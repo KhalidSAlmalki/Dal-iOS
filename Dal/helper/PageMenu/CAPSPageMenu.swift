@@ -18,7 +18,17 @@
 //  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import UIKit
+extension CAPSPageMenu{
+    func getController(_ pageMenuDataModel:[PageMenuDataModel]) -> [UIViewController] {
+        var controlles:[UIViewController] = []
+        for controller in pageMenuDataModel {
+           controlles.append(controller.controller)
+        }
+        return controlles
+    }
 
+    
+}
 @objc public protocol CAPSPageMenuDelegate {
     // MARK: - Delegate functions
 
@@ -39,6 +49,7 @@ open class CAPSPageMenu: UIViewController {
     var menuItems : [MenuItemView] = []
     var menuItemWidths : [CGFloat] = []
     
+    var pageMenuDataModel: [PageMenuDataModel] = []
     var totalMenuItemWidthIfDifferentWidths : CGFloat = 0.0
     
     var startingMenuMargin : CGFloat = 0.0
@@ -81,17 +92,17 @@ open class CAPSPageMenu: UIViewController {
      - parameter frame: Frame for page menu view
      - parameter options: Dictionary holding any customization options user might want to set
      */
-    public init(viewControllers: [UIViewController], frame: CGRect, options: [String: AnyObject]?) {
+    public init(pageMenuDataModel: [PageMenuDataModel], frame: CGRect, options: [String: AnyObject]?) {
         super.init(nibName: nil, bundle: nil)
-        
-        controllerArray = viewControllers
-        
-        self.view.frame = frame
+        self.pageMenuDataModel = pageMenuDataModel
+        controllerArray = getController(pageMenuDataModel)
+    
     }
     
-    public convenience init(viewControllers: [UIViewController], frame: CGRect, pageMenuOptions: [CAPSPageMenuOption]?) {
-        self.init(viewControllers:viewControllers, frame:frame, options:nil)
-        
+    public convenience init(pageMenuDataModel: [PageMenuDataModel], frame: CGRect, pageMenuOptions: [CAPSPageMenuOption]?) {
+        self.init(pageMenuDataModel:pageMenuDataModel, frame:frame, options:nil)
+        self.pageMenuDataModel = pageMenuDataModel
+
         if let options = pageMenuOptions {
             configurePageMenu(options: options)
         }
@@ -110,10 +121,12 @@ open class CAPSPageMenu: UIViewController {
     - parameter frame: Frame for page menu view
     - parameter configuration: A configuration instance for page menu
     */
-    public init(viewControllers: [UIViewController], frame: CGRect, configuration: CAPSPageMenuConfiguration) {
+    public init(pageMenuDataModel: [PageMenuDataModel], frame: CGRect, configuration: CAPSPageMenuConfiguration) {
         super.init(nibName: nil, bundle: nil)
         self.configuration = configuration
-        controllerArray = viewControllers
+        self.pageMenuDataModel = pageMenuDataModel
+
+        controllerArray = getController(pageMenuDataModel)
 
         self.view.frame = frame
         
@@ -131,10 +144,12 @@ open class CAPSPageMenu: UIViewController {
      - parameter storyBoard: Parent storyboard for rendering a page menu
      - parameter configuration: A configuration instance for page menu
      */
-    public init(viewControllers: [UIViewController], in controller: UIViewController, with configuration: CAPSPageMenuConfiguration, usingStoryboards: Bool = false) {
+    public init(pageMenuDataModel: [PageMenuDataModel], in controller: UIViewController, with configuration: CAPSPageMenuConfiguration, usingStoryboards: Bool = false) {
         super.init(nibName: nil, bundle: nil)
+        self.pageMenuDataModel = pageMenuDataModel
+
         self.configuration = configuration
-        controllerArray = viewControllers
+        controllerArray = getController(pageMenuDataModel)
         
         //Setup storyboard
         self.view.frame = CGRect(x: 0, y: 0, width: controller.view.frame.size.width, height: controller.view.frame.size.height)
@@ -154,7 +169,7 @@ open class CAPSPageMenu: UIViewController {
             configureUserInterface()
         }
     }
-
+    
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)!
     }
@@ -196,7 +211,11 @@ extension CAPSPageMenu {
                 if self.menuItems.count > 0 {
                     if self.menuItems[self.lastPageIndex].titleLabel != nil && self.menuItems[self.currentPageIndex].titleLabel != nil {
                         self.menuItems[self.lastPageIndex].titleLabel!.textColor = self.configuration.unselectedMenuItemLabelColor
+                        self.menuItems[self.lastPageIndex].imageView!.tintColor = self.configuration.unselectedMenuItemLabelColor
+                        
                         self.menuItems[self.currentPageIndex].titleLabel!.textColor = self.configuration.selectedMenuItemLabelColor
+                        self.menuItems[self.currentPageIndex].imageView!.tintColor = self.configuration.selectedMenuItemLabelColor
+
                     }
                 }
             })
@@ -250,7 +269,6 @@ extension CAPSPageMenu {
             //Resize menu items if using as segmented control
             if configuration.useMenuLikeSegmentedControl {
                 menuScrollView.contentSize = CGSize(width: self.view.frame.width, height: configuration.menuHeight)
-                
                 // Resize selectionIndicator bar
                 let selectionIndicatorX : CGFloat = CGFloat(currentPageIndex) * (self.view.frame.width / CGFloat(self.controllerArray.count))
                 let selectionIndicatorWidth : CGFloat = self.view.frame.width / CGFloat(self.controllerArray.count)

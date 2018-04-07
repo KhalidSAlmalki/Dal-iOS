@@ -12,19 +12,24 @@ class MenuItemView: UIView {
     // MARK: - Menu item view
     
     var titleLabel : UILabel?
+    var imageView :UIImageView?
     var menuItemSeparator : UIView?
     
     func setUpMenuItemView(_ menuItemWidth: CGFloat, menuScrollViewHeight: CGFloat, indicatorHeight: CGFloat, separatorPercentageHeight: CGFloat, separatorWidth: CGFloat, separatorRoundEdges: Bool, menuItemSeparatorColor: UIColor) {
-        titleLabel = UILabel(frame: CGRect(x: 0.0, y: 0.0, width: menuItemWidth, height: menuScrollViewHeight - indicatorHeight))
+       
+        imageView = UIImageView(frame:  CGRect(x: menuItemWidth/2-15,y: 5, width: 30,height: 30))
+        
+        titleLabel = UILabel(frame: CGRect(x: 0.0, y: (imageView?.frame.maxY)!-15, width: menuItemWidth, height: menuScrollViewHeight - indicatorHeight))
         
         menuItemSeparator = UIView(frame: CGRect(x: menuItemWidth - (separatorWidth / 2), y: floor(menuScrollViewHeight * ((1.0 - separatorPercentageHeight) / 2.0)), width: separatorWidth, height: floor(menuScrollViewHeight * separatorPercentageHeight)))
         menuItemSeparator!.backgroundColor = menuItemSeparatorColor
-        
         if separatorRoundEdges {
             menuItemSeparator!.layer.cornerRadius = menuItemSeparator!.frame.width / 2
         }
         
         menuItemSeparator!.isHidden = true
+        self.addSubview(imageView!)
+
         self.addSubview(menuItemSeparator!)
         
         self.addSubview(titleLabel!)
@@ -58,14 +63,15 @@ class MenuItemView: UIView {
         
         self.titleLabel!.textAlignment = NSTextAlignment.center
         self.titleLabel!.textColor = pageMenu.configuration.unselectedMenuItemLabelColor
-        
+        self.imageView?.tintColor = pageMenu.configuration.unselectedMenuItemLabelColor
         //**************************拡張*************************************
         self.titleLabel!.adjustsFontSizeToFitWidth = pageMenu.configuration.titleTextSizeBasedOnMenuItemWidth
         //**************************拡張ここまで*************************************
         
         // Set title depending on if controller has a title set
         if controller.title != nil {
-            self.titleLabel!.text = controller.title!
+            self.titleLabel!.text = pageMenu.pageMenuDataModel[Int(index)].MenuItemView.name
+            self.imageView?.dalSetImage(url: pageMenu.pageMenuDataModel[Int(index)].MenuItemView.logo)
         } else {
             self.titleLabel!.text = "Menu \(Int(index) + 1)"
         }

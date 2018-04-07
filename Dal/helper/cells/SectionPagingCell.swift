@@ -8,7 +8,7 @@
 
 import UIKit
 import Kingfisher
-class SectionPagingCell: UIView {
+class SectionPaging: UIView {
 
     fileprivate lazy var imageView: UIImageView = {
         let imageView = UIImageView(frame: .zero)
@@ -48,7 +48,10 @@ class SectionPagingCell: UIView {
         self.titleLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 5).isActive = true
         titleLabel.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
         titleLabel.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
-     
+        
+        titleLabel.text = "khlid"
+        imageView.dalSetImage(url: "http://servstore.net/images/ScreenBeautiful/ScreenBeautiful.png")
+
     }
     
     required init?(coder: NSCoder) {

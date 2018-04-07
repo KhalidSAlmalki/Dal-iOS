@@ -20,8 +20,7 @@ class WorkerCollectionVC: UICollectionViewController,UICollectionViewDelegateFlo
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        print(sectionID)
-        applicationDelegate.delgate = self
+    //    applicationDelegate.delgate = self
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -29,7 +28,7 @@ class WorkerCollectionVC: UICollectionViewController,UICollectionViewDelegateFlo
         collectionView?.register(UINib(nibName: "workerCell", bundle: nil), forCellWithReuseIdentifier: reuseIdentifier)
 
         
-        getSectionUser()
+      //  getSectionUser()
     }
 
     func workerDataDidUpdate(data: [workerModel]) {

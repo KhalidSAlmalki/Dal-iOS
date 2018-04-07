@@ -18,7 +18,7 @@ public class CAPSPageMenuConfiguration {
     open var selectedMenuItemLabelColor : UIColor = UIColor.white
     open var unselectedMenuItemLabelColor : UIColor = UIColor.lightGray
     open var scrollMenuBackgroundColor : UIColor = UIColor.black
-    open var viewBackgroundColor : UIColor = UIColor.white
+    open var viewBackgroundColor : UIColor = UIColor.red
     open var bottomMenuHairlineColor : UIColor = UIColor.white
     open var menuItemSeparatorColor : UIColor = UIColor.lightGray
     
