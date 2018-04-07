@@ -77,9 +77,9 @@ class SectionPagingCell: PagingCell {
 
  
             self.titleLabel.text = item?.title
-//            let url = URL(string:(item?.logoURL)!)
-//                self.imageView.kf.setImage(with: url)
-
+        
+            self.imageView.dalSetImage(url: (item?.logoURL)!)
+            updateSelectedState(selected: selected)
 
 
     }

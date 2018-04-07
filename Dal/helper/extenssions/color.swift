@@ -7,6 +7,11 @@
 //
 import UIKit
 extension UIColor {
+    
+    class func dalHeaderColor() -> UIColor {
+                return UIColor(red: 170.0 / 255.0, green: 93.0 / 255.0, blue: 121.0 / 255.0, alpha: 1.0)
+
+    }
     class func dalWarmGreyColor() -> UIColor {
         return UIColor(white: 149.0 / 255.0, alpha: 1.0)
     }
@@ -27,8 +32,8 @@ extension UIColor {
         return UIColor(white: 0.0, alpha: 0.14)
     }
     
-    class func dalLightPlumColor() -> UIColor {
-        return UIColor(red: 170.0 / 255.0, green: 93.0 / 255.0, blue: 121.0 / 255.0, alpha: 1.0)
+    class func dalLightColor() -> UIColor {
+        return UIColor(red:  255.0, green: 255.0 , blue: 255.0 , alpha: 1.0)
     }
     
     class func dalWhiteTwoColor() -> UIColor {

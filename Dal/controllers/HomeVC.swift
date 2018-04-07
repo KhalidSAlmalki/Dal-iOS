@@ -35,6 +35,12 @@ private func setUPPagingVC() {
     
     pagingViewController.menuItemClass = SectionPagingCell.self
     pagingViewController.menuItemSize = .sizeToFit(minWidth: 80, height: 80)
+    pagingViewController.selectedTextColor = .white
+    pagingViewController.indicatorColor =  pagingViewController.selectedTextColor
+    UIApplication.shared.statusBarView?.backgroundColor = .dalHeaderColor()
+    pagingViewController.textColor = .lightGray
+
+    pagingViewController.menuBackgroundColor = UIColor.dalHeaderColor()
     addChildViewController(pagingViewController)
     PagingView.addSubview(pagingViewController.view)
     PagingView.constrainToEdges(pagingViewController.view)
@@ -65,7 +71,7 @@ extension HomeVC: PagingViewControllerDataSource {
     
     func pagingViewController<T>(_ pagingViewController: PagingViewController<T>, viewControllerForIndex index: Int) -> UIViewController {
      
-        return sectionVC(index: sectionItems[index].name)
+        return sectionVC(sectionID: sectionItems[index].id)
     }
     
     func pagingViewController<T>(_ pagingViewController: PagingViewController<T>, pagingItemForIndex index: Int) -> T {

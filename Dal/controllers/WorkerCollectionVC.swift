@@ -10,18 +10,24 @@ import UIKit
 
 private let reuseIdentifier = "Cell"
 
-class SectionCollectionVC: UICollectionViewController {
+class WorkerCollectionVC: UICollectionViewController,UICollectionViewDelegateFlowLayout {
+
+    var sectionID:String = ""
+   lazy var  width = (Double((self.collectionView?.frame.size.width )!-30))
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        print(sectionID)
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Register cell classes
-        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        collectionView?.register(UINib(nibName: "workerCell", bundle: nil), forCellWithReuseIdentifier: reuseIdentifier)
 
-        // Do any additional setup after loading the view.
+        
+        getSectionUser()
     }
 
     func getSectionUser()  {
@@ -50,23 +56,28 @@ class SectionCollectionVC: UICollectionViewController {
     */
 
     // MARK: UICollectionViewDataSource
-
+    func collectionView(_ collectionView: UICollectionView, layout
+        collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection
+        section: Int) -> CGSize {
+        
+      
+        return CGSize(width: width, height: 65)
+    }
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
-        return 0
+        return 10
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
     
         // Configure the cell
-    
         return cell
     }
 
