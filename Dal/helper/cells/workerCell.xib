@@ -19,7 +19,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="618" height="75"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="road_1-1.png" translatesAutoresizingMaskIntoConstraints="NO" id="l4a-S9-QfQ">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="l4a-S9-QfQ">
                         <rect key="frame" x="6" y="15" width="40" height="40"/>
                         <color key="backgroundColor" red="0.0" green="0.97680455450000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -102,7 +102,4 @@
             <point key="canvasLocation" x="-5" y="-17.5"/>
         </collectionViewCell>
     </objects>
-    <resources>
-        <image name="road_1-1.png" width="1" height="1"/>
-    </resources>
 </document>

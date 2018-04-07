@@ -8,7 +8,6 @@
 
 import Foundation
 import CoreLocation
-import Parchment
 class sectionModel:NSObject  {
 
     
@@ -23,7 +22,6 @@ class sectionModel:NSObject  {
     var avatar:String
     var sort:Int
     var workers:[workerModel]
-    var SectionItem:sectionItem
 
     init(id:String,name:String,avatar:String,sort:Int) {
         self.id = id
@@ -31,7 +29,6 @@ class sectionModel:NSObject  {
         self.avatar = avatar
         self.sort = sort
         self.workers = []
-        self.SectionItem = sectionItem(title: self.name , logoURL:  self.avatar , id:   self.id, sort: self.sort)
       }
     
     func add(worker:workerModel!)  {

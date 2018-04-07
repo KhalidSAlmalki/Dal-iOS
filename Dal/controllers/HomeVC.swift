@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Parchment
 
 class HomeVC: SectionVC {
 
@@ -16,7 +15,6 @@ class HomeVC: SectionVC {
     
 
     var sectionItems:[sectionModel] = []
-    let pagingViewController = PagingViewController<sectionItem>()
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -32,55 +30,24 @@ class HomeVC: SectionVC {
 private func setUPPagingVC() {
     // Do any additional setup after loading the view, typically from a nib.
     
-    
-    pagingViewController.menuItemClass = SectionPagingCell.self
-    pagingViewController.menuItemSize = .sizeToFit(minWidth: 80, height: 80)
-    pagingViewController.selectedTextColor = .white
-    pagingViewController.indicatorColor =  pagingViewController.selectedTextColor
-    UIApplication.shared.statusBarView?.backgroundColor = .dalHeaderColor()
-    pagingViewController.textColor = .lightGray
 
-    pagingViewController.menuBackgroundColor = UIColor.dalHeaderColor()
-    addChildViewController(pagingViewController)
-    PagingView.addSubview(pagingViewController.view)
-    PagingView.constrainToEdges(pagingViewController.view)
-    pagingViewController.didMove(toParentViewController: self)
-    
-    // Set our custom data source.
-    pagingViewController.dataSource = self
     
     
     
 }
 }
-extension HomeVC:sectionProtocol{
+extension HomeVC:dataFeederProtocol{
     func sectionDataDidUpdate(data: [sectionModel]) {
         print("sectionDataDidUpdate")
         sectionItems = data
         self.sectionItems = self.sectionItems.sorted(by: { $0.sort < $1.sort })
-        print(sectionItems)
-        pagingViewController.reloadData()
-        pagingViewController.select(pagingItem: (sectionItems.first?.SectionItem)!)
+
+
     }
     
   
     
     
 }
-extension HomeVC: PagingViewControllerDataSource {
-    
-    func pagingViewController<T>(_ pagingViewController: PagingViewController<T>, viewControllerForIndex index: Int) -> UIViewController {
-     
-        return sectionVC(sectionID: sectionItems[index].id)
-    }
-    
-    func pagingViewController<T>(_ pagingViewController: PagingViewController<T>, pagingItemForIndex index: Int) -> T {
-        let s = sectionItems[index]
-        return s.SectionItem as! T
-    }
-    
-    func numberOfViewControllers<T>(in: PagingViewController<T>) -> Int{
-        return sectionItems.count
-    }
-    
-}
+
+

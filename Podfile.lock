@@ -34,14 +34,12 @@ PODS:
     - nanopb/encode (= 0.3.8)
   - nanopb/decode (0.3.8)
   - nanopb/encode (0.3.8)
-  - Parchment (1.1.0)
 
 DEPENDENCIES:
   - Alamofire
   - Firebase/Database
   - GoogleMaps
   - Kingfisher
-  - Parchment
 
 SPEC CHECKSUMS:
   Alamofire: 68d7d521118d49c615a8d2214d87cdf525599d30
@@ -55,8 +53,7 @@ SPEC CHECKSUMS:
   Kingfisher: 68498a706e46c2a050b0c9572f100e5db407f6e0
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
-  Parchment: 88f4b2642a09f37ee314a7492067a9ce04edc3b8
 
-PODFILE CHECKSUM: d8f782206a5cbfc34c40fb318c3a3e73245a8af4
+PODFILE CHECKSUM: c8ad50e632b19806a86f4f77a88c64b2b51a14a6
 
 COCOAPODS: 1.4.0

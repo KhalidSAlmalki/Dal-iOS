@@ -7,26 +7,37 @@
 //
 
 import UIKit
-class workerModel {
+class workerModel:NSObject {
     
     var id:String
+    var sectionID:[String]
     var name:String
     var contactNumber:String
-    var description:String
+    var desc:String
     var avatar:String
     var location:[Double]
     
+    override convenience init() {
+        self.init(id: "", contactNumber: "")
+    }
     init(id:String,contactNumber:String) {
         self.id = id
         self.contactNumber = contactNumber
         self.name = ""
-        self.description = ""
+        self.desc = ""
         self.avatar = ""
         self.location = []
+        self.sectionID = []
     }
     
-    convenience init(id:String,contactNumber:String,name:String,description:String,avatar:String,location:[Double]) {
+    convenience init(id:String,sectionID:[String],contactNumber:String,name:String,description:String,avatar:String,location:[Double]) {
         self.init(id: id, contactNumber: contactNumber)
+        
+        self.name = name
+        self.desc = description
+        self.avatar = avatar
+        self.location = location
+        self.sectionID = sectionID
     }
     
 }

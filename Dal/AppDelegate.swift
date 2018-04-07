@@ -17,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var ref: DatabaseReference!
 
     var sections:[sectionModel] = []
-    var delgate:sectionProtocol?
+    var delgate:dataFeederProtocol?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -33,23 +33,65 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     private func createSectionsOnFireBase(){
         
-        
-        let url = "https://www.google.com/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=2ahUKEwi-5ve3nKHaAhUFVd8KHTDQCiIQjRx6BAgAEAU&url=https%3A%2F%2Fwww.iconfinder.com%2Ficons%2F1876893%2Ffreelance_programmer_freelance_web_designer_software_developer_web_designer_web_developer_web_programmer_website_developer_icon&psig=AOvVaw1W5hyU4Sl2lQpH2dDSvZ5g&ust=1522951990587682"
-       
-        let profileAvatar = "https://www.google.com/imgres?imgurl=https%3A%2F%2Fwww.shareicon.net%2Fdownload%2F2016%2F07%2F26%2F802026_man.svg&imgrefurl=https%3A%2F%2Fwww.shareicon.net%2Fman-profile-avatar-user-social-802026&docid=W8RRRMobR06G1M&tbnid=Szy8MYwKSjgwPM%3A&vet=1&w=800&h=800&client=safari&bih=661&biw=1096&ved=0ahUKEwjRvfLMm6HaAhXyYt8KHR6vCW4QMwiPAigDMAM&iact=c&ictx=1"
-        
-//        let section = sectionModel(id: "", name: "", avatar: "", sort: 0)
-//        let section1 = sectionModel(id: "", name: "", avatar: "", sort: 0)
-//        let section2 = sectionModel(id: "", name: "", avatar: "", sort: 0)
-//        let section3 = sectionModel(id: "", name: "", avatar: "", sort: 0)
-
-       // sections.append()
+    
+   //     let profileAvatar = " http://servstore.co/images/Laundry.png"
+//
+//        -L9Gs9JEclMumK2oCExt-12
+//        -L9Gs9JEclMumK2oCExt-14
+//        -L9Gs9JEclMumK2oCExt-123
 
         //create(section:sectionModel(id: "-L9Gs9JEclMumK2oCExt-1", name: "claose", avatar: profileAvatar, sort: 14))
+        
+//        let w = workerModel(id: "-L9GuhjAMS7yGaqXrft9", sectionID: ["L9Gs9JEclMumK2oCExt-12"], contactNumber: "9132442917", name: "Khalid almalki", description: "i am good in developing iOS applcations", avatar: profileAvatar, location: [0.123599725776124, -77.596479048224111])
+//        let w1 = workerModel(id: "-L9GuhjAMS7yGaqXrft9", sectionID: ["L9Gs9JEclMumK2oCExt-12"], contactNumber: "9132442917", name: "almalki Khalid ", description: "i am good in developing iOS applcations", avatar: profileAvatar, location: [0.123599725776124, -77.596479048224111])
+//        let w2 = workerModel(id: "-L9GuhjAMS7yGaqXrft9", sectionID: ["L9Gs9JEclMumK2oCExt-12"], contactNumber: "9132442917", name: "Abood almalki", description: "i am good in developing iOS applcations", avatar: profileAvatar, location: [0.123599725776124, -77.596479048224111])
+//
+//
+//        let w11 = workerModel(id: "-L9GuhjAMS7yGaqXrft9", sectionID: ["-L9Gs9JEclMumK2oCExt-14"], contactNumber: "9132442917", name: "Test almalki", description: "i am good in developing iOS applcations", avatar: profileAvatar, location: [0.123599725776124, -77.596479048224111])
+//        let w111 = workerModel(id: "-L9GuhjAMS7yGaqXrft9", sectionID: ["-L9Gs9JEclMumK2oCExt-14"], contactNumber: "9132442917", name: "Test1 Khalid ", description: "i am good in developing iOS applcations", avatar: profileAvatar, location: [0.123599725776124, -77.596479048224111])
+//        let w21 = workerModel(id: "-L9GuhjAMS7yGaqXrft9", sectionID: ["-L9Gs9JEclMumK2oCExt-14"], contactNumber: "9132442917", name: "Test3 almalki", description: "i am good in developing iOS applcations", avatar: profileAvatar, location: [0.123599725776124, -77.596479048224111])
+//
+//        create(workers: w)
+//        create(workers: w1)
+//        create(workers: w2)
+//        create(workers: w)
+//
+//        create(workers: w11)
+//        create(workers: w111)
+//        create(workers: w21)
+//        create(workers: w21)
+
+
        getSections()
         
      
     
+    }
+    func getworkers()  {
+        ref.child("workers").observeSingleEvent(of: .value, with: { (snapshot) in
+            
+            var workers = [workerModel]()
+            
+            for worker in snapshot.children {
+                let snap = worker as! DataSnapshot
+             //   let key = snap.key
+                let value = snap.value  as! [String:AnyObject]
+                let aWorker = workerModel(id: convertString(value["id"]) ,
+                                          sectionID: (value["sectionID"] as? [String])!,
+                                          contactNumber: convertString(value["contactNumber"] ) ,
+                                          name: convertString(value["name"] ),
+                                          description: convertString(value["desc"] ),
+                                          avatar: convertString(value["avatar"] ),
+                                          location: value["loc"] as! [Double])
+                workers.append(aWorker)
+            }
+            self.delgate?.workerDataDidUpdate!(data: workers)
+            
+            
+        })
+        
+        
+        
     }
     func getSections()  {
         ref.child("sections").observeSingleEvent(of: .value, with: { (snapshot) in
@@ -62,12 +104,35 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                
                 self.sections.append(sectionModel(id: key, name: convertString(value["name"] ) , avatar:convertString(value["avatar"]), sort:convertInt(value["sort"])))
             }
-            self.delgate?.sectionDataDidUpdate(data: self.sections)
+            self.delgate?.sectionDataDidUpdate!(data: self.sections)
            
            
         })
         
         
+        
+    }
+    func create(workers:workerModel)  {
+        
+        isUnique(id:workers.id, child: "workers") { (re) in
+            if !re {
+                let worker = ["name": workers.name,
+                              "avatar": workers.avatar,
+                              "loc": workers.location,
+                              "desc": workers.desc,
+                              "sectionID": workers.sectionID,
+                              "contactNumber": workers.contactNumber] as [String : Any]
+                self.ref.child("workers").child(workers.id).setValue(worker)
+                print("child is not  exsit")
+                
+            }else{
+                print("child is exsit")
+                let newworkers = workers
+                let n = Int(arc4random_uniform(42))
+                newworkers.id = workers.id+"\(n)"
+                self.create(workers: newworkers)
+            }
+        }
         
     }
     func create(section:sectionModel) {

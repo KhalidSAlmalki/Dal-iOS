@@ -10,16 +10,18 @@ import UIKit
 
 private let reuseIdentifier = "Cell"
 
-class WorkerCollectionVC: UICollectionViewController,UICollectionViewDelegateFlowLayout {
+class WorkerCollectionVC: UICollectionViewController,UICollectionViewDelegateFlowLayout,dataFeederProtocol {
 
     var sectionID:String = ""
    lazy var  width = (Double((self.collectionView?.frame.size.width )!-30))
-
+    var workers:[workerModel] = []
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         print(sectionID)
-        
+        applicationDelegate.delgate = self
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -30,20 +32,34 @@ class WorkerCollectionVC: UICollectionViewController,UICollectionViewDelegateFlo
         getSectionUser()
     }
 
+    func workerDataDidUpdate(data: [workerModel]) {
+        workers.removeAll()
+        for aWorker in data {
+
+            if aWorker.sectionID[0] == sectionID{
+                self.workers.append(aWorker)
+                
+            }
+            
+        }
+        self.collectionView?.reloadData()
+    }
     func getSectionUser()  {
-         applicationDelegate.ref.child("sections").observeSingleEvent(of: .value, with: { (snapshot) in
-            
-//            
-//            for section in snapshot.children {
-//                let snap = section as! DataSnapshot
-//                let key = snap.key
-//                let value = snap.value  as! [String:AnyObject]
-//                
-//                self.sections.append(sectionModel(id: key, name: convertString(value["name"] ) , avatar:convertString(value["avatar"]), sort:convertInt(value["sort"])))
-//            }
-            
-            
-        })
+        
+        applicationDelegate.getworkers()
+//         applicationDelegate.ref.child("workers").observeSingleEvent(of: .value, with: { (snapshot) in
+//
+////
+////            for section in snapshot.children {
+////                let snap = section as! DataSnapshot
+////                let key = snap.key
+////                let value = snap.value  as! [String:AnyObject]
+////
+////                self.sections.append(sectionModel(id: key, name: convertString(value["name"] ) , avatar:convertString(value["avatar"]), sort:convertInt(value["sort"])))
+////            }
+//
+//
+//        })
     }
     /*
     // MARK: - Navigation
@@ -71,7 +87,7 @@ class WorkerCollectionVC: UICollectionViewController,UICollectionViewDelegateFlo
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
-        return 10
+        return self.workers.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

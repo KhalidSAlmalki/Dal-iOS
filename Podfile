@@ -7,8 +7,7 @@ target 'Dal' do
  pod 'Kingfisher'
  pod 'Alamofire'
  pod 'GoogleMaps'
- pod 'Parchment'
- pod 'Firebase/Database'
+pod 'Firebase/Database'
   # Pods for Dal
 
 end

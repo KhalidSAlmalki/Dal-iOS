@@ -7,10 +7,8 @@
 //
 
 import UIKit
-import Parchment
 import Kingfisher
-class SectionPagingCell: PagingCell {
-    private var options: PagingOptions?
+class SectionPagingCell: UIView {
 
     fileprivate lazy var imageView: UIImageView = {
         let imageView = UIImageView(frame: .zero)
@@ -32,10 +30,10 @@ class SectionPagingCell: PagingCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = .clear
-        contentView.layer.cornerRadius = 6
-        contentView.clipsToBounds = true
-        contentView.addSubview(imageView)
-        contentView.addSubview(titleLabel)
+        self.layer.cornerRadius = 6
+        self.clipsToBounds = true
+        self.addSubview(imageView)
+        self.addSubview(titleLabel)
         
         // x,y , h, w
         
@@ -56,33 +54,11 @@ class SectionPagingCell: PagingCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    fileprivate func updateSelectedState(selected: Bool) {
-        guard let options = options else { return }
-        if selected {
-            titleLabel.textColor = options.selectedTextColor
-            imageView.tintColor = options.selectedTextColor
-        } else {
-            titleLabel.textColor = options.textColor
-            imageView.tintColor = options.textColor
-        }
-    }
+
     
     override func layoutSubviews() {
         super.layoutSubviews()
     }
-    override func setPagingItem(_ pagingItem: PagingItem, selected: Bool, options: PagingOptions) {
-        self.options = options
-
-         let item = pagingItem as? sectionItem
-
  
-            self.titleLabel.text = item?.title
-        
-            self.imageView.dalSetImage(url: (item?.logoURL)!)
-            updateSelectedState(selected: selected)
-
-
-    }
-
     
 }
