@@ -10,6 +10,7 @@ import UIKit
 struct MenuItemViewDataModel {
     let name:String
     let logo:String
+    let id:String
 }
 public struct PageMenuDataModel {
     let controller:UIViewController

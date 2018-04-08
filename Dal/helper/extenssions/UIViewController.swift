@@ -11,7 +11,10 @@ extension UIApplication {
         return value(forKey: "statusBar") as? UIView
     }
 }
-
+extension Notification.Name {
+    static let reloadDataWorkers = Notification.Name(
+        rawValue: "reloadData")
+}
 extension UIViewController {
     func configureChildViewController(childController: UIViewController, onView: UIView?) {
         var holderView = self.view

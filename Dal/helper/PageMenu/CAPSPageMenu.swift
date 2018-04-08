@@ -342,6 +342,7 @@ extension CAPSPageMenu {
      
      - parameter index: Index of the page to move to
      */
+
     open func moveToPage(_ index: Int) {
         if index >= 0 && index < controllerArray.count {
             // Update page if changed
@@ -378,5 +379,12 @@ extension CAPSPageMenu {
                 self.controllerScrollView.setContentOffset(CGPoint(x: xOffset, y: self.controllerScrollView.contentOffset.y), animated: false)
             })
         }
+    }
+    open func sendDelgateMessage(){
+        if controllerArray.count != 0 {
+            delegate?.didMoveToPage!(controllerArray[0], index: 0)
+
+        }
+
     }
 }

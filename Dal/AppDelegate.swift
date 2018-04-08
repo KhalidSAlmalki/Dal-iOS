@@ -15,7 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     var ref: DatabaseReference!
-
+    var reloadWorkerhasBeenRegisterd:Bool = false
     var sections:[sectionModel] = []
     var delgate:dataFeederProtocol?
     
@@ -67,7 +67,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
      
     
     }
-    func getworkers()  {
+    func getworkers(completion:@escaping ([workerModel])->Void)  {
         ref.child("workers").observeSingleEvent(of: .value, with: { (snapshot) in
             
             var workers = [workerModel]()
@@ -85,7 +85,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                           location: value["loc"] as! [Double])
                 workers.append(aWorker)
             }
-            self.delgate?.workerDataDidUpdate!(data: workers)
+            completion(workers)
+           // self.delgate?.workerDataDidUpdate!(data: workers)
             
             
         })

@@ -7,7 +7,9 @@
 //
 
 import UIKit
-
+@objc protocol DidloadChange : class{
+    func viewDidloadChange(With sectionData:sectionModel)
+}
 @objc protocol dataFeederProtocol : class{
     @objc optional func workerDataDidUpdate(data:[workerModel])
 

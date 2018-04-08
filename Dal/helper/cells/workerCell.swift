@@ -18,6 +18,12 @@ class workerCell: UICollectionViewCell {
     @IBOutlet weak var statusImageView: UIImageView!
     override func awakeFromNib() {
         super.awakeFromNib()
+        imageView.BorderColor = .dalHeaderColor()
+        self.name.textColor = .dalHeaderColor()
+        self.skill.textColor = UIColor.dalWarmGreyColor()
+        self.distance.textColor = UIColor.dalWarmGreyColor()
+        self.address.textColor = UIColor.dalWarmGreyColor()
+
         // Initialization code
     }
 

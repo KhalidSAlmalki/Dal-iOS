@@ -23,6 +23,9 @@ class sectionModel:NSObject  {
     var sort:Int
     var workers:[workerModel]
 
+    override convenience init() {
+        self.init(id: "", name: "", avatar: "", sort: 0)
+    }
     init(id:String,name:String,avatar:String,sort:Int) {
         self.id = id
         self.name = name
