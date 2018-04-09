@@ -40,6 +40,7 @@
 		1461F2382079B28D0061DE1C /* baseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1461F2372079B28D0061DE1C /* baseViewController.swift */; };
 		1461F23B207B06420061DE1C /* dalAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1461F23A207B06420061DE1C /* dalAlert.swift */; };
 		1461F23D207B08660061DE1C /* dalAlert-extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1461F23C207B08660061DE1C /* dalAlert-extentions.swift */; };
+		1461F25D207BC7EB0061DE1C /* skillModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1461F25C207BC7EB0061DE1C /* skillModel.swift */; };
 		9A0F976F507096E057072A44 /* Pods_Dal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 209A3C5150FF5D48F103F8EA /* Pods_Dal.framework */; };
 /* End PBXBuildFile section */
 
@@ -79,6 +80,7 @@
 		1461F2372079B28D0061DE1C /* baseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = baseViewController.swift; sourceTree = "<group>"; };
 		1461F23A207B06420061DE1C /* dalAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dalAlert.swift; sourceTree = "<group>"; };
 		1461F23C207B08660061DE1C /* dalAlert-extentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "dalAlert-extentions.swift"; sourceTree = "<group>"; };
+		1461F25C207BC7EB0061DE1C /* skillModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = skillModel.swift; sourceTree = "<group>"; };
 		209A3C5150FF5D48F103F8EA /* Pods_Dal.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Dal.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5D341FB4FC8102FC196A6308 /* Pods-Dal.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dal.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Dal/Pods-Dal.debug.xcconfig"; sourceTree = "<group>"; };
 		9071B0A2410047146531199D /* Pods-Dal.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dal.release.xcconfig"; path = "Pods/Target Support Files/Pods-Dal/Pods-Dal.release.xcconfig"; sourceTree = "<group>"; };
@@ -150,6 +152,7 @@
 			children = (
 				144E80C82075612D0049FEB3 /* sectionModel.swift */,
 				144E80CA207561690049FEB3 /* workerModel.swift */,
+				1461F25C207BC7EB0061DE1C /* skillModel.swift */,
 			);
 			path = dataModel;
 			sourceTree = "<group>";
@@ -387,6 +390,7 @@
 				1461F232207896BF0061DE1C /* PageMenuDataModel.swift in Sources */,
 				1461F22A2078929F0061DE1C /* CAPSPageMenu.swift in Sources */,
 				144A950620741DA00024B912 /* SectionPagingCell.swift in Sources */,
+				1461F25D207BC7EB0061DE1C /* skillModel.swift in Sources */,
 				1461F236207995F90061DE1C /* workerDetailsVC.swift in Sources */,
 				1461F23B207B06420061DE1C /* dalAlert.swift in Sources */,
 				1461F22F2078929F0061DE1C /* CAPSPageMenuConfiguration.swift in Sources */,

@@ -21,8 +21,8 @@ class HomeVC: SectionVC {
         super.viewDidLoad()
         
         
-        let alert:dalalert = dalalert(self,text: "khalid")
-        alert.show()
+//        let alert:dalalert = dalalert(self,text: "khalid")
+//        alert.show()
         self.view.backgroundColor = UIColor.dalHeaderColor()
         applicationDelegate.delgate = self
         setUpNvaBar()

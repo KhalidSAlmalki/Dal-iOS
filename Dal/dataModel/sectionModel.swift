@@ -21,7 +21,7 @@ class sectionModel:NSObject  {
     var name:String
     var avatar:String
     var sort:Int
-    var workers:[workerModel]
+    var skills:[skillModel]
 
     override convenience init() {
         self.init(id: "", name: "", avatar: "", sort: 0)
@@ -31,15 +31,12 @@ class sectionModel:NSObject  {
         self.name = name
         self.avatar = avatar
         self.sort = sort
-        self.workers = []
+        self.skills = []
       }
     
-    func add(worker:workerModel!)  {
+    func addSkill(aSkill:skillModel)  {
         
-        guard worker != nil else {
-            return
-        }
-        workers.append(worker)
+        skills.append(aSkill)
     }
     
    

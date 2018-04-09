@@ -59,35 +59,38 @@ class WorkerCollectionVC: UICollectionViewController,UICollectionViewDelegateFlo
         self.workers.removeAll()
         
 
-        applicationDelegate.ref.child("workers").observeSingleEvent(of: .value, with: { (snap) in
+        applicationDelegate.ref.child("workers/worker").observeSingleEvent(of: .value, with: { (snap) in
 
                  for worker in snap.children {
              
-                    let section = worker as! DataSnapshot
+                    let aworker = worker as! DataSnapshot
+                    
+                    let value = aworker.value  as! [String:AnyObject]
 
-                    if let sectionID = section.childSnapshot(forPath: "sectionID").value as? [String]{
-                        
-                      
-                        if sectionID.contains(self.section.id) {
-                            
-                            let value = section.value  as! [String:AnyObject]
-                            let aWorker = workerModel(id: convertString(value["id"]) ,
-                                                      sectionID: (value["sectionID"] as? [String])!,
-                                                      contactNumber: convertString(value["contactNumber"] ) ,
-                                                      name: convertString(value["name"] ),
-                                                      description: convertString(value["desc"] ),
-                                                      avatar: convertString(value["avatar"] ),
-                                                      location: value["loc"] as! [Double])
-                            self.workers.append(aWorker)
-                            
-                            
-                            print(aWorker.name)
-                            
-                            self.collectionView?.reloadData()
+                    let skillsID = convertString(value["skills"])
+                    let arraySkillIDs = skillsID.split(separator: ";")
+                    
+                    if arraySkillIDs[0] == self.section.id{
+                        let splitLocation = convertString(value["location"]).split(separator: ";")
+                        var location:[Double] = []
+                        for loc in splitLocation{
+                            location.append(convertDouble(loc as AnyObject))
                         }
+                        
+                        let aWorker = workerModel(id: convertString(value["id"]) ,
+                                                  sectionID: [String(arraySkillIDs[0])],
+                                      contactNumber: convertString(value["phoneNumber"] ) ,
+                                      name: convertString(value["name"] ),
+                                      description: convertString(value["desc"] ),
+                                      avatar: convertString(value["avatar"] ),
+                                      location: location)
+                                                    self.workers.append(aWorker)
                     }
+                    
                 
                     }
+                                      self.collectionView?.reloadData()
+
             
         })
 

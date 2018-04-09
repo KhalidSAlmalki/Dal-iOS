@@ -26,8 +26,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         ref = Database.database().reference()
 
-        createSectionsOnFireBase()
-        
+       // createSectionsOnFireBase()
+        get(sectionWithLocation: "")
+    
         return true
     }
 
@@ -67,6 +68,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
      
     
     }
+    func get(sectionDetail withID:String , complettion:(String)->Void){
+        
+    }
     func getworkers(completion:@escaping ([workerModel])->Void)  {
         ref.child("workers").observeSingleEvent(of: .value, with: { (snapshot) in
             
@@ -92,6 +96,124 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         })
         
         
+        
+    }
+    func getSectionIndex(_ section:sectionModel) -> Int {
+        
+        return sections.index(where: {$0.id == section.id})!
+        
+    }
+    func convertToAarry(_ string:String) -> [String] {
+        var strings:[String] = []
+        let splitString = string.split(separator: ";")
+        for aSubstring in splitString {
+            
+            strings.append(convertString(aSubstring as AnyObject))
+        }
+        return strings
+    }
+    func get(sectionWithLocation:String) {
+        ref.child("workers/worker").observeSingleEvent(of: .value, with: { (snapshot) in
+            
+            for aworker in snapshot.children {
+                let snap = aworker as! DataSnapshot
+                let value = snap.value  as! [String:AnyObject]
+                let skillsID = self.convertToAarry(convertString(value["skills"]))
+                
+                // get wectin where skillsID belong and add them into array   athat belogn to
+                print(skillsID[0])
+                
+                self.ref.child("sections").observeSingleEvent(of: .value
+                    , with: { (SnapSections) in
+                        
+                        let reslut = SnapSections.value as! [AnyObject]
+                        
+                        for r in reslut{
+                            let asection = r as! [String:AnyObject]
+                            if let skills = asection["skills"] as? [AnyObject]{
+                                
+                                for askill in skills{
+                                    if let id = askill["id"] as? String{
+                                        if id == skillsID[0]{
+                                    
+                                        print("askill",id,askill)
+
+                                        }
+                            
+                                    }
+
+                                }
+
+                            }
+
+
+                        }
+
+//
+//
+//                        
+//                        for asection in SnapSections.children {
+//                            // all sections
+//
+//                            if let sections = (asection as! DataSnapshot).childSnapshot(forPath: "skills").value as? [String:AnyObject] {
+//                             }
+//                            print(asection)
+//                            return
+//
+//                    let value = (asection as! DataSnapshot).value as! [String:AnyObject]
+//                    let aSection = sectionModel(id: convertString(value["id"] ), name: convertString(value["name"] ) , avatar:convertString(value["avatar"]), sort:convertInt(value["sort"]))
+//
+//                            print("aSection.id", aSection.id)
+//
+//                            let snapSkills = asection as! DataSnapshot
+//
+//                            // all skills
+//                            snapSkills.childSnapshot(forPath: "skills")
+//
+//                            for askill in snapSkills.children {
+//
+//                                let values = (askill as! DataSnapshot).value as! [AnyObject]
+//
+//                                for v in values  {
+//                                    print(v)
+//                                }
+//
+////                                print("askill",values["id"])
+////                            let skill = skillModel(id: convertString(values["id"] ), name: convertString(values["name"] ), sort: 0)
+////
+////
+////                                print(skill.id)
+//
+//                            }
+//
+//
+////
+////                    let aSection = sectionModel(id: convertString(value["id"] ), name: convertString(value["name"] ) , avatar:convertString(value["avatar"]), sort:convertInt(value["sort"]))
+////
+////                            let skills  = value["skills"].
+////
+////                            for askill in skills{
+////
+////                                print(askill)
+////
+////                            }
+////
+////                            for askil in skills{
+////
+////                                let skill = skillModel(id: convertString(value["id"] ), name: convertString(value["name"] ), sort: 0, sectionDetail: <#T##sectionModel#>)
+////                                print(askil.value["id"],"belong to ",aSection.id)
+////
+////
+////                            }
+//
+//                        }
+//
+
+                })
+                
+            }
+                
+        })
         
     }
     func getSections()  {

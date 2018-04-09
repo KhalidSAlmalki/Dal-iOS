@@ -63,4 +63,13 @@ import Foundation
         
         return 0
     }
+    func convertDouble(_ any:AnyObject?) -> Double {
+    
+        if let num = any?.doubleValue {
+        
+        return num
+            }
+    
+    return 0
+}
 
