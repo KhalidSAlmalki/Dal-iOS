@@ -24,8 +24,20 @@ class HomeVC: SectionVC {
 //        let alert:dalalert = dalalert(self,text: "khalid")
 //        alert.show()
         self.view.backgroundColor = UIColor.dalHeaderColor()
-        applicationDelegate.delgate = self
         setUpNvaBar()
+        applicationDelegate.get(sectionWithLocation: "") { (sections) in
+           print("sectionWithLocation",sections)
+            self.sectionItems = sections
+            
+            self.sectionItems = self.sectionItems.sorted(by: { $0.sort < $1.sort })
+            
+            guard  self.sectionItems.count != 0  else{
+                return
+            }
+            self.setUPPagingVC()
+            
+            self.pageMenu?.sendDelgateMessage()
+        }
        // setUPPagingVC()
      }
 
@@ -89,28 +101,12 @@ extension HomeVC:CAPSPageMenuDelegate{
         worker.section = sectionItems[index]
         self.delegate = worker
         
+       // print("sectionItems[index]",sectionItems[index].id)
         delegate?.viewDidloadChange(With: sectionItems[index])
     }
 
    
 }
-extension HomeVC:dataFeederProtocol{
-    func sectionDataDidUpdate(data: [sectionModel]) {
-        
-        print("sectionDataDidUpdate")
-        sectionItems = data
-        self.sectionItems = self.sectionItems.sorted(by: { $0.sort < $1.sort })
- 
-        setUPPagingVC()
-        
-        pageMenu?.sendDelgateMessage()
-        
 
-    }
-    
-  
-    
-    
-}
 
 

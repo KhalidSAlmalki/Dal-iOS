@@ -27,7 +27,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         ref = Database.database().reference()
 
        // createSectionsOnFireBase()
-        get(sectionWithLocation: "")
     
         return true
     }
@@ -35,33 +34,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private func createSectionsOnFireBase(){
         
     
-   //     let profileAvatar = " http://servstore.co/images/Laundry.png"
-//
-//        -L9Gs9JEclMumK2oCExt-12
-//        -L9Gs9JEclMumK2oCExt-14
-//        -L9Gs9JEclMumK2oCExt-123
-
-        //create(section:sectionModel(id: "-L9Gs9JEclMumK2oCExt-1", name: "claose", avatar: profileAvatar, sort: 14))
-        
-//        let w = workerModel(id: "-L9GuhjAMS7yGaqXrft9", sectionID: ["L9Gs9JEclMumK2oCExt-12"], contactNumber: "9132442917", name: "Khalid almalki", description: "i am good in developing iOS applcations", avatar: profileAvatar, location: [0.123599725776124, -77.596479048224111])
-//        let w1 = workerModel(id: "-L9GuhjAMS7yGaqXrft9", sectionID: ["L9Gs9JEclMumK2oCExt-12"], contactNumber: "9132442917", name: "almalki Khalid ", description: "i am good in developing iOS applcations", avatar: profileAvatar, location: [0.123599725776124, -77.596479048224111])
-//        let w2 = workerModel(id: "-L9GuhjAMS7yGaqXrft9", sectionID: ["L9Gs9JEclMumK2oCExt-12"], contactNumber: "9132442917", name: "Abood almalki", description: "i am good in developing iOS applcations", avatar: profileAvatar, location: [0.123599725776124, -77.596479048224111])
-//
-//
-//        let w11 = workerModel(id: "-L9GuhjAMS7yGaqXrft9", sectionID: ["-L9Gs9JEclMumK2oCExt-14"], contactNumber: "9132442917", name: "Test almalki", description: "i am good in developing iOS applcations", avatar: profileAvatar, location: [0.123599725776124, -77.596479048224111])
-//        let w111 = workerModel(id: "-L9GuhjAMS7yGaqXrft9", sectionID: ["-L9Gs9JEclMumK2oCExt-14"], contactNumber: "9132442917", name: "Test1 Khalid ", description: "i am good in developing iOS applcations", avatar: profileAvatar, location: [0.123599725776124, -77.596479048224111])
-//        let w21 = workerModel(id: "-L9GuhjAMS7yGaqXrft9", sectionID: ["-L9Gs9JEclMumK2oCExt-14"], contactNumber: "9132442917", name: "Test3 almalki", description: "i am good in developing iOS applcations", avatar: profileAvatar, location: [0.123599725776124, -77.596479048224111])
-//
-//        create(workers: w)
-//        create(workers: w1)
-//        create(workers: w2)
-//        create(workers: w)
-//
-//        create(workers: w11)
-//        create(workers: w111)
-//        create(workers: w21)
-//        create(workers: w21)
-
 
        getSections()
         
@@ -87,6 +59,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                           description: convertString(value["desc"] ),
                                           avatar: convertString(value["avatar"] ),
                                           location: value["loc"] as! [Double])
+                
+                print(aWorker)
                 workers.append(aWorker)
             }
             completion(workers)
@@ -98,9 +72,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         
     }
-    func getSectionIndex(_ section:sectionModel) -> Int {
+    func getSectionIndex(_ section:sectionModel) -> Int? {
         
-        return sections.index(where: {$0.id == section.id})!
+        return sections.index(where: {$0.id == section.id})
         
     }
     func convertToAarry(_ string:String) -> [String] {
@@ -112,7 +86,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         return strings
     }
-    func get(sectionWithLocation:String) {
+    func get(sectionWithLocation:String,completion:@escaping ([sectionModel])->Void ) {
         ref.child("workers/worker").observeSingleEvent(of: .value, with: { (snapshot) in
             
             for aworker in snapshot.children {
@@ -121,98 +95,61 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 let skillsID = self.convertToAarry(convertString(value["skills"]))
                 
                 // get wectin where skillsID belong and add them into array   athat belogn to
-                print(skillsID[0])
                 
-                self.ref.child("sections").observeSingleEvent(of: .value
-                    , with: { (SnapSections) in
-                        
-                        let reslut = SnapSections.value as! [AnyObject]
-                        
-                        for r in reslut{
-                            let asection = r as! [String:AnyObject]
-                            if let skills = asection["skills"] as? [AnyObject]{
-                                
-                                for askill in skills{
-                                    if let id = askill["id"] as? String{
-                                        if id == skillsID[0]{
-                                    
-                                        print("askill",id,askill)
-
-                                        }
+                for  lookingSkill in skillsID{
+                    self.ref.child("sections").observeSingleEvent(of: .value
+                        , with: { (SnapSections) in
                             
+                            let reslut = SnapSections.value as! [AnyObject]
+                            
+                            for r in reslut{
+                                let asection = r as! [String:AnyObject]
+                                if let skills = asection["skills"] as? [AnyObject]{
+                                    
+                                    for askill in skills{
+                                        if let iid = askill["id"] as? String{
+                                            if iid == lookingSkill{
+                                     
+                                let section = sectionModel(id: convertString(asection["id"]),
+                                                           name: convertString(asection["name"]),
+                                                           avatar: convertString(asection["avatar"]),
+                                                           sort: convertInt(asection["sort"]))
+                                                
+                                                if self.getSectionIndex(section) == nil{
+                                                    self.sections.append(section)
+                                                }
+                                                    
+                                               if let index = self.getSectionIndex(section){
+                                                
+                                                let skill = skillModel(id: iid, name:(askill["id"] as? String)!, sort: 0)
+                                                self.sections[index].addSkill(aSkill: skill)
+                                                completion(self.sections)
+
+                                                }
+                                                
+                                            }
+                                            
+                                        }
+                                        
                                     }
-
+                                    
                                 }
-
+                                
+                                
                             }
+                            
+
+                     })
 
 
-                        }
+                    
+                }
 
-//
-//
-//                        
-//                        for asection in SnapSections.children {
-//                            // all sections
-//
-//                            if let sections = (asection as! DataSnapshot).childSnapshot(forPath: "skills").value as? [String:AnyObject] {
-//                             }
-//                            print(asection)
-//                            return
-//
-//                    let value = (asection as! DataSnapshot).value as! [String:AnyObject]
-//                    let aSection = sectionModel(id: convertString(value["id"] ), name: convertString(value["name"] ) , avatar:convertString(value["avatar"]), sort:convertInt(value["sort"]))
-//
-//                            print("aSection.id", aSection.id)
-//
-//                            let snapSkills = asection as! DataSnapshot
-//
-//                            // all skills
-//                            snapSkills.childSnapshot(forPath: "skills")
-//
-//                            for askill in snapSkills.children {
-//
-//                                let values = (askill as! DataSnapshot).value as! [AnyObject]
-//
-//                                for v in values  {
-//                                    print(v)
-//                                }
-//
-////                                print("askill",values["id"])
-////                            let skill = skillModel(id: convertString(values["id"] ), name: convertString(values["name"] ), sort: 0)
-////
-////
-////                                print(skill.id)
-//
-//                            }
-//
-//
-////
-////                    let aSection = sectionModel(id: convertString(value["id"] ), name: convertString(value["name"] ) , avatar:convertString(value["avatar"]), sort:convertInt(value["sort"]))
-////
-////                            let skills  = value["skills"].
-////
-////                            for askill in skills{
-////
-////                                print(askill)
-////
-////                            }
-////
-////                            for askil in skills{
-////
-////                                let skill = skillModel(id: convertString(value["id"] ), name: convertString(value["name"] ), sort: 0, sectionDetail: <#T##sectionModel#>)
-////                                print(askil.value["id"],"belong to ",aSection.id)
-////
-////
-////                            }
-//
-//                        }
-//
-
-                })
                 
+
             }
-                
+
+
         })
         
     }

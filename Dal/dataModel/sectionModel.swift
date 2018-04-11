@@ -35,8 +35,11 @@ class sectionModel:NSObject  {
       }
     
     func addSkill(aSkill:skillModel)  {
+        if skills.index(where: {$0.id == aSkill.id}) == nil{
+            skills.append(aSkill)
+
+        }
         
-        skills.append(aSkill)
     }
     
    

@@ -50,6 +50,17 @@ class WorkerCollectionVC: UICollectionViewController,UICollectionViewDelegateFlo
 //        self.collectionView?.reloadData()
 //    }
     
+    func getSectionID(with skillID:String) -> String{
+      let sections = applicationDelegate.sections
+        
+        let index = sections.index(where: {$0.skills.contains(where: {$0.id == skillID})})
+        
+        guard index != nil else {
+            return ""
+        }
+        
+        return sections[index!].id
+    }
     @objc func reloadWorkers(n:sectionModel)  {
        
         section = n
@@ -67,25 +78,31 @@ class WorkerCollectionVC: UICollectionViewController,UICollectionViewDelegateFlo
                     
                     let value = aworker.value  as! [String:AnyObject]
 
-                    let skillsID = convertString(value["skills"])
-                    let arraySkillIDs = skillsID.split(separator: ";")
+                    let skillsIDstring = convertString(value["skills"])
+                    let skillsID = applicationDelegate.convertToAarry(skillsIDstring)
                     
-                    if arraySkillIDs[0] == self.section.id{
-                        let splitLocation = convertString(value["location"]).split(separator: ";")
-                        var location:[Double] = []
-                        for loc in splitLocation{
-                            location.append(convertDouble(loc as AnyObject))
+                    for id in skillsID{
+                       let sectionID = self.getSectionID(with: id)
+                        
+                        if sectionID == self.section.id {
+                            let splitLocation = convertString(value["location"]).split(separator: ";")
+                            var location:[Double] = []
+                            for loc in splitLocation{
+                                location.append(convertDouble(loc as AnyObject))
+                            }
+                            
+                            let aWorker = workerModel(id: convertString(value["id"]) ,
+                                                      sectionID: skillsID,
+                                                      contactNumber: convertString(value["phoneNumber"] ) ,
+                                                      name: convertString(value["name"] ),
+                                                      description: convertString(value["desc"] ),
+                                                      avatar: convertString(value["avatar"] ),
+                                                      location: location)
+                            self.workers.append(aWorker)
                         }
                         
-                        let aWorker = workerModel(id: convertString(value["id"]) ,
-                                                  sectionID: [String(arraySkillIDs[0])],
-                                      contactNumber: convertString(value["phoneNumber"] ) ,
-                                      name: convertString(value["name"] ),
-                                      description: convertString(value["desc"] ),
-                                      avatar: convertString(value["avatar"] ),
-                                      location: location)
-                                                    self.workers.append(aWorker)
                     }
+              
                     
                 
                     }

@@ -2,4 +2,54 @@
 <Bucket
    type = "0"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Dal/AppDelegate.swift"
+            timestampString = "545114179.583545"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "47"
+            endingLineNumber = "47"
+            landmarkName = "getworkers(completion:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Dal.AppDelegate.getworkers(completion: (Swift.Array&lt;Dal.workerModel&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "Dal"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/khalidalmalki/Documents/GitHub/GitHub1/Dal-iOS/Dal/AppDelegate.swift"
+                  timestampString = "545114179.679543"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "47"
+                  endingLineNumber = "47"
+                  offsetFromSymbolStart = "31">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (__ObjC.DataSnapshot) -&gt; () in Dal.AppDelegate.getworkers(completion: (Swift.Array&lt;Dal.workerModel&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "Dal"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/khalidalmalki/Documents/GitHub/GitHub1/Dal-iOS/Dal/AppDelegate.swift"
+                  timestampString = "545114179.681767"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "49"
+                  endingLineNumber = "49"
+                  offsetFromSymbolStart = "41">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>
