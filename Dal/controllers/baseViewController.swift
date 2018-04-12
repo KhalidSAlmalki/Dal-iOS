@@ -10,5 +10,14 @@ import UIKit
 
 class baseViewController: UIViewController {
     var dalbbaseView:dalBaseView?
+    
+    func dismissDalBaseView()  {
+       
+        guard dalbbaseView != nil else {
+            return
+        }
+        dalbbaseView?.dismiss()
+        
+    }
 
 }

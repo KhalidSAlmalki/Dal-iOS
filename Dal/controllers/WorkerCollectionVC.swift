@@ -37,19 +37,7 @@ class WorkerCollectionVC: UICollectionViewController,UICollectionViewDelegateFlo
         workers = []
     }
 
-//    func workerDataDidUpdate(data: [workerModel]) {
-//        workers.removeAll()
-//        for aWorker in data {
-//
-//            if aWorker.sectionID[0] == sectionID{
-//                self.workers.append(aWorker)
-//
-//            }
-//
-//        }
-//        self.collectionView?.reloadData()
-//    }
-    
+
     func getSectionID(with skillID:String) -> String{
       let sections = applicationDelegate.sections
         
@@ -98,7 +86,10 @@ class WorkerCollectionVC: UICollectionViewController,UICollectionViewDelegateFlo
                                                       description: convertString(value["desc"] ),
                                                       avatar: convertString(value["avatar"] ),
                                                       location: location)
-                            self.workers.append(aWorker)
+                            if !self.workers.contains(where: {$0.id == aWorker.id} ){
+                                self.workers.append(aWorker)
+
+                            }
                         }
                         
                     }
@@ -115,32 +106,7 @@ class WorkerCollectionVC: UICollectionViewController,UICollectionViewDelegateFlo
         
       //  getSectionUser()
     }
-    @objc func getSectionUser()  {
-        
-    
-       
-        
-
-        print("start fetching in section name",section.name)
-        applicationDelegate.getworkers(completion: { data in
-            print("get something  ")
-
-               self.workers = data
-            for aWorker in data {
-                
-                if aWorker.sectionID[0] == self.section.id{
-                    self.workers.append(aWorker)
-                    
-                }
-                
-            }
-            
-            print("finish fetching",self.workers.count)
-            self.collectionView?.reloadData()
-            
-        })
-
-    }
+   
     /*
     // MARK: - Navigation
 

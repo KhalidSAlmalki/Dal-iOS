@@ -10,23 +10,44 @@ import UIKit
 class HomeVC: SectionVC {
 
 
-    lazy   var searchBar:UISearchBar = UISearchBar(frame:CGRect(x: 0, y: 0, width: 200, height: 20))
     @IBOutlet weak var PagingView: UIView!
-    var pageMenu : CAPSPageMenu?
+    
     var controllerArray : [UIViewController] = []
-    var delegate:DidloadChange?
-    @IBOutlet weak var topBar: UIView!
     var sectionItems:[sectionModel] = []
+    
+    var pageMenu : CAPSPageMenu?
+    var delegate:DidloadChange?
+    lazy var searchBar:UISearchBar = UISearchBar(frame:CGRect(x: 0, y: 0, width: 200, height: 20))
+
+
+    
     override func viewDidLoad() {
-        super.viewDidLoad()
+         super.viewDidLoad()
         
         
 //        let alert:dalalert = dalalert(self,text: "khalid")
 //        alert.show()
-        self.view.backgroundColor = UIColor.dalHeaderColor()
-        setUpNvaBar()
-        applicationDelegate.get(sectionWithLocation: "") { (sections) in
-           print("sectionWithLocation",sections)
+        
+         self.view.backgroundColor = UIColor.dalHeaderColor()
+         setUpNvaBar()
+         getSectionBased(location: "")
+        
+        
+      
+        
+     }
+
+    @IBAction func addNewWorker(_ sender: UIBarButtonItem) {
+        
+        let add = dalBaseView(storyBoard: "addworkerVC")
+        add.showOnWindos()
+        
+  
+    }
+    private func getSectionBased(location:String) {
+        
+        applicationDelegate.get(sectionWithLocation: location) { (sections) in
+            print("sectionWithLocation",sections)
             self.sectionItems = sections
             
             self.sectionItems = self.sectionItems.sorted(by: { $0.sort < $1.sort })
@@ -38,11 +59,8 @@ class HomeVC: SectionVC {
             
             self.pageMenu?.sendDelgateMessage()
         }
-       // setUPPagingVC()
-     }
-
-
-    private func setUpNvaBar(){
+    }
+private func setUpNvaBar(){
         
         searchBar.placeholder = "search"
         let leftNavBarButton = UIBarButtonItem(customView:searchBar)
@@ -73,7 +91,7 @@ private func setUPPagingVC() {
         self.PagingView.addSubview(pageMenu!.view)
     
 }
-   private func genreatePageMenuDataModel() -> [PageMenuDataModel] {
+private func genreatePageMenuDataModel() -> [PageMenuDataModel] {
     
    
     var tempPageMenuDataModel:[PageMenuDataModel] = []
@@ -101,7 +119,6 @@ extension HomeVC:CAPSPageMenuDelegate{
         worker.section = sectionItems[index]
         self.delegate = worker
         
-       // print("sectionItems[index]",sectionItems[index].id)
         delegate?.viewDidloadChange(With: sectionItems[index])
     }
 

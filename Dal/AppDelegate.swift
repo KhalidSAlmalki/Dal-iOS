@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import GoogleMaps
 let applicationDelegate:AppDelegate = UIApplication.shared.delegate as! AppDelegate
 
 @UIApplicationMain
@@ -18,6 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var reloadWorkerhasBeenRegisterd:Bool = false
     var sections:[sectionModel] = []
     var delgate:dataFeederProtocol?
+    var sectionsWithSkills:[sectionModel] = []
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -26,52 +28,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         ref = Database.database().reference()
 
-       // createSectionsOnFireBase()
-    
+        GMSServices.provideAPIKey("AIzaSyCF8gJ-IIVt8ls__CVXK1rpEGdkQeo63ck")
+       
+        getSections()
         return true
     }
 
-    private func createSectionsOnFireBase(){
-        
-    
 
-       getSections()
-        
-     
-    
-    }
-    func get(sectionDetail withID:String , complettion:(String)->Void){
-        
-    }
-    func getworkers(completion:@escaping ([workerModel])->Void)  {
-        ref.child("workers").observeSingleEvent(of: .value, with: { (snapshot) in
-            
-            var workers = [workerModel]()
-            
-            for worker in snapshot.children {
-                let snap = worker as! DataSnapshot
-             //   let key = snap.key
-                let value = snap.value  as! [String:AnyObject]
-                let aWorker = workerModel(id: convertString(value["id"]) ,
-                                          sectionID: (value["sectionID"] as? [String])!,
-                                          contactNumber: convertString(value["contactNumber"] ) ,
-                                          name: convertString(value["name"] ),
-                                          description: convertString(value["desc"] ),
-                                          avatar: convertString(value["avatar"] ),
-                                          location: value["loc"] as! [Double])
-                
-                print(aWorker)
-                workers.append(aWorker)
-            }
-            completion(workers)
-           // self.delgate?.workerDataDidUpdate!(data: workers)
-            
-            
-        })
-        
-        
-        
-    }
+
+   
     func getSectionIndex(_ section:sectionModel) -> Int? {
         
         return sections.index(where: {$0.id == section.id})
@@ -121,7 +86,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                                     
                                                if let index = self.getSectionIndex(section){
                                                 
-                                                let skill = skillModel(id: iid, name:(askill["id"] as? String)!, sort: 0)
+                                                let skill = skillModel(id: iid, name:(askill["name"] as? String)!, sort: 0)
                                                 self.sections[index].addSkill(aSkill: skill)
                                                 completion(self.sections)
 
@@ -153,18 +118,34 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         })
         
     }
+    
     func getSections()  {
         ref.child("sections").observeSingleEvent(of: .value, with: { (snapshot) in
-            
             
             for section in snapshot.children {
                 let snap = section as! DataSnapshot
                 let key = snap.key
                 let value = snap.value  as! [String:AnyObject]
                
-                self.sections.append(sectionModel(id: key, name: convertString(value["name"] ) , avatar:convertString(value["avatar"]), sort:convertInt(value["sort"])))
+                
+                
+//                for skill in value["skills"]?.children.v as! [String:AnyObject]{
+//                    print(value["name"],skill)
+//
+//                }
+            let  asection = sectionModel(id: key,
+                                            name:                 convertString(value["name"] ) ,
+                                         avatar:convertString(value["avatar"]), sort:convertInt(value["sort"]))
+                let skills = value["skills"] as! [AnyObject]
+
+                for skill in skills{
+                  
+                    let askill = skillModel(id: (skill["id"] as? String)!, name:(skill["name"] as? String)!, sort: 0)
+                    asection.addSkill(aSkill: askill)
+                }
+
+                self.sectionsWithSkills.append(asection)
             }
-            self.delgate?.sectionDataDidUpdate!(data: self.sections)
            
            
         })
@@ -233,28 +214,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func update(id:String, child:String , value:[AnyHashable : Any])  {
         ref.child(child).child(id).updateChildValues(value )
     }
-    
-    func applicationWillResignActive(_ application: UIApplication) {
-        // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-        // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
-    }
-
-    func applicationDidEnterBackground(_ application: UIApplication) {
-        // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-        // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-    }
-
-    func applicationWillEnterForeground(_ application: UIApplication) {
-        // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
-    }
-
-    func applicationDidBecomeActive(_ application: UIApplication) {
-        // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-    }
-
-    func applicationWillTerminate(_ application: UIApplication) {
-        // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-    }
+   
 
 
 }

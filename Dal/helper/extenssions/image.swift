@@ -10,15 +10,29 @@ import UIKit
 import Kingfisher
 extension UIImageView{
     
+    func dalSetImageWithRenderingMode(url:String) {
+        let url = URL(string:url)
+        
+        self.kf.setImage(with: url, placeholder: UIImage(named: "icNeutralActive"), options: nil, progressBlock: nil) { (dalimage, err, cash, url) in
+            
+            self.image = dalimage
+            
+           self.image = self.image?.withRenderingMode(.alwaysTemplate)
+
+          
+        }
+    }
+    
     func dalSetImage(url:String) {
         let url = URL(string:url)
         
-        self.kf.setImage(with: url, placeholder: nil, options: nil, progressBlock: nil) { (image, err, cash, url) in
+        self.kf.setImage(with: url, placeholder: UIImage(named: "icNeutralActive"), options: nil, progressBlock: nil) { (dalimage, err, cash, url) in
             
-            if let images = self.image{
-                self.image = images.withRenderingMode(.alwaysTemplate)
-            }
+            self.image = dalimage
+            
+            
         }
     }
+    
     
 }

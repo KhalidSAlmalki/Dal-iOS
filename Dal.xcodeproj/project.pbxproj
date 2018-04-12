@@ -41,6 +41,12 @@
 		1461F23B207B06420061DE1C /* dalAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1461F23A207B06420061DE1C /* dalAlert.swift */; };
 		1461F23D207B08660061DE1C /* dalAlert-extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1461F23C207B08660061DE1C /* dalAlert-extentions.swift */; };
 		1461F25D207BC7EB0061DE1C /* skillModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1461F25C207BC7EB0061DE1C /* skillModel.swift */; };
+		14AF8847207E63030055411E /* addworkerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AF8846207E63030055411E /* addworkerVC.swift */; };
+		14AF8849207E9DB90055411E /* googleMapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AF8848207E9DB90055411E /* googleMapVC.swift */; };
+		14AF884F207EC9000055411E /* dalSelectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AF884E207EC9000055411E /* dalSelectionDataSource.swift */; };
+		14AF8851207EC9B20055411E /* dalSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AF8850207EC9B20055411E /* dalSelection.swift */; };
+		14AF8853207EEC1F0055411E /* dalSelectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14AF8852207EEC1F0055411E /* dalSelectionCell.xib */; };
+		14AF8855207EED440055411E /* dalSelectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AF8854207EED440055411E /* dalSelectionCell.swift */; };
 		9A0F976F507096E057072A44 /* Pods_Dal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 209A3C5150FF5D48F103F8EA /* Pods_Dal.framework */; };
 /* End PBXBuildFile section */
 
@@ -81,6 +87,12 @@
 		1461F23A207B06420061DE1C /* dalAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dalAlert.swift; sourceTree = "<group>"; };
 		1461F23C207B08660061DE1C /* dalAlert-extentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "dalAlert-extentions.swift"; sourceTree = "<group>"; };
 		1461F25C207BC7EB0061DE1C /* skillModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = skillModel.swift; sourceTree = "<group>"; };
+		14AF8846207E63030055411E /* addworkerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addworkerVC.swift; sourceTree = "<group>"; };
+		14AF8848207E9DB90055411E /* googleMapVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = googleMapVC.swift; sourceTree = "<group>"; };
+		14AF884E207EC9000055411E /* dalSelectionDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dalSelectionDataSource.swift; sourceTree = "<group>"; };
+		14AF8850207EC9B20055411E /* dalSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dalSelection.swift; sourceTree = "<group>"; };
+		14AF8852207EEC1F0055411E /* dalSelectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = dalSelectionCell.xib; sourceTree = "<group>"; };
+		14AF8854207EED440055411E /* dalSelectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dalSelectionCell.swift; sourceTree = "<group>"; };
 		209A3C5150FF5D48F103F8EA /* Pods_Dal.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Dal.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5D341FB4FC8102FC196A6308 /* Pods-Dal.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dal.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Dal/Pods-Dal.debug.xcconfig"; sourceTree = "<group>"; };
 		9071B0A2410047146531199D /* Pods-Dal.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dal.release.xcconfig"; path = "Pods/Target Support Files/Pods-Dal/Pods-Dal.release.xcconfig"; sourceTree = "<group>"; };
@@ -135,6 +147,7 @@
 		144A94F02073D8810024B912 /* helper */ = {
 			isa = PBXGroup;
 			children = (
+				14AF884D207EC8CF0055411E /* dalSelectin */,
 				1461F239207B06260061DE1C /* dalAlert */,
 				144E80D02075AB120049FEB3 /* protocals */,
 				144A9504207416810024B912 /* cells */,
@@ -160,10 +173,12 @@
 		144A94F22073D89C0024B912 /* controllers */ = {
 			isa = PBXGroup;
 			children = (
+				14AF884A207EB96F0055411E /* addWorkerVC */,
 				144A94E02073D6330024B912 /* HomeVC.swift */,
 				144A95022074167A0024B912 /* WorkerCollectionVC.swift */,
 				1461F235207995F90061DE1C /* workerDetailsVC.swift */,
 				1461F2372079B28D0061DE1C /* baseViewController.swift */,
+				14AF8848207E9DB90055411E /* googleMapVC.swift */,
 			);
 			path = controllers;
 			sourceTree = "<group>";
@@ -220,6 +235,25 @@
 				1461F23C207B08660061DE1C /* dalAlert-extentions.swift */,
 			);
 			path = dalAlert;
+			sourceTree = "<group>";
+		};
+		14AF884A207EB96F0055411E /* addWorkerVC */ = {
+			isa = PBXGroup;
+			children = (
+				14AF8846207E63030055411E /* addworkerVC.swift */,
+			);
+			path = addWorkerVC;
+			sourceTree = "<group>";
+		};
+		14AF884D207EC8CF0055411E /* dalSelectin */ = {
+			isa = PBXGroup;
+			children = (
+				14AF884E207EC9000055411E /* dalSelectionDataSource.swift */,
+				14AF8850207EC9B20055411E /* dalSelection.swift */,
+				14AF8852207EEC1F0055411E /* dalSelectionCell.xib */,
+				14AF8854207EED440055411E /* dalSelectionCell.swift */,
+			);
+			path = dalSelectin;
 			sourceTree = "<group>";
 		};
 		65D08E134555116ABD21822E /* Frameworks */ = {
@@ -300,6 +334,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				14AF8853207EEC1F0055411E /* dalSelectionCell.xib in Resources */,
 				144A94E92073D6340024B912 /* LaunchScreen.storyboard in Resources */,
 				144E80A22075096A0049FEB3 /* GoogleService-Info.plist in Resources */,
 				143564242077026300AEE097 /* workerCell.xib in Resources */,
@@ -390,15 +425,18 @@
 				1461F232207896BF0061DE1C /* PageMenuDataModel.swift in Sources */,
 				1461F22A2078929F0061DE1C /* CAPSPageMenu.swift in Sources */,
 				144A950620741DA00024B912 /* SectionPagingCell.swift in Sources */,
+				14AF884F207EC9000055411E /* dalSelectionDataSource.swift in Sources */,
 				1461F25D207BC7EB0061DE1C /* skillModel.swift in Sources */,
 				1461F236207995F90061DE1C /* workerDetailsVC.swift in Sources */,
 				1461F23B207B06420061DE1C /* dalAlert.swift in Sources */,
 				1461F22F2078929F0061DE1C /* CAPSPageMenuConfiguration.swift in Sources */,
+				14AF8849207E9DB90055411E /* googleMapVC.swift in Sources */,
 				1461F22B2078929F0061DE1C /* CAPSPageMenu+Options.swift in Sources */,
 				1461F22E2078929F0061DE1C /* CAPSPageMenu+UIGestureRecognizerDelegate.swift in Sources */,
 				1461F23D207B08660061DE1C /* dalAlert-extentions.swift in Sources */,
 				144A94E12073D6330024B912 /* HomeVC.swift in Sources */,
 				1461F22D2078929F0061DE1C /* CAPSPageMenu+UIConfiguration.swift in Sources */,
+				14AF8855207EED440055411E /* dalSelectionCell.swift in Sources */,
 				144E80CF207580FE0049FEB3 /* dataFeederProtocol.swift in Sources */,
 				1461F21C207852D40061DE1C /* image.swift in Sources */,
 				144A94F92073DBDC0024B912 /* SectionData.swift in Sources */,
@@ -407,7 +445,9 @@
 				1461F2342079872A0061DE1C /* dalBaseView.swift in Sources */,
 				144A95032074167A0024B912 /* WorkerCollectionVC.swift in Sources */,
 				144E80C92075612D0049FEB3 /* sectionModel.swift in Sources */,
+				14AF8851207EC9B20055411E /* dalSelection.swift in Sources */,
 				1461F22C2078929F0061DE1C /* MenuItemView.swift in Sources */,
+				14AF8847207E63030055411E /* addworkerVC.swift in Sources */,
 				144A94DF2073D6330024B912 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

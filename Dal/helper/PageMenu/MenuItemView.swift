@@ -71,7 +71,7 @@ class MenuItemView: UIView {
         // Set title depending on if controller has a title set
         if controller.title != nil {
             self.titleLabel!.text = pageMenu.pageMenuDataModel[Int(index)].MenuItemView.name
-            self.imageView?.dalSetImage(url: pageMenu.pageMenuDataModel[Int(index)].MenuItemView.logo)
+            self.imageView?.dalSetImageWithRenderingMode(url: pageMenu.pageMenuDataModel[Int(index)].MenuItemView.logo)
         } else {
             self.titleLabel!.text = "Menu \(Int(index) + 1)"
         }
