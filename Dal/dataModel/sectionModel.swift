@@ -12,7 +12,7 @@ class sectionModel:NSObject  {
 
     
     override var description: String{
-        return " name : \(name) "
+        return " name : \(name) , skills : \(skills) "
 
 //        return "id : \(id) \n name : \(name) \n avatar : \(avatar) \n  sort: \(sort)\n"
     }
@@ -40,6 +40,31 @@ class sectionModel:NSObject  {
 
         }
         
+    }
+    func getSkillsIDAsString() -> String {
+        
+        var skills = ""
+        for askill in self.skills {
+           skills += askill.id
+            
+            skills += ";"
+
+        }
+        skills.removeLast()
+        return skills
+    }
+    
+    func getSkillsNameAsString() -> String {
+        
+        var skills = ""
+        for askill in self.skills {
+            skills += askill.name
+            
+            skills += " , "
+            
+        }
+        skills.removeLast()
+        return skills
     }
     
    

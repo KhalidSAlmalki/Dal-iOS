@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreLocation
 class HomeVC: SectionVC {
 
 
@@ -17,6 +18,9 @@ class HomeVC: SectionVC {
     
     var pageMenu : CAPSPageMenu?
     var delegate:DidloadChange?
+    
+    
+    var currentLocation = CLLocationCoordinate2D()
     lazy var searchBar:UISearchBar = UISearchBar(frame:CGRect(x: 0, y: 0, width: 200, height: 20))
 
 
@@ -32,6 +36,19 @@ class HomeVC: SectionVC {
          setUpNvaBar()
          getSectionBased(location: "")
         
+        Locator.shared.authorize { (status) in
+            
+            if status ==  Locator.ResultL.Success {
+                
+                Locator.shared.locate(callback: { (sta) in
+                    if sta == .Success {
+                        
+                self.currentLocation = (Locator.shared.location?.coordinate)!
+
+                    }
+                })
+            }
+        }
         
       
         

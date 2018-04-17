@@ -14,7 +14,6 @@
 		144A94E42073D6330024B912 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 144A94E22073D6330024B912 /* Main.storyboard */; };
 		144A94E62073D6340024B912 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 144A94E52073D6340024B912 /* Assets.xcassets */; };
 		144A94E92073D6340024B912 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 144A94E72073D6340024B912 /* LaunchScreen.storyboard */; };
-		144A94F72073DBA90024B912 /* L102Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144A94F62073DBA90024B912 /* L102Language.swift */; };
 		144A94F92073DBDC0024B912 /* SectionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144A94F82073DBDC0024B912 /* SectionData.swift */; };
 		144A94FC2073DC6A0024B912 /* color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144A94FB2073DC6A0024B912 /* color.swift */; };
 		144A94FE2073DFA00024B912 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144A94FD2073DFA00024B912 /* UIViewController.swift */; };
@@ -41,6 +40,8 @@
 		1461F23B207B06420061DE1C /* dalAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1461F23A207B06420061DE1C /* dalAlert.swift */; };
 		1461F23D207B08660061DE1C /* dalAlert-extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1461F23C207B08660061DE1C /* dalAlert-extentions.swift */; };
 		1461F25D207BC7EB0061DE1C /* skillModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1461F25C207BC7EB0061DE1C /* skillModel.swift */; };
+		147E96062086788F0015BD73 /* locator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147E96052086788F0015BD73 /* locator.swift */; };
+		147E9608208686FE0015BD73 /* locationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147E9607208686FE0015BD73 /* locationModel.swift */; };
 		14AF8847207E63030055411E /* addworkerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AF8846207E63030055411E /* addworkerVC.swift */; };
 		14AF8849207E9DB90055411E /* googleMapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AF8848207E9DB90055411E /* googleMapVC.swift */; };
 		14AF884F207EC9000055411E /* dalSelectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AF884E207EC9000055411E /* dalSelectionDataSource.swift */; };
@@ -60,7 +61,6 @@
 		144A94E52073D6340024B912 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		144A94E82073D6340024B912 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		144A94EA2073D6340024B912 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		144A94F62073DBA90024B912 /* L102Language.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = L102Language.swift; sourceTree = "<group>"; };
 		144A94F82073DBDC0024B912 /* SectionData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SectionData.swift; sourceTree = "<group>"; };
 		144A94FB2073DC6A0024B912 /* color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = color.swift; sourceTree = "<group>"; };
 		144A94FD2073DFA00024B912 /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
@@ -87,6 +87,8 @@
 		1461F23A207B06420061DE1C /* dalAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dalAlert.swift; sourceTree = "<group>"; };
 		1461F23C207B08660061DE1C /* dalAlert-extentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "dalAlert-extentions.swift"; sourceTree = "<group>"; };
 		1461F25C207BC7EB0061DE1C /* skillModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = skillModel.swift; sourceTree = "<group>"; };
+		147E96052086788F0015BD73 /* locator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = locator.swift; sourceTree = "<group>"; };
+		147E9607208686FE0015BD73 /* locationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = locationModel.swift; sourceTree = "<group>"; };
 		14AF8846207E63030055411E /* addworkerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addworkerVC.swift; sourceTree = "<group>"; };
 		14AF8848207E9DB90055411E /* googleMapVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = googleMapVC.swift; sourceTree = "<group>"; };
 		14AF884E207EC9000055411E /* dalSelectionDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dalSelectionDataSource.swift; sourceTree = "<group>"; };
@@ -154,8 +156,8 @@
 				144A94FA2073DC440024B912 /* extenssions */,
 				144A94F82073DBDC0024B912 /* SectionData.swift */,
 				144A94F32073DB370024B912 /* PageMenu */,
-				144A94F62073DBA90024B912 /* L102Language.swift */,
 				1461F2332079872A0061DE1C /* dalBaseView.swift */,
+				147E96052086788F0015BD73 /* locator.swift */,
 			);
 			path = helper;
 			sourceTree = "<group>";
@@ -166,6 +168,7 @@
 				144E80C82075612D0049FEB3 /* sectionModel.swift */,
 				144E80CA207561690049FEB3 /* workerModel.swift */,
 				1461F25C207BC7EB0061DE1C /* skillModel.swift */,
+				147E9607208686FE0015BD73 /* locationModel.swift */,
 			);
 			path = dataModel;
 			sourceTree = "<group>";
@@ -418,11 +421,11 @@
 				144A94FE2073DFA00024B912 /* UIViewController.swift in Sources */,
 				1461F21E207861450061DE1C /* view.swift in Sources */,
 				144E80CD20757AED0049FEB3 /* String.swift in Sources */,
-				144A94F72073DBA90024B912 /* L102Language.swift in Sources */,
 				143564232077026300AEE097 /* workerCell.swift in Sources */,
 				1461F2382079B28D0061DE1C /* baseViewController.swift in Sources */,
 				144E80CB207561690049FEB3 /* workerModel.swift in Sources */,
 				1461F232207896BF0061DE1C /* PageMenuDataModel.swift in Sources */,
+				147E96062086788F0015BD73 /* locator.swift in Sources */,
 				1461F22A2078929F0061DE1C /* CAPSPageMenu.swift in Sources */,
 				144A950620741DA00024B912 /* SectionPagingCell.swift in Sources */,
 				14AF884F207EC9000055411E /* dalSelectionDataSource.swift in Sources */,
@@ -434,6 +437,7 @@
 				1461F22B2078929F0061DE1C /* CAPSPageMenu+Options.swift in Sources */,
 				1461F22E2078929F0061DE1C /* CAPSPageMenu+UIGestureRecognizerDelegate.swift in Sources */,
 				1461F23D207B08660061DE1C /* dalAlert-extentions.swift in Sources */,
+				147E9608208686FE0015BD73 /* locationModel.swift in Sources */,
 				144A94E12073D6330024B912 /* HomeVC.swift in Sources */,
 				1461F22D2078929F0061DE1C /* CAPSPageMenu+UIConfiguration.swift in Sources */,
 				14AF8855207EED440055411E /* dalSelectionCell.swift in Sources */,
