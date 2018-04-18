@@ -15,6 +15,8 @@ let applicationDelegate:AppDelegate = UIApplication.shared.delegate as! AppDeleg
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    var window2: UIWindow?
+
     var ref: DatabaseReference!
     var reloadWorkerhasBeenRegisterd:Bool = false
     var sections:[sectionModel] = []
@@ -23,6 +25,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        window2 = UIWindow(frame: UIScreen.main.bounds)
+        if let window = window2 {
+            window.backgroundColor = UIColor.clear
+            
+            window.rootViewController = UIViewController()
+            window.isHidden = true
+        }
+        
         sections = []
         FirebaseApp.configure()
         

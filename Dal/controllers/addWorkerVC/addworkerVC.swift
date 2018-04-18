@@ -8,7 +8,8 @@
 
 import UIKit
 
-class addworkerVC: baseViewController,UITextFieldDelegate, dalSelectionDataSource,dalSelectionDelgate,googleMapDataSource,googleMapDelegate{
+class addworkerVC: baseViewController,UITextFieldDelegate, dalSelectionDataSource,dalSelectionDelgate,googleMapDataSource,googleMapDelegate,UIPickerViewDelegate,UIPickerViewDataSource,UIImagePickerControllerDelegate,UINavigationControllerDelegate{
+
  
  
 
@@ -22,7 +23,7 @@ class addworkerVC: baseViewController,UITextFieldDelegate, dalSelectionDataSourc
     @IBOutlet weak var imageView: UIImageView!
     
     // list of  contact type
-    let listType = ["phone number","whats up","email"]
+    let listType = ["Phone Number","Whats Up","Email"]
     
     var sectionWithSkills = [sectionModel]()
     
@@ -30,21 +31,78 @@ class addworkerVC: baseViewController,UITextFieldDelegate, dalSelectionDataSourc
 
     var userLocation = locationModel()
     
+    let imagePicker = UIImagePickerController()
+
+    @IBOutlet var pickerViewContacts: UIPickerView!
     override func viewDidLoad() {
         super.viewDidLoad()
         
         SkillsTextfield.delegate = self
         LocationTextfield.delegate = self
+        contactTextfield.delegate = self
         
         sectionWithSkills = applicationDelegate.sectionsWithSkills
-        
-        
-        // CGRect(x: 0, y: dalBaseView.screenHeight-200, width: dalBaseView.screenWidth, height: 200)
-        
+    
        
+        setUpPicker()
+        
+        setUpImagePicker()
       
     }
 
+    @objc func presentImageViewPicker()  {
+        print("presentImageViewPicker")
+        
+        let actionSheet = UIAlertController(title: "Choose Option", message: "", preferredStyle: .actionSheet)
+        
+        actionSheet.addAction(UIAlertAction(title: "OK", style: .default, handler: { (ac) in
+            
+            print("sdsd")
+        }))
+
+        guard dalbbaseView != nil else {
+            return
+        }
+
+        applicationDelegate.window2?.isHidden = false
+        applicationDelegate.window2?.rootViewController?.present(imagePicker, animated: false, completion: nil)
+   
+
+    }
+    func setUpImagePicker(){
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(presentImageViewPicker))
+        
+        imageView.addGestureRecognizer(tapGesture)
+        imageView.isUserInteractionEnabled = true
+        imagePicker.delegate = self
+        
+        imagePicker.allowsEditing = false
+        imagePicker.sourceType = .photoLibrary
+
+    }
+    
+    func dismissImagePicker() {
+        
+        applicationDelegate.window2?.rootViewController?.dismiss(animated: true, completion: nil)
+        applicationDelegate.window2?.isHidden = true
+
+    }
+    // MARK: - UIImagePickerControllerDelegate Methods
+
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        
+        dismissImagePicker()
+    }
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            imageView.contentMode = .scaleAspectFit
+            imageView.image = pickedImage
+        }
+        
+        dismissImagePicker()
+
+    }
+  
     func validateUserInput() -> Bool  {
         return false
     }
@@ -53,9 +111,32 @@ class addworkerVC: baseViewController,UITextFieldDelegate, dalSelectionDataSourc
         //
     }
     func setUpPicker() {
+        let toolBar = UIToolbar()
+        toolBar.barStyle = UIBarStyle.default
+        toolBar.isTranslucent = true
+        toolBar.tintColor = UIColor.dalHeaderColor()
+        toolBar.sizeToFit()
         
+        let doneButton = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.plain, target: self, action: #selector(pickerViewContactsDoneBt))
+        let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: nil, action: nil)
+        let cancelButton = UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.plain, target: self, action: #selector(pickerViewContactsCancelBt))
+        
+        toolBar.setItems([cancelButton, spaceButton, doneButton], animated: false)
+        toolBar.isUserInteractionEnabled = true
+        
+        typeTextfield.inputView = pickerViewContacts
+        typeTextfield.inputAccessoryView = toolBar
     }
     
+    @objc func pickerViewContactsDoneBt() {
+        
+        self.typeTextfield.text = listType[pickerViewContacts.selectedRow(inComponent: 0)]
+        typeTextfield.resignFirstResponder()
+    }
+    @objc func pickerViewContactsCancelBt() {
+        typeTextfield.resignFirstResponder()
+
+    }
     func registerWorker()  {
         
     }
@@ -75,6 +156,17 @@ class addworkerVC: baseViewController,UITextFieldDelegate, dalSelectionDataSourc
     @IBAction func closeBt(_ sender: Any) {
        dismissDalBaseView()
      
+    }
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return listType.count
+    }
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        
+        return listType[row]
     }
     
     func dalSelectionSelectedSkills() -> [sectionModel] {
@@ -97,6 +189,9 @@ class addworkerVC: baseViewController,UITextFieldDelegate, dalSelectionDataSourc
     func googleMapDataDidSelected(locationModel: locationModel) {
         
         userLocation = locationModel
+     userLocation.getCountryAndCity(completion: { (country, city) in
+        self.LocationTextfield.text = "\(country), \(city); range \(self.userLocation.Range) km"
+        })
     }
     
     func googleMapDataSourceUserLocation() -> locationModel {

@@ -514,12 +514,21 @@
                         <outlet property="descTextfield" destination="a1d-1I-VWc" id="M6e-2a-uFC"/>
                         <outlet property="imageView" destination="iLH-r4-6Hh" id="p17-59-9TJ"/>
                         <outlet property="nameTextfield" destination="udv-Y6-lPf" id="JSP-Yj-PNy"/>
+                        <outlet property="pickerViewContacts" destination="CD6-pu-ynD" id="Rz7-Fk-IM4"/>
                         <outlet property="typeTextfield" destination="mWy-PD-wKm" id="XeD-T9-CJV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VfU-cU-sgM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <pickerView contentMode="scaleToFill" id="CD6-pu-ynD">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="218"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                    <connections>
+                        <outlet property="dataSource" destination="l7d-8i-nSW" id="SLX-Sz-Vmf"/>
+                        <outlet property="delegate" destination="l7d-8i-nSW" id="QvN-JM-akV"/>
+                    </connections>
+                </pickerView>
             </objects>
-            <point key="canvasLocation" x="1734" y="717"/>
+            <point key="canvasLocation" x="1734" y="924"/>
         </scene>
         <!--Google MapVC-->
         <scene sceneID="5PI-c7-95B">
