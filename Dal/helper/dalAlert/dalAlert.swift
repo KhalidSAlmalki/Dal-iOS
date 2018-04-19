@@ -341,7 +341,7 @@ class dalalert: UIViewController , UITextFieldDelegate{
             self.textfied = UITextField()
             self.textfied.textColor = .white
             self.textfied.font = UIFont(name: self.textFont, size: 20)
-            self.textfied.textAlignment = .right
+            self.textfied.textAlignment = .left
             self.textfied.placeholder = textfiedOption.name
             self.textfied.delegate = self
             self.textfied.keyboardType = (textfied?.keyboradType)!
@@ -376,9 +376,20 @@ class dalalert: UIViewController , UITextFieldDelegate{
     /// - Parameter action: func which gets executed when disapearing
     
     @objc  func buttonTap() {
-        closeView(true)
+        
+        if closeAction != nil{
+            
+            if let action = self.closeAction {
+                if self.textfiedOption != nil{
+                    action(self.textfied.text!)
+                    
+                }else{
+                    action("has been done")
+                }
+            }
+        }
     }
-    private func addAction(_ action: @escaping (String) -> Void) {
+     func addAction(_ action: @escaping (String) -> Void) {
         
         self.closeAction = action
         
@@ -491,7 +502,7 @@ class dalalert: UIViewController , UITextFieldDelegate{
     /// - Parameters:
     ///   - withCallback: callback availabel
     ///   - source: Type of removing view see ActionType
-    private func closeView(_ withCallback: Bool) {
+     func closeView(_ withCallback: Bool) {
         UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.5, options: [], animations: {
         }, completion: { finished in
             UIView.animate(withDuration: 0.1, animations: {

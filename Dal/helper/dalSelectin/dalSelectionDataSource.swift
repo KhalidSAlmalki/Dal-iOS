@@ -9,7 +9,7 @@
 import Foundation
 
 protocol dalSelectionDelgate:class{
-    func dalSelectionDidSelected(skills:[sectionModel],selectedSkills:[String])
+    func dalSelectionDidSelected(skills:[sectionModel],selectedSkills:String)
 }
 
 protocol dalSelectionDataSource:class{

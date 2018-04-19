@@ -7,12 +7,11 @@
 //
 
 import UIKit
-
+enum addworkerRequestType {
+    case becomeWorker
+    case addWorker
+}
 class addworkerVC: baseViewController,UITextFieldDelegate, dalSelectionDataSource,dalSelectionDelgate,googleMapDataSource,googleMapDelegate,UIPickerViewDelegate,UIPickerViewDataSource,UIImagePickerControllerDelegate,UINavigationControllerDelegate{
-
- 
- 
-
 
     @IBOutlet weak var descTextfield: UITextField!
     @IBOutlet weak var SkillsTextfield: UITextField!
@@ -29,11 +28,16 @@ class addworkerVC: baseViewController,UITextFieldDelegate, dalSelectionDataSourc
     
     var selectedSkills = [sectionModel]()
 
+    var selectedSkillsID = ""
+    
     var userLocation = locationModel()
     
     let imagePicker = UIImagePickerController()
 
+    var userID = ""
     @IBOutlet var pickerViewContacts: UIPickerView!
+    
+    var vcRequestedBased:addworkerRequestType = .addWorker
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -42,14 +46,91 @@ class addworkerVC: baseViewController,UITextFieldDelegate, dalSelectionDataSourc
         contactTextfield.delegate = self
         
         sectionWithSkills = applicationDelegate.sectionsWithSkills
-    
        
         setUpPicker()
         
         setUpImagePicker()
+        
+        if vcRequestedBased == .becomeWorker {
+            let userDefaults = UserDefaults.standard
+
+            if let decoded  = userDefaults.object(forKey: "currentUser") as? Data{
+                let currentUser = NSKeyedUnarchiver.unarchiveObject(with: decoded) as! workerModel
+                let rol =  currentUser.getRole()
+                if rol == .user{
+                   userID = currentUser.id
+                    self.contactTextfield.text = currentUser.contactNumber
+
+                }
+            }
+        }
       
     }
+    private func uploadImage(_ imageID: String, _ data: Data?, urlWith:@escaping (String) -> Void) {
+        // Create a reference to the file you want to upload
+        
+        let imageRef = applicationDelegate.storageRef.child("Avatars/\(imageID).jpg")
+        
+        imageRef.putData(data!, metadata: nil) { (metadata, error) in
+            
+            guard metadata != nil else {
+                return
+            }
+            
+            imageRef.downloadURL { (url, err) in
+                
+                if let urll = url?.absoluteString{
+                    urlWith(urll)
+                }else{
+                    
+                    urlWith("")
+                }
+                
+            }
+            
+        }
+    }
+    
+    @IBAction func submitBt(_ sender: UIButton) {
+        
+        if validateUserInput() {
+            sender.loadingIndicator(true)
+            var par = getUserInputs()
+            // Data in memory
+            
+            let data = UIImagePNGRepresentation(imageView.image!)
 
+            
+          
+            let userID_ = applicationDelegate.getRandomIDUsingFirBase()
+            
+            if vcRequestedBased == .becomeWorker{
+                par["id"] = self.userID
+
+            }else{
+                par["id"] = userID_
+
+            }
+            
+          
+            uploadImage(userID, data) {(url) in
+                
+                print("callBack")
+                if !url.isEmpty{
+                    par["avatar"] = url
+                    applicationDelegate.ref.child("workers/worker").child(par["id"] as! String).setValue(par)
+                    sender.loadingIndicator(false)
+
+                }
+               
+                
+            }
+        
+            
+
+         }
+    }
+    
     @objc func presentImageViewPicker()  {
         print("presentImageViewPicker")
         
@@ -65,7 +146,7 @@ class addworkerVC: baseViewController,UITextFieldDelegate, dalSelectionDataSourc
         }
 
         applicationDelegate.window2?.isHidden = false
-        applicationDelegate.window2?.rootViewController?.present(imagePicker, animated: false, completion: nil)
+        applicationDelegate.window2?.rootViewController?.present(imagePicker, animated: true, completion: nil)
    
 
     }
@@ -87,6 +168,9 @@ class addworkerVC: baseViewController,UITextFieldDelegate, dalSelectionDataSourc
         applicationDelegate.window2?.isHidden = true
 
     }
+    
+    
+    
     // MARK: - UIImagePickerControllerDelegate Methods
 
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
@@ -104,11 +188,37 @@ class addworkerVC: baseViewController,UITextFieldDelegate, dalSelectionDataSourc
     }
   
     func validateUserInput() -> Bool  {
-        return false
+        
+        if (LocationTextfield.text?.isEmpty)! || (contactTextfield.text?.isEmpty)!
+        || (nameTextfield.text?.isEmpty)! || (SkillsTextfield.text?.isEmpty)!
+        || (descTextfield.text?.isEmpty)! {
+            let alert = UIAlertController(title: "Error", message: "plaese check your inputs and fill the missing value", preferredStyle: .alert)
+            
+            
+            alert.addAction(UIAlertAction(title: "done", style: .cancel, handler: { (r) in
+                applicationDelegate.dalDismiss(animated: true, completion: nil)
+
+            }))
+        
+            applicationDelegate.dalPresent(vc: alert, animated: true, completion: nil)
+            return false
+        }
+        return true
     }
     
-    func getUserInputs()  {
-        //
+    func getUserInputs() -> [String:Any] {
+        
+        return ["name":nameTextfield.text!,
+                "avatar":"",
+                "coverageRange":userLocation.Range,
+                "contactMethod":typeTextfield.text!,
+                "desc":userLocation.Range,
+                "id":"",
+                "location":"\(userLocation.location.latitude);\(userLocation.location.longitude)",
+                "phoneNumber":contactTextfield.text!,
+                "skills":self.selectedSkillsID,
+                "status":"active"
+                                ]
     }
     func setUpPicker() {
         let toolBar = UIToolbar()
@@ -173,16 +283,21 @@ class addworkerVC: baseViewController,UITextFieldDelegate, dalSelectionDataSourc
         return selectedSkills
     }
     
-    func dalSelectionDidSelected(skills: [sectionModel], selectedSkills: [String]) {
+    func dalSelectionDidSelected(skills: [sectionModel], selectedSkills: String) {
         
         self.selectedSkills = skills
         
+        // geting skills name
         var name = ""
         for s in skills {
             name+=s.getSkillsNameAsString()
         }
         name.removeLast()
         SkillsTextfield.text = name
+        
+        // geeting skils id
+        self.selectedSkillsID = selectedSkills
+        
         
     }
     

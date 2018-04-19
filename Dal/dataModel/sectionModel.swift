@@ -41,6 +41,15 @@ class sectionModel:NSObject  {
         }
         
     }
+    func getSkillModel(by id:String) -> skillModel? {
+        
+       if let index = skills.index(where: {$0.id == id}){
+        
+        return skills[index]
+        
+        }
+        return nil
+    }
     func getSkillsIDAsString() -> String {
         
         var skills = ""

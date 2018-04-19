@@ -85,7 +85,7 @@ class WorkerCollectionVC: UICollectionViewController,UICollectionViewDelegateFlo
                                                       name: convertString(value["name"] ),
                                                       description: convertString(value["desc"] ),
                                                       avatar: convertString(value["avatar"] ),
-                                                      location: location)
+                                                      location: location,status:convertString(value["status"] ))
                             if !self.workers.contains(where: {$0.id == aWorker.id} ){
                                 self.workers.append(aWorker)
 

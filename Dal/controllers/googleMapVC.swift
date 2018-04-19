@@ -18,6 +18,7 @@ protocol googleMapDataSource :class{
 class googleMapVC: baseViewController,GMSMapViewDelegate {
 
     
+    @IBOutlet weak var rangeLable: UILabel!
     private var circleView = UIView()
     private var width = CGFloat()
     private var height = CGFloat()
@@ -86,6 +87,8 @@ class googleMapVC: baseViewController,GMSMapViewDelegate {
         CATransaction.begin()
         CATransaction.setValue(0.5, forKey: kCATransactionAnimationDuration)
         googleMapView?.animate(to: GMSCameraPosition.camera(withTarget: userLocation.location, zoom: userLocation.zoom))
+        
+        rangeLable.text = "\(userLocation.Range) km"
         CATransaction.commit()
         
         

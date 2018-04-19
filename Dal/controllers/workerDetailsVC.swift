@@ -14,6 +14,8 @@ class workerDetailsVC: baseViewController {
     @IBOutlet weak var skill: UILabel!
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var callBt: UIButton!
+
     var workerDetails:workerModel?
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,11 +24,54 @@ class workerDetailsVC: baseViewController {
         
      }
 
+    private func getWorkerSkillName(_ worker: workerModel?) {
+        var skillsName = ""
+        if let spiltID = worker?.skillIDs.split(separator: ";"){
+            
+            for ids in spiltID{
+                for id in ids{
+                    
+                    for s in applicationDelegate.sections{
+                        
+                        if let sm = s.getSkillModel(by: id){
+                            print(sm)
+                            skillsName += sm.name
+                            skillsName += ","
+                            
+                        }
+                    }
+                    
+                }
+                skillsName.removeLast()
+                skill.text = skillsName
+            }
+        }
+    }
+    
     func setUp(){
         let worker = workerDetails
         name.text = worker?.name
+        
+        print(worker?.desc)
         desc.text = worker?.desc
-    //    imageView.dalSetImage(url:(worker?.avatar)!)
+        
+        
+        
+        getWorkerSkillName(worker)
+        
+
+        
+       // skill.text = applicationDelegate.get
+        if let status = worker?.status{
+            
+            print(status)
+
+        }
+    
+        if let img = worker?.avatar {
+            
+            imageView.dalSetImage(url: img)
+        }
     }
 
     @IBAction func closeBt(_ sender: Any) {
@@ -36,15 +81,6 @@ class workerDetailsVC: baseViewController {
         dalbbaseView?.dismiss() 
     }
     
-    @IBOutlet weak var callBt: UIButton!
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
+ 
 
 }

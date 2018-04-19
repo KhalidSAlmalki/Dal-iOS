@@ -11,6 +11,8 @@ import CoreLocation
 class HomeVC: SectionVC {
 
 
+    @IBOutlet weak var profileBt: UIBarButtonItem!
+    @IBOutlet weak var settingsBt: UIBarButtonItem!
     @IBOutlet weak var PagingView: UIView!
     
     var controllerArray : [UIViewController] = []
@@ -24,17 +26,22 @@ class HomeVC: SectionVC {
     lazy var searchBar:UISearchBar = UISearchBar(frame:CGRect(x: 0, y: 0, width: 200, height: 20))
 
 
+    @IBAction func profileBt(_ sender: Any) {
+        
+        
+        
+    }
+    @IBAction func settingsBt(_ sender: UIBarButtonItem) {
+        
+     let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "settingsVC")
+        applicationDelegate.dalPresent(vc: vc, animated: true, completion: nil)
+  
+    }
     
-    override func viewDidLoad() {
-         super.viewDidLoad()
+    private func setUP() {
+
         
-        
-//        let alert:dalalert = dalalert(self,text: "khalid")
-//        alert.show()
-        
-         self.view.backgroundColor = UIColor.dalHeaderColor()
-         setUpNvaBar()
-         getSectionBased(location: "")
+        getSectionBased(location: "")
         
         Locator.shared.authorize { (status) in
             
@@ -43,17 +50,76 @@ class HomeVC: SectionVC {
                 Locator.shared.locate(callback: { (sta) in
                     if sta == .Success {
                         
-                self.currentLocation = (Locator.shared.location?.coordinate)!
-
+                        self.currentLocation = (Locator.shared.location?.coordinate)!
+                        
                     }
                 })
             }
         }
+    }
+    
+    override func viewDidLoad() {
+         super.viewDidLoad()
+        self.view.backgroundColor = UIColor.dalHeaderColor()
+        setUpNvaBar()
+
+        if retriveUserIntoUserDefault() == nil {
+            
+            let alert:dalalert = dalalert(self,iconImage:UIImage(named: "logo"),textfied:DalTextfieldOption(name: "Phone Number", keyboradType:UIKeyboardType.decimalPad, MustHasData: true))
+            
+            alert.addAction { (textValue) in
+                
+                let id = applicationDelegate.getRandomIDUsingFirBase()
+             
+                applicationDelegate.ref.child("workers/worker").child(id).setValue(["id":id,"contactNumber":textValue], withCompletionBlock: { (erre, datarec) in
+                    
+                    let worker = workerModel(id: id, contactNumber: textValue)
+                    self.saveUserIntoUserDefault(worker: worker)
+                    
+                    alert.closeView(false)
+                    self.setUP()
+                    
+                })
+            }
+            alert.show()
+
+        }else{
+            
+            setUP()
+        }
+
+        
+        applicationDelegate.ref.child("workers/worker").queryOrdered(byChild: "contactNumber").observeSingleEvent(of: .value, with: { (data) in
+            
+            for snap in data.children {
+                print(snap)
+
+            }
+
+        })
+        
         
       
         
      }
+    
+    func retriveUserIntoUserDefault() -> workerModel? {
+        let userDefaults = UserDefaults.standard
+        if let decoded  = userDefaults.object(forKey: "currentUser") as? Data{
+            return NSKeyedUnarchiver.unarchiveObject(with: decoded) as? workerModel
+        }
+        return nil
+    }
 
+    func saveUserIntoUserDefault(worker:workerModel){
+        
+        let userDefaults = UserDefaults.standard
+        let encodedData: Data = NSKeyedArchiver.archivedData(withRootObject: worker)
+        userDefaults.set(encodedData, forKey: "currentUser")
+        userDefaults.synchronize()
+        
+
+    }
     @IBAction func addNewWorker(_ sender: UIBarButtonItem) {
         
         let add = dalBaseView(storyBoard: "addworkerVC")

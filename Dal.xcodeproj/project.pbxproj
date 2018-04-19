@@ -40,6 +40,9 @@
 		1461F23B207B06420061DE1C /* dalAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1461F23A207B06420061DE1C /* dalAlert.swift */; };
 		1461F23D207B08660061DE1C /* dalAlert-extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1461F23C207B08660061DE1C /* dalAlert-extentions.swift */; };
 		1461F25D207BC7EB0061DE1C /* skillModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1461F25C207BC7EB0061DE1C /* skillModel.swift */; };
+		1466A91F208791BC00C3B355 /* Pods_Dal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1466A91E208791BC00C3B355 /* Pods_Dal.framework */; };
+		1466A92120883F4900C3B355 /* settingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1466A92020883F4900C3B355 /* settingsVC.swift */; };
+		1466A92320885FFF00C3B355 /* button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1466A92220885FFF00C3B355 /* button.swift */; };
 		147E96062086788F0015BD73 /* locator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147E96052086788F0015BD73 /* locator.swift */; };
 		147E9608208686FE0015BD73 /* locationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147E9607208686FE0015BD73 /* locationModel.swift */; };
 		14AF8847207E63030055411E /* addworkerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AF8846207E63030055411E /* addworkerVC.swift */; };
@@ -48,7 +51,6 @@
 		14AF8851207EC9B20055411E /* dalSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AF8850207EC9B20055411E /* dalSelection.swift */; };
 		14AF8853207EEC1F0055411E /* dalSelectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14AF8852207EEC1F0055411E /* dalSelectionCell.xib */; };
 		14AF8855207EED440055411E /* dalSelectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AF8854207EED440055411E /* dalSelectionCell.swift */; };
-		9A0F976F507096E057072A44 /* Pods_Dal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 209A3C5150FF5D48F103F8EA /* Pods_Dal.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -87,6 +89,9 @@
 		1461F23A207B06420061DE1C /* dalAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dalAlert.swift; sourceTree = "<group>"; };
 		1461F23C207B08660061DE1C /* dalAlert-extentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "dalAlert-extentions.swift"; sourceTree = "<group>"; };
 		1461F25C207BC7EB0061DE1C /* skillModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = skillModel.swift; sourceTree = "<group>"; };
+		1466A91E208791BC00C3B355 /* Pods_Dal.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_Dal.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1466A92020883F4900C3B355 /* settingsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = settingsVC.swift; sourceTree = "<group>"; };
+		1466A92220885FFF00C3B355 /* button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = button.swift; sourceTree = "<group>"; };
 		147E96052086788F0015BD73 /* locator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = locator.swift; sourceTree = "<group>"; };
 		147E9607208686FE0015BD73 /* locationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = locationModel.swift; sourceTree = "<group>"; };
 		14AF8846207E63030055411E /* addworkerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addworkerVC.swift; sourceTree = "<group>"; };
@@ -95,7 +100,6 @@
 		14AF8850207EC9B20055411E /* dalSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dalSelection.swift; sourceTree = "<group>"; };
 		14AF8852207EEC1F0055411E /* dalSelectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = dalSelectionCell.xib; sourceTree = "<group>"; };
 		14AF8854207EED440055411E /* dalSelectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dalSelectionCell.swift; sourceTree = "<group>"; };
-		209A3C5150FF5D48F103F8EA /* Pods_Dal.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Dal.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5D341FB4FC8102FC196A6308 /* Pods-Dal.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dal.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Dal/Pods-Dal.debug.xcconfig"; sourceTree = "<group>"; };
 		9071B0A2410047146531199D /* Pods-Dal.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dal.release.xcconfig"; path = "Pods/Target Support Files/Pods-Dal/Pods-Dal.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -105,7 +109,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9A0F976F507096E057072A44 /* Pods_Dal.framework in Frameworks */,
+				1466A91F208791BC00C3B355 /* Pods_Dal.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -182,6 +186,7 @@
 				1461F235207995F90061DE1C /* workerDetailsVC.swift */,
 				1461F2372079B28D0061DE1C /* baseViewController.swift */,
 				14AF8848207E9DB90055411E /* googleMapVC.swift */,
+				1466A92020883F4900C3B355 /* settingsVC.swift */,
 			);
 			path = controllers;
 			sourceTree = "<group>";
@@ -209,6 +214,7 @@
 				144E80CC20757AEC0049FEB3 /* String.swift */,
 				1461F21B207852D40061DE1C /* image.swift */,
 				1461F21D207861450061DE1C /* view.swift */,
+				1466A92220885FFF00C3B355 /* button.swift */,
 			);
 			path = extenssions;
 			sourceTree = "<group>";
@@ -262,7 +268,7 @@
 		65D08E134555116ABD21822E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				209A3C5150FF5D48F103F8EA /* Pods_Dal.framework */,
+				1466A91E208791BC00C3B355 /* Pods_Dal.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -357,6 +363,7 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Dal/Pods-Dal-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
@@ -365,6 +372,7 @@
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
@@ -439,6 +447,7 @@
 				1461F23D207B08660061DE1C /* dalAlert-extentions.swift in Sources */,
 				147E9608208686FE0015BD73 /* locationModel.swift in Sources */,
 				144A94E12073D6330024B912 /* HomeVC.swift in Sources */,
+				1466A92120883F4900C3B355 /* settingsVC.swift in Sources */,
 				1461F22D2078929F0061DE1C /* CAPSPageMenu+UIConfiguration.swift in Sources */,
 				14AF8855207EED440055411E /* dalSelectionCell.swift in Sources */,
 				144E80CF207580FE0049FEB3 /* dataFeederProtocol.swift in Sources */,
@@ -452,6 +461,7 @@
 				14AF8851207EC9B20055411E /* dalSelection.swift in Sources */,
 				1461F22C2078929F0061DE1C /* MenuItemView.swift in Sources */,
 				14AF8847207E63030055411E /* addworkerVC.swift in Sources */,
+				1466A92320885FFF00C3B355 /* button.swift in Sources */,
 				144A94DF2073D6330024B912 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -599,6 +609,15 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = FT5TU5KEM8;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/FirebaseAnalytics/Frameworks",
+					"$(PROJECT_DIR)/FirebaseCore/Frameworks",
+					"$(PROJECT_DIR)/FirebaseDatabase/Frameworks",
+					"$(PROJECT_DIR)/FirebaseInstanceID/Frameworks",
+					"$(PROJECT_DIR)/GoogleMaps/Base/Frameworks",
+					"$(PROJECT_DIR)/GoogleMaps/Maps/Frameworks",
+				);
 				INFOPLIST_FILE = Dal/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -619,6 +638,15 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = FT5TU5KEM8;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/FirebaseAnalytics/Frameworks",
+					"$(PROJECT_DIR)/FirebaseCore/Frameworks",
+					"$(PROJECT_DIR)/FirebaseDatabase/Frameworks",
+					"$(PROJECT_DIR)/FirebaseInstanceID/Frameworks",
+					"$(PROJECT_DIR)/GoogleMaps/Base/Frameworks",
+					"$(PROJECT_DIR)/GoogleMaps/Maps/Frameworks",
+				);
 				INFOPLIST_FILE = Dal/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

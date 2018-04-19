@@ -22,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var sections:[sectionModel] = []
     var delgate:dataFeederProtocol?
     var sectionsWithSkills:[sectionModel] = []
-    
+   lazy var storageRef = Storage.storage().reference()
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
@@ -38,15 +38,35 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FirebaseApp.configure()
         
         ref = Database.database().reference()
-
         GMSServices.provideAPIKey("AIzaSyCF8gJ-IIVt8ls__CVXK1rpEGdkQeo63ck")
        
         getSections()
+        
         return true
     }
 
 
+    
 
+    func dalPresent(vc:UIViewController, animated: Bool, completion:(()->Void)?){
+      window2?.isHidden = false
+        window2?.rootViewController?.present(vc, animated: animated, completion: completion)
+    }
+    func getRandomIDUsingFirBase() -> String{
+        
+        let id:String = ref.childByAutoId().description()
+        let split = id.split(separator: "/")
+    return String(describing:split.last!)
+    }
+    func dalDismiss(animated: Bool, completion:(()->Void)?){
+    
+    self.window2?.rootViewController?.dismiss(animated: true, completion: completion)
+
+    
+        
+        window2?.isHidden = true
+
+    }
    
     func getSectionIndex(_ section:sectionModel) -> Int? {
         
@@ -172,7 +192,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                               "avatar": workers.avatar,
                               "loc": workers.location,
                               "desc": workers.desc,
-                              "sectionID": workers.sectionID,
+                              "sectionID": workers.skillIDs,
                               "contactNumber": workers.contactNumber] as [String : Any]
                 self.ref.child("workers").child(workers.id).setValue(worker)
                 print("child is not  exsit")

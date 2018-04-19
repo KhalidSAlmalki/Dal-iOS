@@ -8,6 +8,8 @@ target 'Dal' do
  pod 'Alamofire'
  pod 'GoogleMaps'
 pod 'Firebase/Database'
+pod 'Firebase/Storage'
+
   # Pods for Dal
 
 end

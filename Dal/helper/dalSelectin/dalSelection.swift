@@ -135,14 +135,18 @@ class dalSelection: baseViewController,UITableViewDelegate,UITableViewDataSource
     }
 
     @IBAction func doneBt(_ sender: UIButton) {
-        var selectedSkills = [String]()
+        var selectedSkill_Ids = ""
         
         for section in self.selectedSkills {
             
-            selectedSkills.append(section.getSkillsIDAsString())  // to get skills as needed format
+            selectedSkill_Ids += section.getSkillsIDAsString()
+            selectedSkill_Ids += ";"
+
+            
         }
+        selectedSkill_Ids.removeLast()
         
-        delgate?.dalSelectionDidSelected(skills: self.selectedSkills, selectedSkills: selectedSkills)
+        delgate?.dalSelectionDidSelected(skills: self.selectedSkills, selectedSkills: selectedSkill_Ids)
         dismissDalBaseView()
 
     }
