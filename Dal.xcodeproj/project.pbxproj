@@ -609,19 +609,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = FT5TU5KEM8;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/FirebaseAnalytics/Frameworks",
-					"$(PROJECT_DIR)/FirebaseCore/Frameworks",
-					"$(PROJECT_DIR)/FirebaseDatabase/Frameworks",
-					"$(PROJECT_DIR)/FirebaseInstanceID/Frameworks",
-					"$(PROJECT_DIR)/GoogleMaps/Base/Frameworks",
-					"$(PROJECT_DIR)/GoogleMaps/Maps/Frameworks",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = Dal/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
-					"@executable_path/Frameworks",
 					"$(SRCROOT)",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.khaild.Dal;
@@ -638,19 +629,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = FT5TU5KEM8;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/FirebaseAnalytics/Frameworks",
-					"$(PROJECT_DIR)/FirebaseCore/Frameworks",
-					"$(PROJECT_DIR)/FirebaseDatabase/Frameworks",
-					"$(PROJECT_DIR)/FirebaseInstanceID/Frameworks",
-					"$(PROJECT_DIR)/GoogleMaps/Base/Frameworks",
-					"$(PROJECT_DIR)/GoogleMaps/Maps/Frameworks",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = Dal/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
-					"@executable_path/Frameworks",
 					"$(SRCROOT)",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.khaild.Dal;

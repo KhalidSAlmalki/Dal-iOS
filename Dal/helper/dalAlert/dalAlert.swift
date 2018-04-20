@@ -15,6 +15,7 @@ public struct DalTextfieldOption {
     let name:String!
     let keyboradType:UIKeyboardType!
     let MustHasData:Bool!
+    let MustCkeckRegex:String
     
 }
 enum Result {
@@ -381,7 +382,23 @@ class dalalert: UIViewController , UITextFieldDelegate{
             
             if let action = self.closeAction {
                 if self.textfiedOption != nil{
-                    action(self.textfied.text!)
+                    
+                    if valdateUserInput(){
+                    
+                        action(self.textfied.text!)
+
+                    }else{
+                      
+        let alert = UIAlertController(title: "Error",
+                            message: "The phone number shoild be like (123) 123-1234",
+                                      preferredStyle: .alert)
+                        
+                alert.addAction(UIAlertAction(title: "Got it", style: .destructive, handler: nil))
+                        
+                 self.present(alert, animated: true, completion: nil)
+                        
+                    }
+
                     
                 }else{
                     action("has been done")
@@ -392,7 +409,7 @@ class dalalert: UIViewController , UITextFieldDelegate{
      func addAction(_ action: @escaping (String) -> Void) {
         
         self.closeAction = action
-        
+
     }
    private func adjustingHeight(show:Bool, notification:NSNotification) {
         // 1
@@ -513,7 +530,8 @@ class dalalert: UIViewController , UITextFieldDelegate{
                     if withCallback {
                         if let action = self.closeAction {
                             if self.textfiedOption != nil{
-                                action(self.textfied.text!)
+                                
+                            action(self.textfied.text!)
                                 
                             }else{
                                 action("has been done")
@@ -607,6 +625,7 @@ class dalalert: UIViewController , UITextFieldDelegate{
             if view.point(inside: converted, with: event){
                 if noButtons {
                     //  closeView(true)
+                    
                 }
                 if iskeyBUp {
                     
@@ -620,5 +639,14 @@ class dalalert: UIViewController , UITextFieldDelegate{
                 
             }
         }
+    }
+    func valdateUserInput() -> Bool {
+        guard !textfiedOption.MustCkeckRegex.isEmpty else {
+            return true
+        }
+        let predicate = NSPredicate(format: "SELF MATCHES %@", textfiedOption.MustCkeckRegex)
+        
+        return  predicate.evaluate(with: textfied.text)
+        
     }
 }

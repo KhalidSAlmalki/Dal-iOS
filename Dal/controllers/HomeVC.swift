@@ -64,18 +64,19 @@ class HomeVC: SectionVC {
         setUpNvaBar()
 
         if retriveUserIntoUserDefault() == nil {
+            let phoneRege = "^(\\([0-9]{3}\\) |[0-9]{3}-)[0-9]{3}-[0-9]{4}$"
             
-            let alert:dalalert = dalalert(self,iconImage:UIImage(named: "logo"),textfied:DalTextfieldOption(name: "Phone Number", keyboradType:UIKeyboardType.decimalPad, MustHasData: true))
+            let alert:dalalert = dalalert(self,iconImage:UIImage(named: "logo"),textfied:DalTextfieldOption(name: "Phone Number", keyboradType:UIKeyboardType.decimalPad, MustHasData: true, MustCkeckRegex: phoneRege))
             
-            alert.addAction { (textValue) in
+            alert.addAction { (phoneNumber) in
+                
                 
                 let id = applicationDelegate.getRandomIDUsingFirBase()
              
-                applicationDelegate.ref.child("workers/worker").child(id).setValue(["id":id,"contactNumber":textValue], withCompletionBlock: { (erre, datarec) in
+                applicationDelegate.ref.child("workers/worker").child(id).setValue(["id":id,"contactNumber":phoneNumber], withCompletionBlock: { (erre, datarec) in
                     
-                    let worker = workerModel(id: id, contactNumber: textValue)
+                    let worker = workerModel(id: id, contactNumber: phoneNumber)
                     self.saveUserIntoUserDefault(worker: worker)
-                    
                     alert.closeView(false)
                     self.setUP()
                     
