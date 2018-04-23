@@ -52,6 +52,7 @@ class workerDetailsVC: baseViewController {
         let worker = workerDetails
         name.text = worker?.name
         
+        print(worker?.desc)
         desc.text = worker?.desc
         
         

@@ -57,6 +57,7 @@ class dalBaseView: UIView {
         
         targetViewController = getUIviewController(storyBoard: id)
         setUpInterfaces()
+        self.viewWithTag(100100)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -79,7 +80,9 @@ class dalBaseView: UIView {
         return targetViewController
     }
     func dismiss() {
+        self.window?.viewWithTag(100100)?.removeFromSuperview()
         self.removeFromSuperview()
+        self.targetViewController.removeFromParentViewController()
         self.showOnViewController?.removeFromParentViewController()
         self.showOnViewController?.didMove(toParentViewController: nil)
     }

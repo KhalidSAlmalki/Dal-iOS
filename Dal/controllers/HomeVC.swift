@@ -28,15 +28,11 @@ class HomeVC: SectionVC {
 
     @IBAction func profileBt(_ sender: Any) {
         
-        
+        let add = dalBaseView(storyBoard: "workerDetailsVC")
+        add.showOnWindos()
         
     }
-    @IBAction func settingsBt(_ sender: UIBarButtonItem) {
-        
-     let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "settingsVC")
-        applicationDelegate.dalPresent(vc: vc, animated: true, completion: nil)
-  
-    }
+
     
     private func setUP() {
 
@@ -58,29 +54,55 @@ class HomeVC: SectionVC {
         }
     }
     
+    private func registerNewUser(_ phoneNumber: (String)) {
+        let id = applicationDelegate.getRandomIDUsingFirBase()
+        
+        applicationDelegate.ref.child("workers/worker").child(id).setValue(["id":id,"contactNumber":phoneNumber], withCompletionBlock: { (erre, datarec) in
+            
+            let worker = workerModel(id: id, contactNumber: phoneNumber)
+            self.saveUserIntoUserDefault(worker: worker)
+            self.setUP()
+            
+        })
+    }
+    
     override func viewDidLoad() {
          super.viewDidLoad()
         self.view.backgroundColor = UIColor.dalHeaderColor()
         setUpNvaBar()
-
-        if retriveUserIntoUserDefault() == nil {
+        
+        applicationDelegate.getWorkerDetail(usingUserID: retriveUserFromUserDefault()!) { (currentUser) in
+            
+            print(currentUser.getRole())
+            if currentUser.getRole() == .user{
+                self.navigationItem.rightBarButtonItems?.remove(at: 0)
+            }
+        }
+        if retriveUserFromUserDefault() == nil {
             let phoneRege = "^(\\([0-9]{3}\\) |[0-9]{3}-)[0-9]{3}-[0-9]{4}$"
             
             let alert:dalalert = dalalert(self,iconImage:UIImage(named: "logo"),textfied:DalTextfieldOption(name: "Phone Number", keyboradType:UIKeyboardType.decimalPad, MustHasData: true, MustCkeckRegex: phoneRege))
             
             alert.addAction { (phoneNumber) in
                 
-                
-                let id = applicationDelegate.getRandomIDUsingFirBase()
-             
-                applicationDelegate.ref.child("workers/worker").child(id).setValue(["id":id,"contactNumber":phoneNumber], withCompletionBlock: { (erre, datarec) in
+                print("phoneNumber")
+                applicationDelegate.getWorkerDetail(usingPhoneNUmber: phoneNumber) { (worker) in
+                    print("phoneNumber",worker)
+
+                    if worker.id.isEmpty{ // if there is no data belog to the phone number
+                         self.registerNewUser(phoneNumber)
+                        
+
+                    }else{
+                        print("welcome back ")
+                        self.saveUserIntoUserDefault(worker: worker)
+                    }
                     
-                    let worker = workerModel(id: id, contactNumber: phoneNumber)
-                    self.saveUserIntoUserDefault(worker: worker)
-                    alert.closeView(false)
+                      alert.closeView(false)
                     self.setUP()
-                    
-                })
+                }
+                
+
             }
             alert.show()
 
@@ -90,24 +112,17 @@ class HomeVC: SectionVC {
         }
 
         
-        applicationDelegate.ref.child("workers/worker").queryOrdered(byChild: "contactNumber").observeSingleEvent(of: .value, with: { (data) in
-            
-            for snap in data.children {
-                print(snap)
 
-            }
-
-        })
         
         
       
         
      }
     
-    func retriveUserIntoUserDefault() -> workerModel? {
+    func retriveUserFromUserDefault() -> String? {
         let userDefaults = UserDefaults.standard
-        if let decoded  = userDefaults.object(forKey: "currentUser") as? Data{
-            return NSKeyedUnarchiver.unarchiveObject(with: decoded) as? workerModel
+        if let currentUser  = userDefaults.value(forKey: "currentUser") as? String{
+            return currentUser
         }
         return nil
     }
@@ -115,8 +130,7 @@ class HomeVC: SectionVC {
     func saveUserIntoUserDefault(worker:workerModel){
         
         let userDefaults = UserDefaults.standard
-        let encodedData: Data = NSKeyedArchiver.archivedData(withRootObject: worker)
-        userDefaults.set(encodedData, forKey: "currentUser")
+        userDefaults.set(worker.id, forKey: "currentUser")
         userDefaults.synchronize()
         
 
@@ -131,7 +145,6 @@ class HomeVC: SectionVC {
     private func getSectionBased(location:String) {
         
         applicationDelegate.get(sectionWithLocation: location) { (sections) in
-            print("sectionWithLocation",sections)
             self.sectionItems = sections
             
             self.sectionItems = self.sectionItems.sorted(by: { $0.sort < $1.sort })

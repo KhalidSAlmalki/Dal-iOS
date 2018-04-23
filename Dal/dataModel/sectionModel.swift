@@ -8,11 +8,43 @@
 
 import Foundation
 import CoreLocation
+
+class sectionsModel:NSObject {
+    var sectionList:[sectionModel] = []
+    override var description: String{
+        return "sectionList : \(sectionList.count)"
+    }
+    override init() {
+        super.init()
+
+    }
+    func add(section:sectionModel) {
+        
+        if !sectionList.contains(where: {$0.id == section.id}){
+            print(section)
+            sectionList.append(section)
+            print(self)
+        }
+    }
+    
+    func add(skills:[skillModel], at:sectionModel) {
+        
+        for s in skills {
+            add(skill: s, at: at)
+        }
+    }
+    func add(skill:skillModel, at:sectionModel) {
+        if let index = sectionList.index(where: {$0.id == at.id}){
+            sectionList[index].addSkill(aSkill: skill)
+        }
+    }
+    
+}
 class sectionModel:NSObject  {
 
     
     override var description: String{
-        return " name : \(name) , skills : \(skills) "
+        return " id : \(id) ,name : \(name)  avatar : \(avatar) sort : \(sort)  skills : \(skills) "
 
 //        return "id : \(id) \n name : \(name) \n avatar : \(avatar) \n  sort: \(sort)\n"
     }
@@ -35,9 +67,8 @@ class sectionModel:NSObject  {
       }
     
     func addSkill(aSkill:skillModel)  {
-        if skills.index(where: {$0.id == aSkill.id}) == nil{
+        if !skills.contains(where: {$0.id == aSkill.id}){
             skills.append(aSkill)
-
         }
         
     }

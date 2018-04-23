@@ -8,14 +8,17 @@
 
 import Foundation
 import CoreLocation
+
 class locationModel: NSObject {
+   
     
+  
     var location: CLLocationCoordinate2D
     var Range: Float
     var zoom:Float
     
     override var description: String{
-        return "(\(location))"
+        return "(\(location), \(Range) , \(zoom))"
     }
     override init() {
         location = CLLocationCoordinate2D()
@@ -29,11 +32,7 @@ class locationModel: NSObject {
         self.zoom = zoom
 
     }
-    func getCity()-> String{
-        
-        return "String"
-    }
-    
+
    func getCountryAndCity(completion: @escaping (String, String) -> ()) {
         CLGeocoder().reverseGeocodeLocation(CLLocation(latitude: location.latitude, longitude: location.longitude)) { placemarks, error in
             if let error = error {

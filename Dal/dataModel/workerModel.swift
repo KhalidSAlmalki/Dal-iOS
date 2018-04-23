@@ -11,7 +11,7 @@ enum Role {
     case worker
     case user
 }
-class workerModel:NSObject, NSCoding{
+class workerModel:NSObject{
 
     var id:String
     var skillIDs:[String]
@@ -19,9 +19,13 @@ class workerModel:NSObject, NSCoding{
     var contactNumber:String
     var desc:String
     var avatar:String
-    var location:[Double]
     var status:String = ""
+    var location = locationModel()
+    var contactMethod:String = ""
     
+    override var description: String{
+        return "\(id)  \(skillIDs)   \(name)  \(contactNumber) \(location)"
+    }
     override convenience init() {
         self.init(id: "", contactNumber: "")
     }
@@ -31,11 +35,11 @@ class workerModel:NSObject, NSCoding{
         self.name = ""
         self.desc = ""
         self.avatar = ""
-        self.location = []
+        self.location = locationModel()
         self.skillIDs = []
     }
     
-    convenience init(id:String,sectionID:[String],contactNumber:String,name:String,description:String,avatar:String,location:[Double],status:String) {
+    convenience init(id:String,sectionID:[String],contactMethod:String,contactNumber:String,name:String,description:String,avatar:String,location:locationModel,status:String) {
         self.init(id: id, contactNumber: contactNumber)
         
         self.name = name
@@ -44,35 +48,10 @@ class workerModel:NSObject, NSCoding{
         self.location = location
         self.skillIDs = sectionID
         self.status = status
+        self.contactMethod = contactMethod
     }
-    
-    func encode(with aCoder: NSCoder) {
-        aCoder.encode(id, forKey: "id")
-        aCoder.encode(contactNumber, forKey: "contactNumber")
-        aCoder.encode(name, forKey: "name")
-        aCoder.encode(desc, forKey: "desc")
-        aCoder.encode(avatar, forKey: "avatar")
-        aCoder.encode(location, forKey: "location")
-        aCoder.encode(skillIDs, forKey: "skillIDs")
-        aCoder.encode(status, forKey: "status")
+ 
 
-    }
-    
-    required convenience init?(coder aDecoder: NSCoder) {
-        let id = aDecoder.decodeObject(forKey: "id") as! String
-        let contactNumber = aDecoder.decodeObject(forKey: "contactNumber") as! String
-        let name = aDecoder.decodeObject(forKey: "name") as! String
-        let desc = aDecoder.decodeObject(forKey: "desc") as! String
-        let avatar = aDecoder.decodeObject(forKey: "avatar") as! String
-        let location = aDecoder.decodeObject(forKey: "location") as! [Double]
-        let skillIDs = aDecoder.decodeObject(forKey: "skillIDs") as! [String]
-        let status = aDecoder.decodeObject(forKey: "status") as! String
-
-        
-        self.init(id: id, sectionID: skillIDs, contactNumber: contactNumber, name: name, description: desc, avatar: avatar, location: location,status:status)
-    }
-    
-    
     
     
     func getRole() -> Role {

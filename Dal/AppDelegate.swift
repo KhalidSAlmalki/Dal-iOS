@@ -82,8 +82,143 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         return strings
     }
+    func getWorkerDetail(usingPhoneNUmber:String,completion:@escaping (workerModel)->Void )  {
+        getWorkerDetail(byChild: "contactNumber", value: usingPhoneNUmber) { (w) in
+            completion(w)
+        }
+    }
+    func getWorkerDetail(usingUserID:String,completion:@escaping (workerModel)->Void )  {
+        getWorkerDetail(byChild: "id", value: usingUserID) { (w) in
+            completion(w)
+        }
+    }
+     func parseWorkerFirbaseValue(_ val: Any)->workerModel {
+        if let _result = val as? [String:AnyObject]{
+            let skillsIDstring = convertString(_result["skills"])
+            let skillsID = self.convertToAarry(skillsIDstring)
+            let worker = workerModel(id: convertString(_result["id"]),
+                                     sectionID: skillsID ,
+                                     contactMethod: convertString(_result["contactMethod"]) ,
+                                     contactNumber: convertString(_result["contactNumber"]),
+                                     name: convertString(_result["name"]) ,
+                                     description: convertString(_result["desc"]) ,
+                                     avatar:convertString(_result["avatar"]),
+                                     location: locationModel(),
+                                     status: convertString(_result["status"]))
+            if let location = _result["location"] as? [String:Any]{
+                
+                let location_ = locationModel(location: CLLocationCoordinate2D(latitude: location["latitude"] as! CLLocationDegrees, longitude: location["longitude"] as! CLLocationDegrees),
+                                              Range: location["range"] as! Float,
+                                              zoom: location["zoom"] as! Float)
+                worker.location = location_
+                
+                return worker
+            }
+               return worker
+            
+            
+        }
+        return workerModel()
+    }
+    
+    func getWorkerDetail(byChild:String,value:String,completion:@escaping (workerModel)->Void )  {
+        
+        self.ref.child("workers").child("worker").queryOrdered(byChild: byChild).queryEqual(toValue: value).observeSingleEvent(of: .value) { (snap) in
+            
+            if let result = snap.value as? [String:Any]{
+                result.forEach({ (key,val) in
+                    let worker = self.parseWorkerFirbaseValue(val)
+                        completion(worker)
+
+                    
+
+                })
+            }else{
+                completion(workerModel())
+
+            }
+        }
+    }
+    func extarctSkills(basedOnSectionID:String,completion:(([skillModel]?)->Void)?){
+        self.ref.child("sections").queryOrdered(byChild: "id").queryEqual(toValue: basedOnSectionID).observe(.value) { (skill) in
+            if let skills = skill.value as? [String : AnyObject]{
+               
+                var skillsModel = [skillModel]()
+                for askill in skills.values{
+                    
+                    if let foundSkill = askill["skills"] as? [[String:AnyObject]]{
+                        foundSkill.forEach({ (s) in
+                            skillsModel.append(skillModel(id: s["id"] as! String, name: s["name"] as! String, sort: 0))
+                        })
+                    }
+                    completion!(skillsModel)
+
+                }
+        
+
+            }else{
+                completion!(nil)
+
+            }
+            
+        }
+        
+    }
+    func extractSection(bySkillID:String,completion:((sectionModel?)->Void)?){
+        self.ref.child("sections").queryOrdered(byChild: "skills").observeSingleEvent(of: .value, with: { (lookingForSection) in
+            
+            if let value = lookingForSection.value as? [String : AnyObject]{
+               
+
+                let index = value.index(where: { (k,v) -> Bool in
+                if let skills = v["skills"] as? [[String:Any]]{
+                    let isIthere = skills.contains(where: { (skill) -> Bool in
+                        if let id = skill["id"] as? String{
+                            if id == bySkillID{
+                                return true
+                            }
+                        }
+                        return false
+
+                    })
+                    return isIthere
+
+                }
+                return false
+               })
+                
+                
+                
+                guard index != nil else {
+                    completion!(nil)
+
+                    return
+                }
+
+            
+                if let found = value[index!].value as? [String : AnyObject]{
+                    completion!(sectionModel(id: convertString(found["id"]), name: convertString(found["name"]), avatar: convertString(found["avatar"]), sort: convertInt(found["sort"])))
+
+                }else{
+                    completion!(nil)
+
+                }
+            }
+            
+        })
+        
+    }
+            
+
+    func get(workerBasedOnSectionsID:String,completion:@escaping ([workerModel])->Void){
+        
+        //since i have all skill liked with thier section I will query to get them
+        
+        
+    }
     func get(sectionWithLocation:String,completion:@escaping ([sectionModel])->Void ) {
         ref.child("workers/worker").observeSingleEvent(of: .value, with: { (snapshot) in
+            let sEctions = sectionsModel()
             
             for aworker in snapshot.children {
                 let snap = aworker as! DataSnapshot
@@ -91,59 +226,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 let skillsID = self.convertToAarry(convertString(value["skills"]))
                 
                 // get wectin where skillsID belong and add them into array   athat belogn to
-                
                 for  lookingSkill in skillsID{
-                    self.ref.child("sections").observeSingleEvent(of: .value
-                        , with: { (SnapSections) in
-                            
-                            let reslut = SnapSections.value as! [AnyObject]
-                            
-                            for r in reslut{
-                                let asection = r as! [String:AnyObject]
-                                if let skills = asection["skills"] as? [AnyObject]{
-                                    
-                                    for askill in skills{
-                                        if let iid = askill["id"] as? String{
-                                            if iid == lookingSkill{
-                                     
-                                let section = sectionModel(id: convertString(asection["id"]),
-                                                           name: convertString(asection["name"]),
-                                                           avatar: convertString(asection["avatar"]),
-                                                           sort: convertInt(asection["sort"]))
-                                                
-                                                if self.getSectionIndex(section) == nil{
-                                                    self.sections.append(section)
-                                                }
-                                                    
-                                               if let index = self.getSectionIndex(section){
-                                                
-                                                let skill = skillModel(id: iid, name:(askill["name"] as? String)!, sort: 0)
-                                                self.sections[index].addSkill(aSkill: skill)
-                                                completion(self.sections)
-
-                                                }
-                                                
-                                            }
-                                            
-                                        }
-                                        
-                                    }
-                                    
-                                }
-                                
-                                
-                            }
-                            
-
-                     })
-
-
                     
+                    self.extractSection(bySkillID: lookingSkill, completion: { (foundSectionDetails) in
+                       if let asection =  foundSectionDetails {
+                        
+                        sEctions.add(section: asection)
+                        self.extarctSkills(basedOnSectionID: asection.id, completion: { (skills_) in
+                            sEctions.add(skills: skills_!, at: asection)
+                            
+                            
+                            self.sections = sEctions.sectionList
+                            completion(sEctions.sectionList)
+                        })
+                        
+                        }
+                    })
+                    
+                  
                 }
+         
+             
 
-                
 
             }
+    
 
 
         })
@@ -159,13 +266,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 let value = snap.value  as! [String:AnyObject]
                
                 
-                
-//                for skill in value["skills"]?.children.v as! [String:AnyObject]{
-//                    print(value["name"],skill)
-//
-//                }
             let  asection = sectionModel(id: key,
-                                            name:                 convertString(value["name"] ) ,
+                                            name:convertString(value["name"] ) ,
                                          avatar:convertString(value["avatar"]), sort:convertInt(value["sort"]))
                 let skills = value["skills"] as! [AnyObject]
 
@@ -184,63 +286,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         
     }
-    func create(workers:workerModel)  {
-        
-        isUnique(id:workers.id, child: "workers") { (re) in
-            if !re {
-                let worker = ["name": workers.name,
-                              "avatar": workers.avatar,
-                              "loc": workers.location,
-                              "desc": workers.desc,
-                              "sectionID": workers.skillIDs,
-                              "contactNumber": workers.contactNumber] as [String : Any]
-                self.ref.child("workers").child(workers.id).setValue(worker)
-                print("child is not  exsit")
-                
-            }else{
-                print("child is exsit")
-                let newworkers = workers
-                let n = Int(arc4random_uniform(42))
-                newworkers.id = workers.id+"\(n)"
-                self.create(workers: newworkers)
-            }
-        }
-        
-    }
-    func create(section:sectionModel) {
-        
-        isUnique(id:section.id, child: "sections") { (re) in
-            if !re {
-               
-                self.ref.child("sections").child(section.id).setValue(["name":section.name,"avatar":section.avatar,"sort":section.sort])
-                print("child is not  exsit")
-
-            }else{
-                print("child is exsit")
-                let newSection = section
-                let n = Int(arc4random_uniform(42))
-                newSection.id = section.id+"\(n)"
-              self.create(section: newSection)
-            }
-        }
-    }
-    
-    func isUnique(id:String,child:String, completion: @escaping (Bool)->Void) {
-       
-        ref.child(child).observeSingleEvent(of: .value, with: { (snapshot) in
-            
-            if snapshot.hasChild(id){
-                completion(true)
-                
-            }else{
-                completion(false)
-
-            }
-        })
-      
-    }
-    
  
+    func create(worker:workerModel)  {
+        
+            let worker_ = [
+                        "name":worker.name,
+                        "avatar":worker.avatar,
+                        "coverageRange":worker.location.Range,
+                        "contactMethod":worker.contactMethod,
+                        "desc":worker.desc,
+                        "id":worker.id,
+                        "location":"\(worker.location.location.latitude);\(worker.location.location.latitude)",
+                        "contactNumber":worker.contactNumber,
+                        "skills":worker.skillIDs,
+                        "status":worker.status
+                ] as [String : Any]
+
+        self.ref.child("workers").child(worker.id).setValue(worker_)
+        
+    }
+
+
     
     func update(id:String, child:String , value:[AnyHashable : Any])  {
         ref.child(child).child(id).updateChildValues(value )

@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import CoreLocation
 private let reuseIdentifier = "Cell"
 
 class WorkerCollectionVC: UICollectionViewController,UICollectionViewDelegateFlowLayout,DidloadChange {
@@ -69,27 +70,22 @@ class WorkerCollectionVC: UICollectionViewController,UICollectionViewDelegateFlo
                     let skillsIDstring = convertString(value["skills"])
                     let skillsID = applicationDelegate.convertToAarry(skillsIDstring)
                     
+                    
+                    // get the detall f skilla where its belongs
                     for id in skillsID{
-                       let sectionID = self.getSectionID(with: id)
+                        
+                    let sectionID = self.getSectionID(with: id)
+                    
                         
                         if sectionID == self.section.id {
-                            let splitLocation = convertString(value["location"]).split(separator: ";")
-                            var location:[Double] = []
-                            for loc in splitLocation{
-                                location.append(convertDouble(loc as AnyObject))
-                            }
+                   
+                            let aWorker =  applicationDelegate.parseWorkerFirbaseValue(value)
                             
-                            let aWorker = workerModel(id: convertString(value["id"]) ,
-                                                      sectionID: skillsID,
-                                                      contactNumber: convertString(value["phoneNumber"] ) ,
-                                                      name: convertString(value["name"] ),
-                                                      description: convertString(value["desc"] ),
-                                                      avatar: convertString(value["avatar"] ),
-                                                      location: location,status:convertString(value["status"] ))
                             if !self.workers.contains(where: {$0.id == aWorker.id} ){
-                                self.workers.append(aWorker)
+                                                              self.workers.append(aWorker)
+                              
+                                        }
 
-                            }
                         }
                         
                     }
@@ -141,7 +137,7 @@ class WorkerCollectionVC: UICollectionViewController,UICollectionViewDelegateFlo
     
         let worker = workers[indexPath.row]
         cell.name.text = worker.name
-        cell.address.text = "\(worker.location[0])"
+//        cell.address.text = "\(worker.location[0])"
         cell.skill.text = section.name
         cell.imageView.dalSetImage(url: worker.avatar)
         
