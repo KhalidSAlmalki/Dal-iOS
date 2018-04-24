@@ -140,69 +140,65 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     func extarctSkills(basedOnSectionID:String,completion:(([skillModel]?)->Void)?){
-        self.ref.child("sections").queryOrdered(byChild: "id").queryEqual(toValue: basedOnSectionID).observe(.value) { (skill) in
-            if let skills = skill.value as? [String : AnyObject]{
-               
-                var skillsModel = [skillModel]()
-                for askill in skills.values{
+        self.ref.child("sections").child("\(basedOnSectionID)").observeSingleEvent(of: DataEventType.value, with: { (skill) in
+            print("basedOnSectionID",basedOnSectionID)
+            if let section = skill.value as? [String:AnyObject]{
+                
+                var skillsModels = [skillModel]()
+
+                if let skills = section["skills"] as? [[String:AnyObject]]{
                     
-                    if let foundSkill = askill["skills"] as? [[String:AnyObject]]{
-                        foundSkill.forEach({ (s) in
-                            skillsModel.append(skillModel(id: s["id"] as! String, name: s["name"] as! String, sort: 0))
-                        })
+                    for _skill in skills{
+                        skillsModels.append(skillModel(snapshot: _skill))
                     }
-                    completion!(skillsModel)
-
-                }
-        
-
-            }else{
-                completion!(nil)
-
-            }
-            
-        }
-        
-    }
-    func extractSection(bySkillID:String,completion:((sectionModel?)->Void)?){
-        self.ref.child("sections").queryOrdered(byChild: "skills").observeSingleEvent(of: .value, with: { (lookingForSection) in
-            
-            if let value = lookingForSection.value as? [String : AnyObject]{
-               
-
-                let index = value.index(where: { (k,v) -> Bool in
-                if let skills = v["skills"] as? [[String:Any]]{
-                    let isIthere = skills.contains(where: { (skill) -> Bool in
-                        if let id = skill["id"] as? String{
-                            if id == bySkillID{
-                                return true
-                            }
-                        }
-                        return false
-
-                    })
-                    return isIthere
-
-                }
-                return false
-               })
-                
-                
-                
-                guard index != nil else {
-                    completion!(nil)
-
-                    return
-                }
-
-            
-                if let found = value[index!].value as? [String : AnyObject]{
-                    completion!(sectionModel(id: convertString(found["id"]), name: convertString(found["name"]), avatar: convertString(found["avatar"]), sort: convertInt(found["sort"])))
+                    
+                    print("skillsModels",skillsModels)
+                    completion!(skillsModels)
 
                 }else{
                     completion!(nil)
 
                 }
+                
+
+            }else{
+                completion!(nil)
+
+            }
+        })
+
+        
+    }
+    func extractSection(bySkillID:String,completion:((sectionModel?)->Void)?){
+        self.ref.child("sections").queryOrdered(byChild: "skills").observeSingleEvent(of: .value, with: { (lookingForSection) in
+
+            if let value = lookingForSection.value as? [[String : AnyObject]]{
+               
+                for found in value{
+                    
+                    if let skills = found["skills"] as? [[String : AnyObject]]{
+                        
+                        if skills.contains(where: { (askill) -> Bool in
+                            
+                            if convertString(askill["id"]) == bySkillID{
+                                return true
+                            }
+                            return false
+                        }){
+                            
+                    completion!(sectionModel(id: convertString(found["id"]), name: convertString(found["name"]), avatar: convertString(found["avatar"]), sort: convertInt(found["sort"])))
+
+                        }else{
+                            completion!(nil)
+                        }
+                        
+
+                    }
+                }
+
+            }else{
+                    print("fail")
+
             }
             
         })
@@ -233,18 +229,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         
                         sEctions.add(section: asection)
                         self.extarctSkills(basedOnSectionID: asection.id, completion: { (skills_) in
-                            sEctions.add(skills: skills_!, at: asection)
                             
+                            guard skills_ != nil else{
+                                return
+                            }
+                            sEctions.add(skills: skills_!, at: asection)
                             
                             self.sections = sEctions.sectionList
                             completion(sEctions.sectionList)
+                         
                         })
+                        
+                       }else{
                         
                         }
                     })
                     
                   
                 }
+              
          
              
 

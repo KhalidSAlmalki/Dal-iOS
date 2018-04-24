@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import Firebase
 class skillModel:NSObject  {
     
     
@@ -23,6 +23,14 @@ class skillModel:NSObject  {
     
     override convenience init() {
         self.init(id: "", name: "", sort: 0)
+    }
+    convenience init(snapshot: [String:AnyObject]) {
+
+        let snapshotValue = snapshot
+        self.init(id: convertString(snapshotValue["id"]), name: convertString(snapshotValue["name"]), sort: convertInt(snapshotValue["sort"]))
+
+        
+
     }
     init(id:String,name:String,sort:Int) {
         self.id = id

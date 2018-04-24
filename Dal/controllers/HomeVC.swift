@@ -60,7 +60,7 @@ class HomeVC: SectionVC {
         applicationDelegate.ref.child("workers/worker").child(id).setValue(["id":id,"contactNumber":phoneNumber], withCompletionBlock: { (erre, datarec) in
             
             let worker = workerModel(id: id, contactNumber: phoneNumber)
-            self.saveUserIntoUserDefault(worker: worker)
+            userSessionManagement.saveUserData(worker: worker)
             self.setUP()
             
         })
@@ -71,23 +71,17 @@ class HomeVC: SectionVC {
         self.view.backgroundColor = UIColor.dalHeaderColor()
         setUpNvaBar()
         
-        applicationDelegate.getWorkerDetail(usingUserID: retriveUserFromUserDefault()!) { (currentUser) in
-            
-            print(currentUser.getRole())
-            if currentUser.getRole() == .user{
-                self.navigationItem.rightBarButtonItems?.remove(at: 0)
-            }
-        }
-        if retriveUserFromUserDefault() == nil {
+
+    
+        
+        if userSessionManagement.isLoginedIn() == nil {
             let phoneRege = "^(\\([0-9]{3}\\) |[0-9]{3}-)[0-9]{3}-[0-9]{4}$"
             
             let alert:dalalert = dalalert(self,iconImage:UIImage(named: "logo"),textfied:DalTextfieldOption(name: "Phone Number", keyboradType:UIKeyboardType.decimalPad, MustHasData: true, MustCkeckRegex: phoneRege))
             
             alert.addAction { (phoneNumber) in
                 
-                print("phoneNumber")
                 applicationDelegate.getWorkerDetail(usingPhoneNUmber: phoneNumber) { (worker) in
-                    print("phoneNumber",worker)
 
                     if worker.id.isEmpty{ // if there is no data belog to the phone number
                          self.registerNewUser(phoneNumber)
@@ -95,7 +89,7 @@ class HomeVC: SectionVC {
 
                     }else{
                         print("welcome back ")
-                        self.saveUserIntoUserDefault(worker: worker)
+                        userSessionManagement.saveUserData(worker: worker)
                     }
                     
                       alert.closeView(false)
@@ -114,30 +108,29 @@ class HomeVC: SectionVC {
         
 
         
-        
+        if !userSessionManagement.IsLogined.isEmpty{
+            
+            applicationDelegate.getWorkerDetail(usingUserID: userSessionManagement.isLoginedIn()!) { (currentUser) in
+                
+                print(currentUser.getRole())
+                if currentUser.getRole() == .user{
+                    self.navigationItem.rightBarButtonItems?.remove(at: 0)
+                }else{
+                    self.navigationItem.rightBarButtonItems?.append(self.profileBt)
+                }
+            }
+        }
       
         
      }
     
-    func retriveUserFromUserDefault() -> String? {
-        let userDefaults = UserDefaults.standard
-        if let currentUser  = userDefaults.value(forKey: "currentUser") as? String{
-            return currentUser
-        }
-        return nil
-    }
-
-    func saveUserIntoUserDefault(worker:workerModel){
-        
-        let userDefaults = UserDefaults.standard
-        userDefaults.set(worker.id, forKey: "currentUser")
-        userDefaults.synchronize()
-        
-
-    }
+   
     @IBAction func addNewWorker(_ sender: UIBarButtonItem) {
         
         let add = dalBaseView(storyBoard: "addworkerVC")
+        let vc = add.getViewController() as! addworkerVC
+        vc.vcRequestedBased = .addWorker
+        vc.setUp()
         add.showOnWindos()
         
   

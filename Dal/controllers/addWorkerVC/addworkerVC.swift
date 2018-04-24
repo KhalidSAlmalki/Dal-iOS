@@ -38,33 +38,29 @@ class addworkerVC: baseViewController,UITextFieldDelegate, dalSelectionDataSourc
     @IBOutlet var pickerViewContacts: UIPickerView!
     
     var vcRequestedBased:addworkerRequestType = .addWorker
-    override func viewDidLoad() {
-        super.viewDidLoad()
+
+    func setUp()  {
         
         SkillsTextfield.delegate = self
         LocationTextfield.delegate = self
         contactTextfield.delegate = self
         
         sectionWithSkills = applicationDelegate.sectionsWithSkills
-       
+        
         setUpPicker()
         
         setUpImagePicker()
         
         if vcRequestedBased == .becomeWorker {
-            let userDefaults = UserDefaults.standard
-
-            if let decoded  = userDefaults.object(forKey: "currentUser") as? Data{
-                let currentUser = NSKeyedUnarchiver.unarchiveObject(with: decoded) as! workerModel
-                let rol =  currentUser.getRole()
-                if rol == .user{
-                   userID = currentUser.id
-                    self.contactTextfield.text = currentUser.contactNumber
-
-                }
+            
+            userSessionManagement.getLoginedUserData { (currentUser) in
+                
+                self.contactTextfield.text = currentUser?.contactNumber
+                self.userID = (currentUser?.id)!
+                
             }
         }
-      
+        
     }
     private func uploadImage(_ imageID: String, _ data: Data?, urlWith:@escaping (String) -> Void) {
         // Create a reference to the file you want to upload
@@ -210,15 +206,15 @@ class addworkerVC: baseViewController,UITextFieldDelegate, dalSelectionDataSourc
         
         return ["name":nameTextfield.text!,
                 "avatar":"",
-                "coverageRange":userLocation.Range,
                 "contactMethod":typeTextfield.text!,
-                "desc":userLocation.Range,
+                "desc":descTextfield.text!,
                 "id":"",
-                "location":"\(userLocation.location.latitude);\(userLocation.location.longitude)",
-                "phoneNumber":contactTextfield.text!,
+                "location":["latitude":userLocation.location.latitude,
+                            "longitude":userLocation.location.longitude,
+                            "range":userLocation.Range,"zoom":userLocation.zoom],
+                "contactNumber":contactTextfield.text!,
                 "skills":self.selectedSkillsID,
-                "status":"active"
-                                ]
+                "status":"active"]
     }
     func setUpPicker() {
         let toolBar = UIToolbar()
