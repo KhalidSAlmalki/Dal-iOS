@@ -22,7 +22,7 @@ class HomeVC: SectionVC {
     var delegate:DidloadChange?
     
     
-    var currentLocation = CLLocationCoordinate2D()
+    static var currentLocation = CLLocationCoordinate2D()
     lazy var searchBar:UISearchBar = UISearchBar(frame:CGRect(x: 0, y: 0, width: 200, height: 20))
 
 
@@ -37,7 +37,6 @@ class HomeVC: SectionVC {
     private func setUP() {
 
         
-        getSectionBased(location: "")
         
         Locator.shared.authorize { (status) in
             
@@ -46,10 +45,15 @@ class HomeVC: SectionVC {
                 Locator.shared.locate(callback: { (sta) in
                     if sta == .Success {
                         
-                        self.currentLocation = (Locator.shared.location?.coordinate)!
+                        HomeVC.currentLocation = (Locator.shared.location?.coordinate)!
                         
+                        self.getSectionBased(location: CLLocation(latitude: HomeVC.currentLocation.latitude, longitude: HomeVC.currentLocation.longitude))
+
                     }
                 })
+            }else{
+//                let alert = UIAlertController()
+//                alert.addAction(UIAlertAction(title: "got it", style: .alert, handler: nil))
             }
         }
     }
@@ -112,7 +116,6 @@ class HomeVC: SectionVC {
             
             applicationDelegate.getWorkerDetail(usingUserID: userSessionManagement.isLoginedIn()!) { (currentUser) in
                 
-                print(currentUser.getRole())
                 if currentUser.getRole() == .user{
                     self.navigationItem.rightBarButtonItems?.remove(at: 0)
                 }else{
@@ -135,7 +138,7 @@ class HomeVC: SectionVC {
         
   
     }
-    private func getSectionBased(location:String) {
+    private func getSectionBased(location:CLLocation) {
         
         applicationDelegate.get(sectionWithLocation: location) { (sections) in
             self.sectionItems = sections

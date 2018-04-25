@@ -7,9 +7,10 @@
 //
 
 import UIKit
-
+import Cosmos
 class workerDetailsVC: baseViewController {
 
+    @IBOutlet weak var ratingView: CosmosView!
     @IBOutlet weak var desc: UILabel!
     @IBOutlet weak var skill: UILabel!
     @IBOutlet weak var name: UILabel!
@@ -52,7 +53,6 @@ class workerDetailsVC: baseViewController {
         let worker = workerDetails
         name.text = worker?.name
         
-        print(worker?.desc)
         desc.text = worker?.desc
         
         
@@ -61,7 +61,7 @@ class workerDetailsVC: baseViewController {
         
 
         
-       // skill.text = applicationDelegate.get
+    
         if let status = worker?.status{
             
             print(status)

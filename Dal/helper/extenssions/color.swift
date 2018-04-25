@@ -12,6 +12,9 @@ extension UIColor {
                 return UIColor(red: 170.0 / 255.0, green: 93.0 / 255.0, blue: 121.0 / 255.0, alpha: 1.0)
 
     }
+    @nonobjc class var dalwhite: UIColor {
+        return UIColor(white: 240.0 / 255.0, alpha: 1.0)
+    }
     class func dalWarmGreyColor() -> UIColor {
         return UIColor(white: 149.0 / 255.0, alpha: 1.0)
     }

@@ -17,7 +17,6 @@
 		144A94FC2073DC6A0024B912 /* color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144A94FB2073DC6A0024B912 /* color.swift */; };
 		144A94FE2073DFA00024B912 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144A94FD2073DFA00024B912 /* UIViewController.swift */; };
 		144A95032074167A0024B912 /* WorkerCollectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144A95022074167A0024B912 /* WorkerCollectionVC.swift */; };
-		144A950620741DA00024B912 /* SectionPagingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144A950520741DA00024B912 /* SectionPagingCell.swift */; };
 		144E80A22075096A0049FEB3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 144E80A1207509690049FEB3 /* GoogleService-Info.plist */; };
 		144E80C92075612D0049FEB3 /* sectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144E80C82075612D0049FEB3 /* sectionModel.swift */; };
 		144E80CB207561690049FEB3 /* workerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144E80CA207561690049FEB3 /* workerModel.swift */; };
@@ -43,6 +42,9 @@
 		1466A92120883F4900C3B355 /* settingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1466A92020883F4900C3B355 /* settingsVC.swift */; };
 		1466A92320885FFF00C3B355 /* button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1466A92220885FFF00C3B355 /* button.swift */; };
 		14671900208EC33400D573CE /* userSessionManagement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146718FF208EC33400D573CE /* userSessionManagement.swift */; };
+		14671902208FD6D600D573CE /* sectionsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14671901208FD6D600D573CE /* sectionsModel.swift */; };
+		14671906208FD76100D573CE /* workersModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14671905208FD76100D573CE /* workersModel.swift */; };
+		1467190820901B5200D573CE /* ratingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1467190720901B5200D573CE /* ratingVC.swift */; };
 		147E96062086788F0015BD73 /* locator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147E96052086788F0015BD73 /* locator.swift */; };
 		147E9608208686FE0015BD73 /* locationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147E9607208686FE0015BD73 /* locationModel.swift */; };
 		14AF8847207E63030055411E /* addworkerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AF8846207E63030055411E /* addworkerVC.swift */; };
@@ -66,7 +68,6 @@
 		144A94FB2073DC6A0024B912 /* color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = color.swift; sourceTree = "<group>"; };
 		144A94FD2073DFA00024B912 /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
 		144A95022074167A0024B912 /* WorkerCollectionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkerCollectionVC.swift; sourceTree = "<group>"; };
-		144A950520741DA00024B912 /* SectionPagingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionPagingCell.swift; sourceTree = "<group>"; };
 		144E80A1207509690049FEB3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		144E80C82075612D0049FEB3 /* sectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sectionModel.swift; sourceTree = "<group>"; };
 		144E80CA207561690049FEB3 /* workerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = workerModel.swift; sourceTree = "<group>"; };
@@ -92,6 +93,9 @@
 		1466A92020883F4900C3B355 /* settingsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = settingsVC.swift; sourceTree = "<group>"; };
 		1466A92220885FFF00C3B355 /* button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = button.swift; sourceTree = "<group>"; };
 		146718FF208EC33400D573CE /* userSessionManagement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = userSessionManagement.swift; sourceTree = "<group>"; };
+		14671901208FD6D600D573CE /* sectionsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sectionsModel.swift; sourceTree = "<group>"; };
+		14671905208FD76100D573CE /* workersModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = workersModel.swift; sourceTree = "<group>"; };
+		1467190720901B5200D573CE /* ratingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ratingVC.swift; sourceTree = "<group>"; };
 		147E96052086788F0015BD73 /* locator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = locator.swift; sourceTree = "<group>"; };
 		147E9607208686FE0015BD73 /* locationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = locationModel.swift; sourceTree = "<group>"; };
 		14AF8846207E63030055411E /* addworkerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addworkerVC.swift; sourceTree = "<group>"; };
@@ -169,8 +173,8 @@
 		144A94F12073D88E0024B912 /* dataModel */ = {
 			isa = PBXGroup;
 			children = (
-				144E80C82075612D0049FEB3 /* sectionModel.swift */,
-				144E80CA207561690049FEB3 /* workerModel.swift */,
+				14671904208FD72100D573CE /* worker */,
+				14671903208FD70D00D573CE /* section */,
 				1461F25C207BC7EB0061DE1C /* skillModel.swift */,
 				147E9607208686FE0015BD73 /* locationModel.swift */,
 			);
@@ -187,6 +191,7 @@
 				1461F2372079B28D0061DE1C /* baseViewController.swift */,
 				14AF8848207E9DB90055411E /* googleMapVC.swift */,
 				1466A92020883F4900C3B355 /* settingsVC.swift */,
+				1467190720901B5200D573CE /* ratingVC.swift */,
 			);
 			path = controllers;
 			sourceTree = "<group>";
@@ -222,7 +227,6 @@
 		144A9504207416810024B912 /* cells */ = {
 			isa = PBXGroup;
 			children = (
-				144A950520741DA00024B912 /* SectionPagingCell.swift */,
 				143564212077026300AEE097 /* workerCell.swift */,
 				143564222077026300AEE097 /* workerCell.xib */,
 			);
@@ -244,6 +248,24 @@
 				1461F23C207B08660061DE1C /* dalAlert-extentions.swift */,
 			);
 			path = dalAlert;
+			sourceTree = "<group>";
+		};
+		14671903208FD70D00D573CE /* section */ = {
+			isa = PBXGroup;
+			children = (
+				144E80C82075612D0049FEB3 /* sectionModel.swift */,
+				14671901208FD6D600D573CE /* sectionsModel.swift */,
+			);
+			path = section;
+			sourceTree = "<group>";
+		};
+		14671904208FD72100D573CE /* worker */ = {
+			isa = PBXGroup;
+			children = (
+				144E80CA207561690049FEB3 /* workerModel.swift */,
+				14671905208FD76100D573CE /* workersModel.swift */,
+			);
+			path = worker;
 			sourceTree = "<group>";
 		};
 		14AF884A207EB96F0055411E /* addWorkerVC */ = {
@@ -363,6 +385,7 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Dal/Pods-Dal-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/Cosmos/Cosmos.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
@@ -372,6 +395,7 @@
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Cosmos.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
@@ -435,8 +459,8 @@
 				144E80CB207561690049FEB3 /* workerModel.swift in Sources */,
 				1461F232207896BF0061DE1C /* PageMenuDataModel.swift in Sources */,
 				147E96062086788F0015BD73 /* locator.swift in Sources */,
+				14671902208FD6D600D573CE /* sectionsModel.swift in Sources */,
 				1461F22A2078929F0061DE1C /* CAPSPageMenu.swift in Sources */,
-				144A950620741DA00024B912 /* SectionPagingCell.swift in Sources */,
 				14AF884F207EC9000055411E /* dalSelectionDataSource.swift in Sources */,
 				1461F25D207BC7EB0061DE1C /* skillModel.swift in Sources */,
 				1461F236207995F90061DE1C /* workerDetailsVC.swift in Sources */,
@@ -444,6 +468,7 @@
 				1461F22F2078929F0061DE1C /* CAPSPageMenuConfiguration.swift in Sources */,
 				14AF8849207E9DB90055411E /* googleMapVC.swift in Sources */,
 				1461F22B2078929F0061DE1C /* CAPSPageMenu+Options.swift in Sources */,
+				1467190820901B5200D573CE /* ratingVC.swift in Sources */,
 				1461F22E2078929F0061DE1C /* CAPSPageMenu+UIGestureRecognizerDelegate.swift in Sources */,
 				1461F23D207B08660061DE1C /* dalAlert-extentions.swift in Sources */,
 				147E9608208686FE0015BD73 /* locationModel.swift in Sources */,
@@ -459,6 +484,7 @@
 				144A95032074167A0024B912 /* WorkerCollectionVC.swift in Sources */,
 				144E80C92075612D0049FEB3 /* sectionModel.swift in Sources */,
 				14AF8851207EC9B20055411E /* dalSelection.swift in Sources */,
+				14671906208FD76100D573CE /* workersModel.swift in Sources */,
 				1461F22C2078929F0061DE1C /* MenuItemView.swift in Sources */,
 				14AF8847207E63030055411E /* addworkerVC.swift in Sources */,
 				1466A92320885FFF00C3B355 /* button.swift in Sources */,

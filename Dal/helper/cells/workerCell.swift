@@ -26,5 +26,40 @@ class workerCell: UICollectionViewCell {
 
         // Initialization code
     }
+    
+    func setUP(_ worker:workerModel , at section:sectionModel){
+        
+        name.text = worker.name
+        
+        self.address.text = ""
+
+        worker.location.getCountryAndCity { (co, ci) in
+            
+            self.address.text = "\(co),\(ci) "
+            self.reloadInputViews()
+        }
+        
+        
+        distance.text = "\(worker.distance.description)"
+        imageView.dalSetImage(url: worker.avatar)
+        
+        var skilldesc = ""
+        for _skill in worker.skillIDs
+        {
+         
+            if let skill = section.getSkillModel(by: _skill){
+                skilldesc += skill.name
+                skilldesc += ","
+            }
+          
+            
+        }
+        
+        skilldesc.removeLast()
+        
+        self.skill.text = skilldesc
+        
+    }
+
 
 }

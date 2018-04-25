@@ -9,7 +9,7 @@ target 'Dal' do
  pod 'GoogleMaps'
 pod 'Firebase/Database'
 pod 'Firebase/Storage'
-
+pod 'Cosmos'
   # Pods for Dal
 
 end

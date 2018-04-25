@@ -37,6 +37,8 @@ class settingsVC: UITableViewController {
         updateData.tag = updateDataTAG
         
         self.title = "Setting"
+        let textAttributes = [NSAttributedStringKey.foregroundColor:UIColor.white]
+        navigationController?.navigationBar.titleTextAttributes = textAttributes
         
        self.navigationController!.navigationBar.barTintColor =  .dalHeaderColor()
         self.navigationController?.navigationBar.shadowImage = UIImage()

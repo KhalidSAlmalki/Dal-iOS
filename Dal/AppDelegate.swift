@@ -212,7 +212,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         
     }
-    func get(sectionWithLocation:String,completion:@escaping ([sectionModel])->Void ) {
+    func getDistanceBetween(location1:CLLocation,location2:CLLocation) -> Float{
+        
+        return Float(location1.distance(from: location2) * 0.00062137)
+    }
+    func get(sectionWithLocation:CLLocation,completion:@escaping ([sectionModel])->Void ) {
         ref.child("workers/worker").observeSingleEvent(of: .value, with: { (snapshot) in
             let sEctions = sectionsModel()
             
@@ -221,24 +225,37 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 let value = snap.value  as! [String:AnyObject]
                 let skillsID = self.convertToAarry(convertString(value["skills"]))
                 
+                let aWorker =  self.parseWorkerFirbaseValue(value)
+
                 // get wectin where skillsID belong and add them into array   athat belogn to
                 for  lookingSkill in skillsID{
                     
                     self.extractSection(bySkillID: lookingSkill, completion: { (foundSectionDetails) in
                        if let asection =  foundSectionDetails {
                         
-                        sEctions.add(section: asection)
-                        self.extarctSkills(basedOnSectionID: asection.id, completion: { (skills_) in
+                        //add the section that is
+                        // if class with the workers range
+                        
+                        let distance = self.getDistanceBetween(location1: sectionWithLocation, location2: aWorker.getLocation())
+                        
+                        if distance <= aWorker.location.Range{
                             
-                            guard skills_ != nil else{
-                                return
-                            }
-                            sEctions.add(skills: skills_!, at: asection)
+                            sEctions.add(section: asection)
+                            self.extarctSkills(basedOnSectionID: asection.id, completion: { (skills_) in
+                                
+                                guard skills_ != nil else{
+                                    return
+                                }
+                                sEctions.add(skills: skills_!, at: asection)
+                                
+                                self.sections = sEctions.sectionList
+                                completion(sEctions.sectionList)
+                                
+                            })
                             
-                            self.sections = sEctions.sectionList
-                            completion(sEctions.sectionList)
-                         
-                        })
+                        }
+                      
+           
                         
                        }else{
                         
