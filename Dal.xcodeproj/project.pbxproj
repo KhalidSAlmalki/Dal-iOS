@@ -45,6 +45,7 @@
 		14671902208FD6D600D573CE /* sectionsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14671901208FD6D600D573CE /* sectionsModel.swift */; };
 		14671906208FD76100D573CE /* workersModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14671905208FD76100D573CE /* workersModel.swift */; };
 		1467190820901B5200D573CE /* ratingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1467190720901B5200D573CE /* ratingVC.swift */; };
+		1467194920925A2300D573CE /* restAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1467194820925A2300D573CE /* restAPI.swift */; };
 		147E96062086788F0015BD73 /* locator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147E96052086788F0015BD73 /* locator.swift */; };
 		147E9608208686FE0015BD73 /* locationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 147E9607208686FE0015BD73 /* locationModel.swift */; };
 		14AF8847207E63030055411E /* addworkerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AF8846207E63030055411E /* addworkerVC.swift */; };
@@ -96,6 +97,7 @@
 		14671901208FD6D600D573CE /* sectionsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sectionsModel.swift; sourceTree = "<group>"; };
 		14671905208FD76100D573CE /* workersModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = workersModel.swift; sourceTree = "<group>"; };
 		1467190720901B5200D573CE /* ratingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ratingVC.swift; sourceTree = "<group>"; };
+		1467194820925A2300D573CE /* restAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = restAPI.swift; sourceTree = "<group>"; };
 		147E96052086788F0015BD73 /* locator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = locator.swift; sourceTree = "<group>"; };
 		147E9607208686FE0015BD73 /* locationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = locationModel.swift; sourceTree = "<group>"; };
 		14AF8846207E63030055411E /* addworkerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addworkerVC.swift; sourceTree = "<group>"; };
@@ -141,6 +143,7 @@
 		144A94DD2073D6330024B912 /* Dal */ = {
 			isa = PBXGroup;
 			children = (
+				1467194720925A0000D573CE /* restAPi */,
 				144E80A1207509690049FEB3 /* GoogleService-Info.plist */,
 				144A94F12073D88E0024B912 /* dataModel */,
 				144A94F02073D8810024B912 /* helper */,
@@ -266,6 +269,14 @@
 				14671905208FD76100D573CE /* workersModel.swift */,
 			);
 			path = worker;
+			sourceTree = "<group>";
+		};
+		1467194720925A0000D573CE /* restAPi */ = {
+			isa = PBXGroup;
+			children = (
+				1467194820925A2300D573CE /* restAPI.swift */,
+			);
+			path = restAPi;
 			sourceTree = "<group>";
 		};
 		14AF884A207EB96F0055411E /* addWorkerVC */ = {
@@ -460,6 +471,7 @@
 				1461F2382079B28D0061DE1C /* baseViewController.swift in Sources */,
 				144E80CB207561690049FEB3 /* workerModel.swift in Sources */,
 				1461F232207896BF0061DE1C /* PageMenuDataModel.swift in Sources */,
+				1467194920925A2300D573CE /* restAPI.swift in Sources */,
 				147E96062086788F0015BD73 /* locator.swift in Sources */,
 				14671902208FD6D600D573CE /* sectionsModel.swift in Sources */,
 				1461F22A2078929F0061DE1C /* CAPSPageMenu.swift in Sources */,
@@ -639,7 +651,10 @@
 				DEVELOPMENT_TEAM = FT5TU5KEM8;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = Dal/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) $(SRCROOT)";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.khaild.Dal;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -656,7 +671,10 @@
 				DEVELOPMENT_TEAM = FT5TU5KEM8;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = Dal/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) $(SRCROOT)";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.khaild.Dal;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;

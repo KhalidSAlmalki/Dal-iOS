@@ -28,8 +28,6 @@ class addworkerVC: baseViewController,UITextFieldDelegate, dalSelectionDataSourc
     var sectionWithSkills = [sectionModel]()
     
     var selectedSkills = sectionsModel()
-
-    var selectedSkillsID = ""
     
     var userLocation = locationModel()
     
@@ -87,6 +85,7 @@ class addworkerVC: baseViewController,UITextFieldDelegate, dalSelectionDataSourc
                     _worker = worker!
                     
                     self.selectedSkills.add(section: _worker.skillIDs)
+                    
                     self.imageView.dalSetImage(url: _worker.avatar)
                     self.nameTextfield.text = _worker.name
                     self.contactTextfield.text = _worker.contactNumber
@@ -94,6 +93,8 @@ class addworkerVC: baseViewController,UITextFieldDelegate, dalSelectionDataSourc
                     self.typeTextfield.text = _worker.contactMethod
                     self.userLocation = _worker.location
                     self.descTextfield.text = _worker.desc
+                    
+                    
                     self.SkillsTextfield.text = self.selectedSkills.getAllSkillDesc()
                     _worker.location.getDesc(completion: { (dec) in
                        self.LocationTextfield.text = dec
@@ -159,7 +160,13 @@ class addworkerVC: baseViewController,UITextFieldDelegate, dalSelectionDataSourc
                 
                 if !url.isEmpty{
                     par["avatar"] = url
-                    applicationDelegate.ref.child("workers/worker").child(par["id"] as! String).setValue(par)
+                    if self.vcRequestedBased == .addWorker{
+                        applicationDelegate.ref.child("workers/worker").child(par["id"] as! String).setValue(par)
+                    }else{
+                        
+                applicationDelegate.ref.child("workers/worker").child(par["id"] as! String).updateChildValues(par)
+                    }
+                  
                     sender.loadingIndicator(false)
 
                 }
@@ -253,7 +260,7 @@ class addworkerVC: baseViewController,UITextFieldDelegate, dalSelectionDataSourc
                             "longitude":userLocation.location.longitude,
                             "range":userLocation.Range,"zoom":userLocation.zoom],
                 "contactNumber":contactTextfield.text!,
-                "skills":self.selectedSkillsID,
+                "skills":self.selectedSkills.getAllSkillID(),
                 "status":"active"]
     }
     func setUpPicker() {
@@ -309,16 +316,14 @@ class addworkerVC: baseViewController,UITextFieldDelegate, dalSelectionDataSourc
         return selectedSkills.getSections()
     }
     
-    func dalSelectionDidSelected(skills: [sectionModel], selectedSkills: String) {
+    func dalSelectionDidSelected(skills: [sectionModel]) {
         
+        self.selectedSkills.clear()
         self.selectedSkills.add(listOf: skills)
         
         // geting skills name
     
         SkillsTextfield.text = self.selectedSkills.getAllSkillDesc()
-        
-        // geeting skils id
-        self.selectedSkillsID = selectedSkills
         
         
     }

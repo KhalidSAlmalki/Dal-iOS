@@ -15,6 +15,7 @@ class sectionsModel:NSObject {
     override init() {
         super.init()
         
+        sectionList = []
     }
     //MARK: - Add methods
     func add(section:sectionModel) {
@@ -45,8 +46,12 @@ class sectionsModel:NSObject {
     func add(section bySkillIDs:[String]){
         
         // get section detalis if skill has this id
+        
         for Skill in bySkillIDs {
-            let secs = applicationDelegate.sections
+            let secs = applicationDelegate.sectionsWithSkills
+            
+            // get section id
+       
             if let index = secs.index(where: { (sec) -> Bool in
                 if sec.skills.contains(where:{$0.id == Skill }){return true};return false}){
                 
@@ -74,11 +79,15 @@ class sectionsModel:NSObject {
                 
                }
         }
+        print("all added method",getSections())
         
     }
     //MARK: - get methods
 
 
+    func clear()  {
+        sectionList = []
+    }
     func getSections() -> [sectionModel] {
         return sectionList
     }
@@ -86,14 +95,31 @@ class sectionsModel:NSObject {
         return sectionList.count
     }
     
+    func getAllSkillID() -> String{
+        var temp = ""
+        for _skill in sectionList {
+            temp += _skill.getSkillsIDAsString()
+            temp += ";"
+
+        }
+        guard !temp.isEmpty else {
+            return temp
+        }
+        temp.removeLast()
+        return temp
+
+    }
     func getAllSkillDesc()-> String{
         
         var temp = ""
         for _skill in sectionList {
             temp += _skill.getSkillsNameAsString()
+
+        }
+        guard !temp.isEmpty else {
+            return temp
         }
         temp.removeLast()
-        
         return temp
     }
     
