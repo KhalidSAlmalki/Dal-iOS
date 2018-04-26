@@ -35,10 +35,9 @@ class ratingVC: baseViewController {
      imageView.dalSetImage(url: worker.avatar)
      nameLabel.text = worker.name
 
-            worker.getRate { (rate) in
-                self.rateControl.rating = rate
-
-        }
+        worker.getRates(completion: { (rate) in
+               self.rateControl.rating = rate
+        }) 
     
         
         
@@ -52,10 +51,13 @@ class ratingVC: baseViewController {
 
     @IBAction func rateBt(_ sender: Any) {
      
-        applicationDelegate.ref.child("rates").child(worker.id).child(userSessionManagement.IsLogined).setValue(["score":rateControl.rating]) { (err, d) in
+       
+        restAPI.shared.rate(with: worker.id, whoRate: userSessionManagement.IsLogined, rating: rateControl.rating) { (re) in
             
             self.dalbbaseView?.dismiss()
+
         }
+        
         
         
         

@@ -11,9 +11,10 @@ import UIKit
 
 
 class dalSelection: baseViewController,UITableViewDelegate,UITableViewDataSource {
+
+    
     
 
-    var sectionWithSkills = [sectionModel]()
     var delgate:dalSelectionDelgate?
     var dataSource:dalSelectionDataSource?
     @IBOutlet weak private var secondTableView: UITableView!
@@ -22,9 +23,9 @@ class dalSelection: baseViewController,UITableViewDelegate,UITableViewDataSource
     private var selectedSkills = [sectionModel]()
     
     
+    
     func setUP() {
-        firstTableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
-        secondTableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+      
 
         if let data = dataSource?.dalSelectionSelectedSkills() {
             selectedSkills = data
@@ -39,45 +40,49 @@ class dalSelection: baseViewController,UITableViewDelegate,UITableViewDataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         if tableView == firstTableView{
-            return self.sectionWithSkills.count
-        }else if tableView == secondTableView{
+            return  restAPI.shared.sections.count()
+         }else if tableView == secondTableView{
             guard firstTableView.indexPathForSelectedRow?.row != nil else{
                 return 0
             }
-    return
+    return  restAPI.shared.sections.getSections()[(firstTableView.indexPathForSelectedRow?.row)!].skills.count
         
-        self.sectionWithSkills[(firstTableView.indexPathForSelectedRow?.row)!].skills.count
 
         }
         
         return 0
     }
     
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell:UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        
+
         if tableView == self.firstTableView {
-            cell.textLabel?.text = sectionWithSkills[indexPath.row].name
+
+            let cell:UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell1", for: indexPath)
+
+            cell.textLabel?.text = restAPI.shared.sections.getSections()[indexPath.row].name
             cell.accessoryType = .disclosureIndicator
             cell.selectionStyle = .gray
 
             return cell
         }
-        
-        let data = sectionWithSkills[(firstTableView.indexPathForSelectedRow?.row)!]
+
+        let cell:UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "cell2", for: indexPath)
+
+        let data = restAPI.shared.sections.getSections()[(firstTableView.indexPathForSelectedRow?.row)!]
         cell.textLabel?.text = data.skills[indexPath.row].name
         cell.accessoryType = .checkmark
-        
+
         if let index = selectedSkills.index(where:{$0.id == data.id}) {
-            
+
             if selectedSkills[index].skills.contains(where :{$0.id ==  data.skills[indexPath.row].id }){
                         cell.tintColor = UIColor.red
 
             }else{
                         cell.tintColor = UIColor.gray
 
-            }
-            
+             }
+
         }else{
             cell.tintColor = UIColor.gray
 
@@ -104,8 +109,7 @@ class dalSelection: baseViewController,UITableViewDelegate,UITableViewDataSource
     
     func addSelectedPath(selectedIndex:Int) {
         
-    let data = sectionWithSkills[(firstTableView.indexPathForSelectedRow?.row)!]
-
+    let data = restAPI.shared.sections.getSections()[(firstTableView.indexPathForSelectedRow?.row)!]
         let selected = data.skills[selectedIndex]
         
         if selectedSkills.contains(where:{$0.id == data.id}) {
@@ -143,9 +147,7 @@ class dalSelection: baseViewController,UITableViewDelegate,UITableViewDataSource
         dismissDalBaseView()
     }
     
-    override func viewDidLoad() {
-        
-    }
+   
     
     
 }

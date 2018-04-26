@@ -38,7 +38,7 @@ class WorkerCollectionVC: UICollectionViewController,UICollectionViewDelegateFlo
 
 
     func getSectionID(with skillID:String) -> String{
-      let sections = applicationDelegate.sections
+      let sections = restAPI.shared.sections.getSections()
 
         let index = sections.index(where: {$0.skills.contains(where: {$0.id == skillID})})
         
@@ -78,7 +78,7 @@ class WorkerCollectionVC: UICollectionViewController,UICollectionViewDelegateFlo
        
         self.workers = workersModel()
 
-        applicationDelegate.ref.child("workers/worker").observe(DataEventType.childChanged, with: { (changed) in
+        restAPI.shared.ref.child("workers/worker").observe(DataEventType.childChanged, with: { (changed) in
             let _aworker = workerModel(data: changed.value as! [String : AnyObject])
             
             
@@ -91,7 +91,7 @@ class WorkerCollectionVC: UICollectionViewController,UICollectionViewDelegateFlo
  
         
 
-        applicationDelegate.ref.child("workers/worker").observeSingleEvent(of: .value, with: { (snap) in
+         restAPI.shared.ref.child("workers/worker").observeSingleEvent(of: .value, with: { (snap) in
 
 
             

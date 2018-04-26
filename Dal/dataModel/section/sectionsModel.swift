@@ -48,7 +48,7 @@ class sectionsModel:NSObject {
         // get section detalis if skill has this id
         
         for Skill in bySkillIDs {
-            let secs = applicationDelegate.sectionsWithSkills
+            let secs = restAPI.shared.sectionsBasedOnUserLocations.getSections()
             
             // get section id
        
@@ -108,6 +108,11 @@ class sectionsModel:NSObject {
         temp.removeLast()
         return temp
 
+    }
+    func getSectionIndex(_ id:String) -> Int? {
+        
+        return sectionList.index(where: {$0.id == id})
+        
     }
     func getAllSkillDesc()-> String{
         

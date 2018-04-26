@@ -42,7 +42,7 @@ class userSessionManagement {
     class func getLoginedUserData(completion:@escaping((workerModel?)->Void)){
         
         if isLoginedIn() != nil{
-            applicationDelegate.getWorkerDetail(usingUserID: isLoginedIn()!) { (worker) in
+            restAPI.shared.getWorkerDetail(usingUserID: isLoginedIn()!) { (worker) in
                 
                 completion(worker)
             }

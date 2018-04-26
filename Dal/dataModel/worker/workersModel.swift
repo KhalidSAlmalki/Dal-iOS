@@ -20,7 +20,7 @@ class workersModel:NSObject {
     
     func add(worker:workerModel, currentlocation:CLLocation) {
         
-        let distance = applicationDelegate.getDistanceBetween(location1: currentlocation, location2:worker.getLocation() )
+        let distance =  restAPI.shared.getDistanceBetween(location1: currentlocation, location2:worker.getLocation() )
         
         guard distance > 0 else {
             return

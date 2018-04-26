@@ -62,9 +62,9 @@ class HomeVC: SectionVC {
     }
     
     private func registerNewUser(_ phoneNumber: (String)) {
-        let id = applicationDelegate.getRandomIDUsingFirBase()
+        let id = restAPI.shared.getRandomIDUsingFirBase()
         
-        applicationDelegate.ref.child("workers/worker").child(id).setValue(["id":id,"contactNumber":phoneNumber], withCompletionBlock: { (erre, datarec) in
+        restAPI.shared.ref.child("workers/worker").child(id).setValue(["id":id,"contactNumber":phoneNumber], withCompletionBlock: { (erre, datarec) in
             
             let worker = workerModel(id: id, contactNumber: phoneNumber)
             userSessionManagement.saveUserData(worker: worker)
@@ -88,7 +88,7 @@ class HomeVC: SectionVC {
             
             alert.addAction { (phoneNumber) in
                 
-                applicationDelegate.getWorkerDetail(usingPhoneNUmber: phoneNumber) { (worker) in
+                 restAPI.shared.getWorkerDetail(usingPhoneNUmber: phoneNumber) { (worker) in
 
                     if worker.id.isEmpty{ // if there is no data belog to the phone number
                          self.registerNewUser(phoneNumber)
@@ -116,7 +116,7 @@ class HomeVC: SectionVC {
         
         if !userSessionManagement.IsLogined.isEmpty{
             
-            applicationDelegate.getWorkerDetail(usingUserID: userSessionManagement.isLoginedIn()!) { (currentUser) in
+            restAPI.shared.getWorkerDetail(usingUserID: userSessionManagement.isLoginedIn()!) { (currentUser) in
                 
                 if currentUser.getRole() == .user{
                     self.navigationItem.rightBarButtonItems?.remove(at: 0)
@@ -142,7 +142,7 @@ class HomeVC: SectionVC {
     }
     private func getSectionBased(location:CLLocation) {
         
-        applicationDelegate.get(sectionWithLocation: location) { (sections) in
+        restAPI.shared.get(sectionWithLocation: location) { (sections) in
             self.sectionItems = sections
             
             self.sectionItems = self.sectionItems.sorted(by: { $0.sort < $1.sort })

@@ -25,7 +25,6 @@ class addworkerVC: baseViewController,UITextFieldDelegate, dalSelectionDataSourc
     // list of  contact type
     let listType = ["Whatsapp","Telegram","Calling","Texting"]
     
-    var sectionWithSkills = [sectionModel]()
     
     var selectedSkills = sectionsModel()
     
@@ -56,7 +55,6 @@ class addworkerVC: baseViewController,UITextFieldDelegate, dalSelectionDataSourc
         nameTextfield.delegate = self
         descTextfield.delegate = self
         
-        sectionWithSkills = applicationDelegate.sectionsWithSkills
         
         setUpPicker()
         
@@ -113,7 +111,7 @@ class addworkerVC: baseViewController,UITextFieldDelegate, dalSelectionDataSourc
     private func uploadImage(_ imageID: String, _ data: Data?, urlWith:@escaping (String) -> Void) {
         // Create a reference to the file you want to upload
         
-        let imageRef = applicationDelegate.storageRef.child("Avatars/\(imageID).jpg")
+        let imageRef = restAPI.shared.storageRef.child("Avatars/\(imageID).jpg")
         
         imageRef.putData(data!, metadata: nil) { (metadata, error) in
             
@@ -150,7 +148,7 @@ class addworkerVC: baseViewController,UITextFieldDelegate, dalSelectionDataSourc
                 par["id"] = self.userID
 
             }else{
-                par["id"] = applicationDelegate.getRandomIDUsingFirBase()
+                par["id"] = restAPI.shared.getRandomIDUsingFirBase()
                 
 
             }
@@ -161,10 +159,11 @@ class addworkerVC: baseViewController,UITextFieldDelegate, dalSelectionDataSourc
                 if !url.isEmpty{
                     par["avatar"] = url
                     if self.vcRequestedBased == .addWorker{
-                        applicationDelegate.ref.child("workers/worker").child(par["id"] as! String).setValue(par)
+                      
+                          restAPI.shared.ref.child("workers/worker").child(par["id"] as! String).setValue(par)
                     }else{
                         
-                applicationDelegate.ref.child("workers/worker").child(par["id"] as! String).updateChildValues(par)
+                 restAPI.shared.ref.child("workers/worker").child(par["id"] as! String).updateChildValues(par)
                     }
                   
                     sender.loadingIndicator(false)
@@ -358,7 +357,6 @@ class addworkerVC: baseViewController,UITextFieldDelegate, dalSelectionDataSourc
             let frame = CGRect(x: 0, y:dalBaseView.screenHeight-200, width: dalBaseView.screenWidth, height: 200)
             let dalSelection = dalBaseView(frame: frame,storyBoard: "dalSelection")
             let vc = dalSelection.getViewController() as! dalSelection
-            vc.sectionWithSkills = sectionWithSkills
             vc.delgate = self
             vc.dataSource = self
             vc.setUP()

@@ -83,7 +83,7 @@ class workerDetailsVC: baseViewController,UIPickerViewDelegate,UIPickerViewDataS
 
         self.skill.text = sectioins.getAllSkillDesc()
         
-        worker.getRate { (avarage) in
+        worker.getRates { (avarage) in
             
             self.ratingView.rating = avarage
             
@@ -175,22 +175,21 @@ class workerDetailsVC: baseViewController,UIPickerViewDelegate,UIPickerViewDataS
         guard !worker.id.isEmpty else {
             return
         }
-        applicationDelegate.ref.child("workers/worker").child(worker.id).updateChildValues(["status":selectedValue]) { (e, d) in
+        
+        restAPI.shared.updateStatus(userID: worker.id, status: selectedValue) { (_) in
             
-            print(d)
-          
             if selectedValue == "active"{
+                
                 self.worker.status = .active
             }else{
                 self.worker.status = .busy
             }
             
             self.checkWorkerStatus(.profile)
-
+            
             self.pickerContainer.isHidden = true
-
         }
-        print("selectedValue",selectedValue)
+
 
     }
     @objc func pickerViewContactsCancelBt() {

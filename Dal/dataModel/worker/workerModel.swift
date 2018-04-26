@@ -61,7 +61,7 @@ class workerModel:NSObject{
     convenience init(data:[String:AnyObject]) {
         
         let skillsIDstring = convertString(data["skills"])
-        let skillsID = applicationDelegate.convertToAarry(skillsIDstring)
+        let skillsID =  restAPI.shared.convertToAarry(skillsIDstring)
      
         var location_ = locationModel()
         if let location = data["location"] as? [String:Any]{
@@ -84,37 +84,11 @@ class workerModel:NSObject{
                   status: convertWorkerStatus(data["status"]))
         
     }
-    
-    func getRate(compleation:@escaping((Double)->())) {
-        
-        var _rates:[Int] = []
-       
-         applicationDelegate.ref.child("rates").child(id).queryOrdered(byChild: "score").observeSingleEvent(of: .value) { (rates) in
-            
-            
-            if let val = rates.value as? [String:Any] {
-                
-                
-                for r in val{
-                    let _rate = r.value as! [String:AnyObject]
-                    
-                    _rates.append(convertInt(_rate["score"]))
-                }
-                
-                let totalSum = _rates.map({$0}).reduce(0, +)
-                guard totalSum != 0 , _rates.count != 0 else {
-                    compleation(-1)
-                    return
-                }
-                compleation(Double(totalSum/_rates.count))
-                
-            }
 
+    func getRates(completion:@escaping (Double)->Void){
         
-     
-
-            
-           
+        restAPI.shared.getRates(with: id) { (rateNumber) in
+            completion(rateNumber)
         }
     }
     func getLocation() -> CLLocation {
