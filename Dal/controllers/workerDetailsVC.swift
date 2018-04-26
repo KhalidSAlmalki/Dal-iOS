@@ -8,8 +8,11 @@
 
 import UIKit
 import Cosmos
-class workerDetailsVC: baseViewController {
+class workerDetailsVC: baseViewController,UIPickerViewDelegate,UIPickerViewDataSource {
 
+
+    @IBOutlet var PickerChangeStatus: UIPickerView!
+    let pickerContainer = UIView()
     @IBOutlet weak var statusImageView: UIImageView!
     @IBOutlet weak var ratingView: CosmosView!
     @IBOutlet weak var desc: UILabel!
@@ -18,14 +21,17 @@ class workerDetailsVC: baseViewController {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var callBt: UIButton!
     
+    
+    let StatusdataSource = ["active","busy"]
     let PROFILETAG = 0
     let WORKERDETALS = 1
 
+    var worker = workerModel()
 
  
-    
     func setUP()  {
-        
+   
+        self.setUpPicker()
         userSessionManagement.getLoginedUserData { (worker) in
             
             if worker?.getRole() == .worker{
@@ -33,17 +39,39 @@ class workerDetailsVC: baseViewController {
                 self.setUp(worker: worker!, modeType: .profile)
 
             }
+        }
+    }
+    
+    fileprivate func checkWorkerStatus( _ modeType: modeType) {
+        switch self.worker.status {
             
+        case .active:
+            if modeType == .workerDrtails{
+                callBt.isEnabled = true
+                callBt.setTitle("Contact", for: .normal)
+            }
+            PickerChangeStatus.selectRow(0, inComponent: 0, animated: true)
+            statusImageView.image = UIImage(named: "icAvailable")
             
+        case .busy:
+            if modeType == .workerDrtails{
+                callBt.isEnabled = false
+                callBt.setTitle("unavailable", for: .disabled)
+            }
+            PickerChangeStatus.selectRow(1, inComponent: 0, animated: true)
+
+            statusImageView.image = UIImage(named: "icBusy")
+            
+        default:
+            statusImageView.isHidden = true
             
         }
-        
     }
     
     func setUp(worker:workerModel,modeType:modeType){
         
         let sectioins = sectionsModel()
-        
+        self.worker = worker
         sectioins.add(section: (worker.skillIDs))
         
         name.text = worker.name
@@ -51,7 +79,7 @@ class workerDetailsVC: baseViewController {
         desc.text = worker.desc
         
          
-        
+    
 
         self.skill.text = sectioins.getAllSkillDesc()
         
@@ -61,27 +89,7 @@ class workerDetailsVC: baseViewController {
             
         }
         
-        switch worker.status {
-            
-        case .active:
-            if modeType == .workerDrtails{
-                callBt.isEnabled = true
-                callBt.setTitle("Contact", for: .normal)
-            }
-            statusImageView.image = UIImage(named: "icAvailable")
-           
-            
-        case .busy:
-            if modeType == .workerDrtails{
-                callBt.isEnabled = false
-                callBt.setTitle("unavailable", for: .disabled)
-            }
-            statusImageView.image = UIImage(named: "icBusy")
-           
-        default:
-            statusImageView.isHidden = true
-            
-        }
+        checkWorkerStatus(modeType)
         
         
         if modeType == .profile{
@@ -102,13 +110,111 @@ class workerDetailsVC: baseViewController {
             imageView.dalSetImage(url: img)
         
     }
+    @IBAction func callChangeStatusBt(_ sender: UIButton) {
+        
+        if sender.tag == PROFILETAG {
+            
+            print("profile")
+            pickerContainer.isHidden = false
+            
+        }else{
+            
+            print("workerdetail")
 
+        }
+    }
+    
     @IBAction func closeBt(_ sender: Any) {
         guard dalbbaseView != nil else {
             return
         }
         dalbbaseView?.dismiss() 
     }
+    
+    
+    //MARK: - picker
+    func setUpPicker() {
+        
+        var pickerRect = UIScreen.main.bounds
+        pickerContainer.isHidden = true
+
+        pickerRect.size.height = 300
+        pickerRect.origin.x = -15
+        pickerRect.origin.y = UIScreen.main.bounds.height-pickerRect.height
+
+        pickerContainer.frame = pickerRect
+        self.view.addSubview(pickerContainer)
+        PickerChangeStatus.frame = CGRect(x: 0, y: 40, width: pickerRect.width, height: 250)
+        PickerChangeStatus.delegate = self
+        PickerChangeStatus.dataSource = self
+        PickerChangeStatus.backgroundColor = .dalwhite
+        self.pickerContainer.addSubview(PickerChangeStatus)
+        
+        let toolBar = UIToolbar(frame: CGRect(x: 0, y: 0, width: pickerRect.width, height: 50))
+        toolBar.barStyle = UIBarStyle.default
+        toolBar.isTranslucent = true
+        toolBar.tintColor = UIColor.dalHeaderColor()
+        toolBar.sizeToFit()
+        let doneButton = UIBarButtonItem(title: " Done   ", style: UIBarButtonItemStyle.plain, target: self, action: #selector(pickerViewContactsDoneBt))
+        let spaceButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: nil, action: nil)
+        let cancelButton = UIBarButtonItem(title: "  Cancel", style: UIBarButtonItemStyle.plain, target: self, action: #selector(pickerViewContactsCancelBt))
+        
+        toolBar.setItems([cancelButton, spaceButton, doneButton], animated: false)
+        toolBar.isUserInteractionEnabled = true
+        toolBar.becomeFirstResponder()
+        
+        pickerContainer.addSubview(toolBar)
+    }
+    
+    @objc func pickerViewContactsDoneBt() {
+        print("profile")
+
+        let selectedValue = self.StatusdataSource[PickerChangeStatus.selectedRow(inComponent: 0)]
+        
+
+        guard !worker.id.isEmpty else {
+            return
+        }
+        applicationDelegate.ref.child("workers/worker").child(worker.id).updateChildValues(["status":selectedValue]) { (e, d) in
+            
+            print(d)
+          
+            if selectedValue == "active"{
+                self.worker.status = .active
+            }else{
+                self.worker.status = .busy
+            }
+            
+            self.checkWorkerStatus(.profile)
+
+            self.pickerContainer.isHidden = true
+
+        }
+        print("selectedValue",selectedValue)
+
+    }
+    @objc func pickerViewContactsCancelBt() {
+        
+        
+        pickerContainer.isHidden = true
+        print("profile")
+
+    }
+    
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+       return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return StatusdataSource.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return StatusdataSource[row]
+    }
+    
+    
     
 
     

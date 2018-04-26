@@ -35,8 +35,7 @@ class dalBaseView: UIView {
         }
         return statusBarHeight
     }
-    
-    
+   
    private var targetViewController:UIViewController = UIViewController()
    private var showOnViewController:UIViewController? = nil
     
@@ -110,5 +109,6 @@ class dalBaseView: UIView {
         }
         return vc
     }
-
+    
+    
 }

@@ -283,22 +283,12 @@ class addworkerVC: baseViewController,UITextFieldDelegate, dalSelectionDataSourc
         typeTextfield.resignFirstResponder()
 
     }
-    func registerWorker()  {
-        
-    }
-    func dismissCurrentView()  {
-        
-    }
+   
 
     //MARK -dsd
     
     
-    @IBAction func googleMapView(_ sender: UITextField) {
-    
-        
-       
-    }
- 
+
     @IBAction func closeBt(_ sender: Any) {
        dismissDalBaseView()
      
@@ -359,6 +349,7 @@ class addworkerVC: baseViewController,UITextFieldDelegate, dalSelectionDataSourc
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         if SkillsTextfield == textField {
+            self.dismissKeyboard()
             let frame = CGRect(x: 0, y:dalBaseView.screenHeight-200, width: dalBaseView.screenWidth, height: 200)
             let dalSelection = dalBaseView(frame: frame,storyBoard: "dalSelection")
             let vc = dalSelection.getViewController() as! dalSelection
@@ -369,6 +360,8 @@ class addworkerVC: baseViewController,UITextFieldDelegate, dalSelectionDataSourc
             dalSelection.showOnWindos()
             return false
         }else if LocationTextfield == textField{
+            self.dismissKeyboard()
+
             let googleMap = dalBaseView(frame:UIScreen.main.bounds,storyBoard: "googleMapVC")
             let vc = googleMap.getViewController() as! googleMapVC
             vc.dataSource = self
