@@ -10,68 +10,97 @@ import UIKit
 import Cosmos
 class workerDetailsVC: baseViewController {
 
+    @IBOutlet weak var statusImageView: UIImageView!
     @IBOutlet weak var ratingView: CosmosView!
     @IBOutlet weak var desc: UILabel!
     @IBOutlet weak var skill: UILabel!
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var callBt: UIButton!
+    
+    let PROFILETAG = 0
+    let WORKERDETALS = 1
 
-    var workerDetails:workerModel?
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        setUp()
-        
-     }
 
-    private func getWorkerSkillName(_ worker: workerModel?) {
-        var skillsName = ""
-        if let spiltID = worker?.skillIDs.split(separator: ";"){
+ 
+    
+    func setUP()  {
+        
+        userSessionManagement.getLoginedUserData { (worker) in
             
-            for ids in spiltID{
-                for id in ids{
-                    
-                    for s in applicationDelegate.sections{
-                        
-                        if let sm = s.getSkillModel(by: id){
-                            print(sm)
-                            skillsName += sm.name
-                            skillsName += ","
-                            
-                        }
-                    }
-                    
-                }
-                skillsName.removeLast()
-                skill.text = skillsName
+            if worker?.getRole() == .worker{
+                
+                self.setUp(worker: worker!, modeType: .profile)
+
             }
+            
+            
+            
         }
+        
     }
     
-    func setUp(){
-        let worker = workerDetails
-        name.text = worker?.name
+    func setUp(worker:workerModel,modeType:modeType){
         
-        desc.text = worker?.desc
+        let sectioins = sectionsModel()
         
+        sectioins.add(section: (worker.skillIDs))
         
+        name.text = worker.name
         
-        getWorkerSkillName(worker)
+        desc.text = worker.desc
+        
+         
         
 
+        self.skill.text = sectioins.getAllSkillDesc()
         
-    
-        if let status = worker?.status{
+        worker.getRate { (avarage) in
             
-            print(status)
+            self.ratingView.rating = avarage
+            
+        }
+        
+        switch worker.status {
+            
+        case .active:
+            if modeType == .workerDrtails{
+                callBt.isEnabled = true
+                callBt.setTitle("Contact", for: .normal)
+            }
+            statusImageView.image = UIImage(named: "icAvailable")
+           
+            
+        case .busy:
+            if modeType == .workerDrtails{
+                callBt.isEnabled = false
+                callBt.setTitle("unavailable", for: .disabled)
+            }
+            statusImageView.image = UIImage(named: "icBusy")
+           
+        default:
+            statusImageView.isHidden = true
+            
+        }
+        
+        
+        if modeType == .profile{
+        
+            callBt.tag = PROFILETAG
+            callBt.setTitle("Change Status", for: .normal)
+        }else{
+            callBt.tag = WORKERDETALS
+            callBt.setTitle(worker.contactMethod, for: .normal)
 
         }
+        
     
-        if let img = worker?.avatar {
+        
+    
+        let img = worker.avatar
             
             imageView.dalSetImage(url: img)
-        }
+        
     }
 
     @IBAction func closeBt(_ sender: Any) {
@@ -80,6 +109,8 @@ class workerDetailsVC: baseViewController {
         }
         dalbbaseView?.dismiss() 
     }
+    
+
     
  
 

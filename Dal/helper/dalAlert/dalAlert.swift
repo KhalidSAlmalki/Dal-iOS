@@ -86,7 +86,6 @@ class dalalert: UIViewController , UITextFieldDelegate{
     }
     override public init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName:nibNameOrNil, bundle:nibBundleOrNil)
-        print("nibName")
     }
     
     public required init?(coder aDecoder: NSCoder) {
@@ -425,7 +424,6 @@ class dalalert: UIViewController , UITextFieldDelegate{
             //   self.button.constant += changeInHeight
             
             if show{
-                print(self.viewHeight as Any)
                 
                 
                 self.button.center.y = self.viewHeight! - (changeInHeight + 45)
@@ -493,7 +491,6 @@ class dalalert: UIViewController , UITextFieldDelegate{
     }
     
     override internal func viewWillDisappear(_ animated: Bool) {
-        print("viewWillDisappear")
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         
@@ -563,7 +560,6 @@ class dalalert: UIViewController , UITextFieldDelegate{
     @objc private func EnableDisableButton()  {
         
         if textfiedOption.MustHasData == true{
-            //  print("textfied.text",textfied.text!)
             if textfied.text! == "" {
                 button.isEnabled = false
                 button.alpha = 0.5

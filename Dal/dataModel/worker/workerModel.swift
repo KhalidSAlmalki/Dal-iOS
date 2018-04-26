@@ -12,6 +12,11 @@ enum Role {
     case worker
     case user
 }
+enum status {
+    case active
+    case busy
+    case unknown
+}
 class workerModel:NSObject{
 
     var id:String
@@ -20,7 +25,7 @@ class workerModel:NSObject{
     var contactNumber:String
     var desc:String
     var avatar:String
-    var status:String = ""
+    var status:status = .unknown
     var location = locationModel()
     var contactMethod:String = ""
     var distance:Float = -1
@@ -41,7 +46,7 @@ class workerModel:NSObject{
         self.skillIDs = []
     }
     
-    convenience init(id:String,sectionID:[String],contactMethod:String,contactNumber:String,name:String,description:String,avatar:String,location:locationModel,status:String) {
+    convenience init(id:String,sectionID:[String],contactMethod:String,contactNumber:String,name:String,description:String,avatar:String,location:locationModel,status:status) {
         self.init(id: id, contactNumber: contactNumber)
         
         self.name = name
@@ -76,10 +81,42 @@ class workerModel:NSObject{
                   description: convertString(data["desc"]) ,
                   avatar:convertString(data["avatar"]),
                   location: location_,
-                  status: convertString(data["status"]))
+                  status: convertWorkerStatus(data["status"]))
         
     }
     
+    func getRate(compleation:@escaping((Double)->())) {
+        
+        var _rates:[Int] = []
+       
+         applicationDelegate.ref.child("rates").child(id).queryOrdered(byChild: "score").observeSingleEvent(of: .value) { (rates) in
+            
+            
+            if let val = rates.value as? [String:Any] {
+                
+                
+                for r in val{
+                    let _rate = r.value as! [String:AnyObject]
+                    
+                    _rates.append(convertInt(_rate["score"]))
+                }
+                
+                let totalSum = _rates.map({$0}).reduce(0, +)
+                guard totalSum != 0 , _rates.count != 0 else {
+                    compleation(-1)
+                    return
+                }
+                compleation(Double(totalSum/_rates.count))
+                
+            }
+
+        
+     
+
+            
+           
+        }
+    }
     func getLocation() -> CLLocation {
         
         return CLLocation(latitude: location.location.latitude, longitude: location.location.longitude)

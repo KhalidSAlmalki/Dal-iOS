@@ -11,9 +11,7 @@ import CoreLocation
 class workersModel:NSObject {
     private var list:[workerModel] = []
     
-    override var description: String{
-        return "workersModel : \(list.count)"
-    }
+  
     override init() {
         super.init()
         list = []
@@ -24,7 +22,7 @@ class workersModel:NSObject {
         
         let distance = applicationDelegate.getDistanceBetween(location1: currentlocation, location2:worker.getLocation() )
         
-        guard distance != 0 else {
+        guard distance > 0 else {
             return
         }
         
@@ -41,9 +39,16 @@ class workersModel:NSObject {
         
       
     }
+    
+    func remove(workerID:String)  {
+        if let index = list.index(where: {$0.id == workerID}){
+            
+            list.remove(at: index)
+        }
+        
+    }
     func getWorkerList() -> [workerModel] {
         
-        print(list)
         return list
     }
     

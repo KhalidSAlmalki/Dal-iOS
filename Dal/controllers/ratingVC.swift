@@ -9,10 +9,16 @@
 import UIKit
 import Cosmos
 
+enum modeType {
+    case profile
+    case workerDrtails
+}
 class ratingVC: baseViewController {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var rateControl: CosmosView!
+    @IBOutlet weak var statusImageView: UIImageView!
     
+   
     @IBOutlet weak var close: UIButton!
     @IBOutlet weak var imageView: UIImageView!
 
@@ -20,13 +26,29 @@ class ratingVC: baseViewController {
 
     
     func  setUP(worker:workerModel){
-     close.tintColor = UIColor.dalHeaderColor()
-     close.backgroundColor = .clear
-        imageView.dalSetImage(url: worker.avatar)
-        self.worker = worker
-    }
+        
+     self.worker = worker
 
     
+     close.tintColor = UIColor.dalHeaderColor()
+     close.backgroundColor = .clear
+     imageView.dalSetImage(url: worker.avatar)
+     nameLabel.text = worker.name
+
+            worker.getRate { (rate) in
+                self.rateControl.rating = rate
+
+        }
+    
+        
+        
+    }
+
+    @IBAction func closeBt(_ sender: Any) {
+        
+        self.dalbbaseView?.dismiss()
+
+    }
 
     @IBAction func rateBt(_ sender: Any) {
      

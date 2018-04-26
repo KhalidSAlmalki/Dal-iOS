@@ -27,7 +27,8 @@ class settingsVC: UITableViewController {
     @IBOutlet weak var contactNumberCell: UITableViewCell!
     @IBOutlet weak var RoleCell: UITableViewCell!
     
-
+    @IBOutlet weak var currentLocationDe: UITableViewCell!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -45,12 +46,21 @@ class settingsVC: UITableViewController {
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         UIApplication.shared.statusBarStyle = .lightContent
         navigationController!.navigationBar.backgroundColor = .dalHeaderColor()
+        
+        Locator.shared.locate { (reslut) in
+            
+            let loc = locationModel(location: (Locator.shared.location?.coordinate)!, Range: 0, zoom: 0)
+            
+            loc.getCountryAndCity(completion: { (c1, c2) in
+                self.currentLocationDe.detailTextLabel?.text = " Address:\(c1),\(c2) \n \(loc.description)"
+            })
+        }
         navigationController?.navigationBar.isTranslucent = false
         
         
         userSessionManagement.getLoginedUserData { (w) in
             self.userName.detailTextLabel?.text = w?.name
-            self.contactNumberCell.detailTextLabel?.text = w?.contactMethod
+            self.contactNumberCell.detailTextLabel?.text = w?.contactNumber
             
             if w?.getRole() == .worker{
                 self.becomeWorker.isHidden = true
@@ -64,6 +74,7 @@ class settingsVC: UITableViewController {
 
 
             }
+            self.tableView.reloadData()
             
         }
         
@@ -80,6 +91,7 @@ class settingsVC: UITableViewController {
         let cell = tableView.cellForRow(at: indexPath)
         
         switch cell?.tag {
+            
         case BECOMEWORKERTAG:
             
             let becomeWorker = dalBaseView(storyBoard: "addworkerVC")
@@ -89,6 +101,15 @@ class settingsVC: UITableViewController {
                 becomeWorker.showOnWindos()
             
              break
+        case updateDataTAG:
+            
+            let becomeWorker = dalBaseView(storyBoard: "addworkerVC")
+            let vc = becomeWorker.getViewController() as! addworkerVC
+                vc.vcRequestedBased = .UpdateWorkerData
+                vc.setUp()
+                becomeWorker.showOnWindos()
+            
+            break
         case SUSPENDTAG:
             break
         case LONGOUTTAG:

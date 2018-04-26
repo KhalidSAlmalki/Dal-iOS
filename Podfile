@@ -10,6 +10,7 @@ target 'Dal' do
 pod 'Firebase/Database'
 pod 'Firebase/Storage'
 pod 'Cosmos'
+pod 'IHKeyboardAvoiding'
   # Pods for Dal
 
 end

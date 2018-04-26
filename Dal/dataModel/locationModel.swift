@@ -18,11 +18,13 @@ class locationModel: NSObject {
     var zoom:Float
     
     override var description: String{
-        return "(\(location), \(Range) , \(zoom))"
+        
+        return "latitude:  \(location.latitude), \n latitude: \(location.longitude)"
     }
+
     override init() {
         location = CLLocationCoordinate2D()
-        Range = 1000
+        Range = 8.04672*0.62137119
         zoom = 15
     }
    convenience init(location: CLLocationCoordinate2D, Range: Float,zoom:Float) {
@@ -32,11 +34,19 @@ class locationModel: NSObject {
         self.zoom = zoom
 
     }
+  
+    func getDesc(completion:@escaping (String) -> ()){
+        
+        getCountryAndCity { (Country, City) in
+            
+            completion("\(Country),\(City),\(self.Range)")
+        }
+        
+    }
 
    func getCountryAndCity(completion: @escaping (String, String) -> ()) {
         CLGeocoder().reverseGeocodeLocation(CLLocation(latitude: location.latitude, longitude: location.longitude)) { placemarks, error in
-            if let error = error {
-                print(error)
+            if error != nil {
             } else if let country = placemarks?.first?.country,
                 let city = placemarks?.first?.locality {
                 completion(country, city)

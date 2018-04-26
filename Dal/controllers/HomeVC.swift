@@ -29,7 +29,10 @@ class HomeVC: SectionVC {
     @IBAction func profileBt(_ sender: Any) {
         
         let add = dalBaseView(storyBoard: "workerDetailsVC")
+        let vc = add.getViewController() as! workerDetailsVC
+            vc.setUP()
         add.showOnWindos()
+
         
     }
 
@@ -92,7 +95,6 @@ class HomeVC: SectionVC {
                         
 
                     }else{
-                        print("welcome back ")
                         userSessionManagement.saveUserData(worker: worker)
                     }
                     

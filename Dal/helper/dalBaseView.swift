@@ -43,6 +43,7 @@ class dalBaseView: UIView {
     private var contentView:UIView = UIView()
  
 
+
    convenience init(storyBoard id:String) {
     self.init(frame: CGRect(x: 15, y: 70, width: dalBaseView.screenWidth-30, height: dalBaseView.screenHeight-100), storyBoard: id)
 
@@ -89,6 +90,9 @@ class dalBaseView: UIView {
     
     private func setUpInterfaces(){
         targetViewController.view.frame = self.contentView.bounds
+        
+        self.contentView.CornerRaduis = 10
+          targetViewController.view.CornerRaduis = 10
     }
     private func addViewControllerAsChild(){
         guard showOnViewController != nil else {

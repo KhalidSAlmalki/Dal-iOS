@@ -7,17 +7,37 @@
 //
 
 import Foundation
+
+extension Float {
+    var clean: String {
+        
+        let d = "\(Double(self))"
+      
+        return String(d.prefix(4))
+}
+}
+    func convertWorkerStatus(_ any:AnyObject?)->status{
+        let s = convertString(any)
+        
+        if s == "active"{
+            return .active
+        }else if s == "busy"{
+            return .busy
+        }else{
+            return .unknown
+
+        }
+    
+    }
     func convertString(_ any:AnyObject?) -> String {
         
         let text = any as? String
         
         if text != nil {
             // Continue
-            // print("convertString any",text! as Any)
             return text!
         } else {
             // Handling the error.
-            //print("text")
             
             return ""
         }
@@ -28,11 +48,9 @@ import Foundation
         
         if text != nil {
             // Continue
-            // print(text!)
             return text!
         } else {
             // Handling the error.
-            // print("text")
             
             return false
         }
@@ -41,11 +59,9 @@ import Foundation
         
         if let num = any?.doubleValue {
             
-            //print("Parsing",num)
             
             return Int(num)
         } else {
-            //print("Parsing Issue")
         }
         
         return 0
@@ -54,11 +70,9 @@ import Foundation
         
         if let num = any?.doubleValue {
             
-            //print("Parsing",num)
             
             return Float(num)
         } else {
-            //print("Parsing Issue")
         }
         
         return 0

@@ -42,6 +42,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
        
         getSections()
         
+        
+        
         return true
     }
 
@@ -58,6 +60,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let split = id.split(separator: "/")
     return String(describing:split.last!)
     }
+    
+ 
     func dalDismiss(animated: Bool, completion:(()->Void)?){
     
     self.window2?.rootViewController?.dismiss(animated: true, completion: completion)
@@ -104,7 +108,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                      description: convertString(_result["desc"]) ,
                                      avatar:convertString(_result["avatar"]),
                                      location: locationModel(),
-                                     status: convertString(_result["status"]))
+                                     status: convertWorkerStatus(_result["status"]))
             if let location = _result["location"] as? [String:Any]{
                 
                 let location_ = locationModel(location: CLLocationCoordinate2D(latitude: location["latitude"] as! CLLocationDegrees, longitude: location["longitude"] as! CLLocationDegrees),
@@ -141,7 +145,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     func extarctSkills(basedOnSectionID:String,completion:(([skillModel]?)->Void)?){
         self.ref.child("sections").child("\(basedOnSectionID)").observeSingleEvent(of: DataEventType.value, with: { (skill) in
-            print("basedOnSectionID",basedOnSectionID)
             if let section = skill.value as? [String:AnyObject]{
                 
                 var skillsModels = [skillModel]()
@@ -152,7 +155,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         skillsModels.append(skillModel(snapshot: _skill))
                     }
                     
-                    print("skillsModels",skillsModels)
                     completion!(skillsModels)
 
                 }else{
@@ -197,7 +199,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 }
 
             }else{
-                    print("fail")
 
             }
             
@@ -206,12 +207,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
             
 
-    func get(workerBasedOnSectionsID:String,completion:@escaping ([workerModel])->Void){
-        
-        //since i have all skill liked with thier section I will query to get them
-        
-        
-    }
     func getDistanceBetween(location1:CLLocation,location2:CLLocation) -> Float{
         
         return Float(location1.distance(from: location2) * 0.00062137)
@@ -240,6 +235,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         
                         if distance <= aWorker.location.Range{
                             
+                            guard distance > 0 else{
+                                return
+                            }
+                            guard aWorker.id != userSessionManagement.isLoginedIn() else {
+                                                return
+                                            }
+
                             sEctions.add(section: asection)
                             self.extarctSkills(basedOnSectionID: asection.id, completion: { (skills_) in
                                 
@@ -248,8 +250,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                 }
                                 sEctions.add(skills: skills_!, at: asection)
                                 
-                                self.sections = sEctions.sectionList
-                                completion(sEctions.sectionList)
+                                self.sections = sEctions.getSections()
+                                completion(sEctions.getSections())
                                 
                             })
                             

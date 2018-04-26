@@ -50,17 +50,51 @@ class WorkerCollectionVC: UICollectionViewController,UICollectionViewDelegateFlo
     }
     
     
+    private func addIntoWorkers(_ _aworker: workerModel) {
+        
+        let loc = CLLocation(latitude: HomeVC.currentLocation.latitude, longitude: HomeVC.currentLocation.longitude)
+
+        
+        for _skillID in _aworker.skillIDs{
+            
+            let section_ID = self.getSectionID(with: _skillID)
+            
+            // if the user belomn to current section add
+            if section_ID == self.section.id {
+                
+                
+                self.workers.add(worker: _aworker, currentlocation:loc)
+                
+            }
+            
+            
+        }
+    }
+    
     @objc func reloadWorkers(n:sectionModel)  {
        
         section = n
-        print("seection ID ", section.id)
 
        
         self.workers = workersModel()
+
+        applicationDelegate.ref.child("workers/worker").observe(DataEventType.childChanged, with: { (changed) in
+            let _aworker = workerModel(data: changed.value as! [String : AnyObject])
+            
+            
+            self.workers.remove(workerID: _aworker.id)
+            self.addIntoWorkers(_aworker)
+            
+            self.collectionView?.reloadData()
+        })
+        
+ 
         
 
         applicationDelegate.ref.child("workers/worker").observeSingleEvent(of: .value, with: { (snap) in
 
+
+            
             let _workers = snap.value as! [String:AnyObject]
             
             for _worker in _workers{
@@ -68,24 +102,11 @@ class WorkerCollectionVC: UICollectionViewController,UICollectionViewDelegateFlo
                 // getting aworker
                 
                 let _worker_ = _worker.value as! [String:AnyObject]
+                
                 let _aworker = workerModel(data: _worker_)
                 
                 
-                for _skillID in _aworker.skillIDs{
-                    
-                    let section_ID = self.getSectionID(with: _skillID)
-                    
-                    // if the user belomn to current section add
-                    if section_ID == self.section.id {
-                        
-                    let loc = CLLocation(latitude: HomeVC.currentLocation.latitude, longitude: HomeVC.currentLocation.longitude)
-
-                        self.workers.add(worker: _aworker, currentlocation:loc)
-                        
-                     }
-                    
-
-                }
+                    self.addIntoWorkers(_aworker)
                 
             }
             self.collectionView?.reloadData()
@@ -133,8 +154,7 @@ class WorkerCollectionVC: UICollectionViewController,UICollectionViewDelegateFlo
             
                     let profile = dalBaseView(storyBoard: "workerDetailsVC")
                     let vc =   profile.getViewController() as! workerDetailsVC
-                    vc.workerDetails = self.workers.getWorkerList()[indexPath.row]
-                    vc.setUp()
+            vc.setUp(worker: self.workers.getWorkerList()[indexPath.row], modeType: .workerDrtails)
                     profile.showOnWindos()
             
         }))

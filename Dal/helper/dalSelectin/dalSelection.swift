@@ -130,7 +130,6 @@ class dalSelection: baseViewController,UITableViewDelegate,UITableViewDataSource
             self.addSelectedPath(selectedIndex: selectedIndex)
         }
 
-        print(selectedSkills)
         secondTableView.reloadData()
     }
 

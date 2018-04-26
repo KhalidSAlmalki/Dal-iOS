@@ -10,6 +10,7 @@ import UIKit
 enum addworkerRequestType {
     case becomeWorker
     case addWorker
+    case UpdateWorkerData
 }
 class addworkerVC: baseViewController,UITextFieldDelegate, dalSelectionDataSource,dalSelectionDelgate,googleMapDataSource,googleMapDelegate,UIPickerViewDelegate,UIPickerViewDataSource,UIImagePickerControllerDelegate,UINavigationControllerDelegate{
 
@@ -22,11 +23,11 @@ class addworkerVC: baseViewController,UITextFieldDelegate, dalSelectionDataSourc
     @IBOutlet weak var imageView: UIImageView!
     
     // list of  contact type
-    let listType = ["Phone Number","Whats Up","Email"]
+    let listType = ["Whatsapp","Telegram","Calling","Texting"]
     
     var sectionWithSkills = [sectionModel]()
     
-    var selectedSkills = [sectionModel]()
+    var selectedSkills = sectionsModel()
 
     var selectedSkillsID = ""
     
@@ -39,11 +40,23 @@ class addworkerVC: baseViewController,UITextFieldDelegate, dalSelectionDataSourc
     
     var vcRequestedBased:addworkerRequestType = .addWorker
 
-    func setUp()  {
+    @objc func dismissKeyboard(){
         
+        self.view.endEditing(true)
+        
+        self.view.endEditing(false)
+
+    }
+    func setUp()  {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+    
+        self.view.addGestureRecognizer(tap)
+
         SkillsTextfield.delegate = self
         LocationTextfield.delegate = self
         contactTextfield.delegate = self
+        nameTextfield.delegate = self
+        descTextfield.delegate = self
         
         sectionWithSkills = applicationDelegate.sectionsWithSkills
         
@@ -59,6 +72,40 @@ class addworkerVC: baseViewController,UITextFieldDelegate, dalSelectionDataSourc
                 self.userID = (currentUser?.id)!
                 
             }
+        }else if vcRequestedBased == .UpdateWorkerData{
+            
+            // populate data here
+            
+            selectedSkills = sectionsModel()
+            
+            // get worker input
+            var _worker  = workerModel()
+            userSessionManagement.getLoginedUserData { (worker) in
+                
+                if worker != nil{
+                    
+                    _worker = worker!
+                    
+                    self.selectedSkills.add(section: _worker.skillIDs)
+                    self.imageView.dalSetImage(url: _worker.avatar)
+                    self.nameTextfield.text = _worker.name
+                    self.contactTextfield.text = _worker.contactNumber
+                    self.userID = _worker.id
+                    self.typeTextfield.text = _worker.contactMethod
+                    self.userLocation = _worker.location
+                    self.descTextfield.text = _worker.desc
+                    self.SkillsTextfield.text = self.selectedSkills.getAllSkillDesc()
+                    _worker.location.getDesc(completion: { (dec) in
+                       self.LocationTextfield.text = dec
+                    })
+                    
+                    
+                    
+                    
+                }
+            }
+            
+            
         }
         
     }
@@ -98,20 +145,18 @@ class addworkerVC: baseViewController,UITextFieldDelegate, dalSelectionDataSourc
 
             
           
-            let userID_ = applicationDelegate.getRandomIDUsingFirBase()
-            
-            if vcRequestedBased == .becomeWorker{
+            if vcRequestedBased == .becomeWorker ||  vcRequestedBased == .UpdateWorkerData{
                 par["id"] = self.userID
 
             }else{
-                par["id"] = userID_
+                par["id"] = applicationDelegate.getRandomIDUsingFirBase()
+                
 
             }
             
           
             uploadImage(userID, data) {(url) in
                 
-                print("callBack")
                 if !url.isEmpty{
                     par["avatar"] = url
                     applicationDelegate.ref.child("workers/worker").child(par["id"] as! String).setValue(par)
@@ -128,22 +173,18 @@ class addworkerVC: baseViewController,UITextFieldDelegate, dalSelectionDataSourc
     }
     
     @objc func presentImageViewPicker()  {
-        print("presentImageViewPicker")
         
         let actionSheet = UIAlertController(title: "Choose Option", message: "", preferredStyle: .actionSheet)
         
         actionSheet.addAction(UIAlertAction(title: "OK", style: .default, handler: { (ac) in
             
-            print("sdsd")
         }))
 
         guard dalbbaseView != nil else {
             return
         }
 
-        applicationDelegate.window2?.isHidden = false
-        applicationDelegate.window2?.rootViewController?.present(imagePicker, animated: true, completion: nil)
-   
+        applicationDelegate.dalPresent(vc: imagePicker, animated: true, completion: nil)
 
     }
     func setUpImagePicker(){
@@ -160,8 +201,7 @@ class addworkerVC: baseViewController,UITextFieldDelegate, dalSelectionDataSourc
     
     func dismissImagePicker() {
         
-        applicationDelegate.window2?.rootViewController?.dismiss(animated: true, completion: nil)
-        applicationDelegate.window2?.isHidden = true
+       applicationDelegate.dalDismiss(animated: true, completion: nil)
 
     }
     
@@ -276,20 +316,16 @@ class addworkerVC: baseViewController,UITextFieldDelegate, dalSelectionDataSourc
     }
     
     func dalSelectionSelectedSkills() -> [sectionModel] {
-        return selectedSkills
+        return selectedSkills.getSections()
     }
     
     func dalSelectionDidSelected(skills: [sectionModel], selectedSkills: String) {
         
-        self.selectedSkills = skills
+        self.selectedSkills.add(listOf: skills)
         
         // geting skills name
-        var name = ""
-        for s in skills {
-            name+=s.getSkillsNameAsString()
-        }
-        name.removeLast()
-        SkillsTextfield.text = name
+    
+        SkillsTextfield.text = self.selectedSkills.getAllSkillDesc()
         
         // geeting skils id
         self.selectedSkillsID = selectedSkills
@@ -301,7 +337,7 @@ class addworkerVC: baseViewController,UITextFieldDelegate, dalSelectionDataSourc
         
         userLocation = locationModel
      userLocation.getCountryAndCity(completion: { (country, city) in
-        self.LocationTextfield.text = "\(country), \(city); range \(self.userLocation.Range) km"
+        self.LocationTextfield.text = "\(country), \(city); range \(self.userLocation.Range.clean) miles"
         })
     }
     
@@ -309,7 +345,7 @@ class addworkerVC: baseViewController,UITextFieldDelegate, dalSelectionDataSourc
 
         
         if userLocation.location.latitude == 0.0 {
-            return locationModel(location: (Locator.shared.location?.coordinate)!, Range: 10000, zoom: 18)
+            return locationModel(location: (Locator.shared.location?.coordinate)!, Range: 8.04672, zoom: 18)
 
         }else{
             return userLocation
@@ -317,7 +353,9 @@ class addworkerVC: baseViewController,UITextFieldDelegate, dalSelectionDataSourc
         }
     }
     
-    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        return true
+    }
     
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         if SkillsTextfield == textField {
@@ -335,7 +373,7 @@ class addworkerVC: baseViewController,UITextFieldDelegate, dalSelectionDataSourc
             let vc = googleMap.getViewController() as! googleMapVC
             vc.dataSource = self
             vc.delegate = self
-            vc.setUP(loction: [], range: "")
+            vc.setUP()
             googleMap.showOnWindos()
             return false
         }

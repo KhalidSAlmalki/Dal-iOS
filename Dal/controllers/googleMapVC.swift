@@ -33,13 +33,14 @@ class googleMapVC: baseViewController,GMSMapViewDelegate {
     
     var userLocation:locationModel = locationModel()
     
-    func setUP(loction:[String],range:String) {
+    func setUP() {
         
         width =  self.view.frame.size.width-10
         height = self.view.frame.size.height-63
         
         drawCircle()
-        
+        rangeLable.text = ""
+
         googleMapView.delegate = self
         googleMapView.isMyLocationEnabled = true
         googleMapView.isMyLocationEnabled = true
@@ -56,17 +57,11 @@ class googleMapVC: baseViewController,GMSMapViewDelegate {
         
     }
     
-    func changeTitleDependOnLocation() {
-       
-       // Bartitle.text = "مساحة التغطية (  \((CurrentLocationData?.Range)!) كم )"
-    }
+
     
     func mapView(_ mapView: GMSMapView, didTapAt coordinate: CLLocationCoordinate2D) {
         
-        print("You tapped at \(coordinate.latitude), \(coordinate.longitude)")
-        print("the current didTapAt ", userLocation.location as Any)
-        userLocation = locationModel(location: coordinate, Range:Float(getRadius()/1000), zoom: mapView.camera.zoom)
-        print("the current didTapAt after", userLocation.location as Any)
+        userLocation = locationModel(location: coordinate, Range:Float(getRadius()), zoom: mapView.camera.zoom)
         
         setMapCamera()
         
@@ -77,8 +72,7 @@ class googleMapVC: baseViewController,GMSMapViewDelegate {
         
         googleMapView.clear()
   
-        userLocation = locationModel(location: cameraPosition.target, Range:Float(getRadius()/1000), zoom: cameraPosition.zoom)
-        changeTitleDependOnLocation()
+        userLocation = locationModel(location: cameraPosition.target, Range:Float(getRadius()), zoom: cameraPosition.zoom)
         self.setMapCamera()
     }
     
@@ -88,7 +82,7 @@ class googleMapVC: baseViewController,GMSMapViewDelegate {
         CATransaction.setValue(0.5, forKey: kCATransactionAnimationDuration)
         googleMapView?.animate(to: GMSCameraPosition.camera(withTarget: userLocation.location, zoom: userLocation.zoom))
         
-        rangeLable.text = "\(userLocation.Range) km"
+        rangeLable.text = "\(userLocation.Range.clean) miles"
         CATransaction.commit()
         
         
@@ -174,10 +168,10 @@ class googleMapVC: baseViewController,GMSMapViewDelegate {
         let topCenterCoordinate = self.getTopCenterCoordinate().0
         let topCenterLocation = CLLocation(latitude: topCenterCoordinate.latitude, longitude: topCenterCoordinate.longitude)
         
-        let radius = CLLocationDistance(centerLocation.distance(from: topCenterLocation))
         
+        let distanceInMeters = centerLocation.distance(from: topCenterLocation)
         
-        return round(radius)
+        return (distanceInMeters/1000)*0.62137119
     }
     
     
