@@ -722,6 +722,7 @@
                         <outlet property="imageView" destination="wlX-dn-zPl" id="g4X-EV-Uw1"/>
                         <outlet property="nameTextfield" destination="AMj-8n-Cng" id="30G-Nu-eez"/>
                         <outlet property="pickerViewContacts" destination="CD6-pu-ynD" id="Rz7-Fk-IM4"/>
+                        <outlet property="submitBt" destination="SOC-j3-Crw" id="XwB-Sh-Nhm"/>
                         <outlet property="typeTextfield" destination="Rev-6D-bfM" id="4ml-Ql-uc6"/>
                     </connections>
                 </viewController>

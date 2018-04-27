@@ -25,25 +25,107 @@ class HomeVC: SectionVC {
     static var currentLocation = CLLocationCoordinate2D()
     lazy var searchBar:UISearchBar = UISearchBar(frame:CGRect(x: 0, y: 0, width: 200, height: 20))
 
+
     @IBAction func refreshBt(_ sender: UIBarButtonItem) {
+        print("refreshBt")
         setUP()
+        reloadSections()
+        reloadHomeBarData()
     }
     
     @IBAction func profileBt(_ sender: Any) {
         
-        let add = dalBaseView(storyBoard: "workerDetailsVC")
-        let vc = add.getViewController() as! workerDetailsVC
+        restAPI.shared.getWorkerDetail(usingUserID: userSessionManagement.isLoginedIn()!) { (currentUser) in
+            
+            guard !currentUser.id.isEmpty else{
+                return
+            }
+            
+               if currentUser.getRole() == .user{
+                
+                let alert = UIAlertController(title: "Error", message: "You are normal user who will not be able to see his profile , go to setting to be  aworker", preferredStyle: UIAlertControllerStyle.alert)
+                alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default, handler: nil))
+                
+                self.present(alert, animated: true, completion: nil)
+                
+                return
+                }
+            
+            let add = dalBaseView(storyBoard: "workerDetailsVC")
+            let vc = add.getViewController() as! workerDetailsVC
             vc.setUP()
-        add.showOnWindos()
+            add.showOnWindos()
+
+            
+        }
+      
 
         
     }
 
+   class func loading()  {
+        let alert = UIAlertController(title: nil, message: "Please wait...", preferredStyle: .alert)
+        
+        let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
+        loadingIndicator.hidesWhenStopped = true
+        loadingIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
+        loadingIndicator.startAnimating();
+        
+        alert.view.addSubview(loadingIndicator)
+    applicationDelegate.window?.rootViewController?.present(alert, animated: true, completion: nil)
+    }
+    class func Dismissloading() {
+        applicationDelegate.window?.rootViewController?.dismiss(animated: false, completion: nil)
+
+    }
+    func reloadHomeBarData()  {
+
+        guard userSessionManagement.isLoginedIn() != nil else {
+            return
+        }
+        restAPI.shared.getWorkerDetail(usingUserID: userSessionManagement.isLoginedIn()!) { (currentUser) in
+
+
+            if var nv =  self.navigationItem.rightBarButtonItems{
+
+                if currentUser.getRole() == .user{
+                    if nv.count > 1{
+                        nv.remove(at: 0)
+                    }
+                }else{
+                    if nv.contains(where: {$0 == self.profileBt}){
+                        nv.append(self.profileBt)
+
+                    }
+
+
+                }
+            }
+
+        }
+
+    }
     
+    func reloadSections()  {
+        guard Locator.shared.location?.coordinate != nil else {
+            
+            let alert = UIAlertController(title: "Error", message: "Please enable the current location to show the data", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default, handler: nil))
+            
+            self.present(alert, animated: true, completion: nil)
+
+            return
+        }
+        if HomeVC.currentLocation.latitude <= 0 {
+            HomeVC.currentLocation = (Locator.shared.location?.coordinate)!
+        }
+        self.getSectionBased(location: CLLocation(latitude: HomeVC.currentLocation.latitude, longitude: HomeVC.currentLocation.longitude))
+    }
     private func setUP() {
 
-        
-        
+            HomeVC.loading()
+        reloadSections()
+
         Locator.shared.authorize { (status) in
             
             if status ==  Locator.ResultL.Success {
@@ -51,22 +133,11 @@ class HomeVC: SectionVC {
                 Locator.shared.locate(callback: { (sta) in
                     if sta == .Success {
                         
-                        HomeVC.currentLocation = (Locator.shared.location?.coordinate)!
+                        self.reloadSections()
+                       
                         
-                        self.getSectionBased(location: CLLocation(latitude: HomeVC.currentLocation.latitude, longitude: HomeVC.currentLocation.longitude))
                         
-                        
-                        if !userSessionManagement.IsLogined.isEmpty{
-                            
-                            restAPI.shared.getWorkerDetail(usingUserID: userSessionManagement.isLoginedIn()!) { (currentUser) in
-                                
-                                if currentUser.getRole() == .user{
-                                    self.navigationItem.rightBarButtonItems?.remove(at: 0)
-                                }else{
-                                    self.navigationItem.rightBarButtonItems?.append(self.profileBt)
-                                }
-                            }
-                        }
+                   
 
                     }else{
                       
@@ -103,7 +174,7 @@ class HomeVC: SectionVC {
         self.view.backgroundColor = UIColor.dalHeaderColor()
         setUpNvaBar()
         
-
+       
     
         
         if userSessionManagement.isLoginedIn() == nil {
@@ -118,7 +189,6 @@ class HomeVC: SectionVC {
                     if worker.id.isEmpty{ // if there is no data belog to the phone number
                          self.registerNewUser(phoneNumber)
                         
-
                     }else{
                         userSessionManagement.saveUserData(worker: worker)
                     }
@@ -167,6 +237,7 @@ class HomeVC: SectionVC {
             self.setUPPagingVC()
             
             self.pageMenu?.sendDelgateMessage()
+                HomeVC.Dismissloading()
         }
     }
 private func setUpNvaBar(){

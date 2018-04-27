@@ -29,6 +29,23 @@ class settingsVC: UITableViewController {
     
     @IBOutlet weak var currentLocationDe: UITableViewCell!
      var user = workerModel()
+    
+    override func viewDidLayoutSubviews() {
+
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        print("viewDidLayoutSubviews",Locator.shared.location?.coordinate)
+        Locator.shared.locate { (reslut) in
+            
+            let loc = locationModel(location: (Locator.shared.location?.coordinate)!, Range: 0, zoom: 0)
+            
+            loc.getCountryAndCity(completion: { (c1, c2) in
+                self.currentLocationDe.detailTextLabel?.text = " Address:\(c1),\(c2) \n \(loc.description)"
+            })
+        }
+        
+        tableView.reloadData()
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -90,9 +107,19 @@ class settingsVC: UITableViewController {
 
     @IBAction func doneBT(_ sender: Any) {
         
-        self.dismiss(animated: true, completion: nil)
+        self.dismiss(animated: true) {
+
+        }
     }
 
+    func pushToMain()  {
+        
+        let rootViewController = applicationDelegate.window!.rootViewController as! UINavigationController
+        let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let HomeVC = mainStoryboard.instantiateViewController(withIdentifier: "HomeVC") as! HomeVC
+        
+        rootViewController.pushViewController(HomeVC, animated: true)
+    }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let cell = tableView.cellForRow(at: indexPath)
@@ -129,7 +156,8 @@ class settingsVC: UITableViewController {
                     
                     _ = userSessionManagement.logout()
                     self.dismiss(animated: true, completion: nil)
-                    
+                    self.pushToMain()
+
                 }
             }))
             self.present(alert, animated: true, completion: nil)
@@ -138,8 +166,7 @@ class settingsVC: UITableViewController {
         case LONGOUTTAG:
             if userSessionManagement.logout(){
                 self.dismiss(animated: true, completion: nil)
-                self.present((applicationDelegate.window?.rootViewController)!, animated: true, completion: nil)
-                
+                pushToMain()
             }
              
             

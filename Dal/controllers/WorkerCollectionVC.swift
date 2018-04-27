@@ -85,6 +85,7 @@ class WorkerCollectionVC: UICollectionViewController,UICollectionViewDelegateFlo
             self.workers.remove(workerID: _aworker.id)
             self.addIntoWorkers(_aworker)
             
+            
             self.collectionView?.reloadData()
         })
         

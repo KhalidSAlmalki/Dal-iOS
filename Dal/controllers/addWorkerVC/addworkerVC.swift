@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import IHKeyboardAvoiding
 enum addworkerRequestType {
     case becomeWorker
     case addWorker
@@ -25,6 +26,7 @@ class addworkerVC: baseViewController,UITextFieldDelegate, dalSelectionDataSourc
     // list of  contact type
     let listType = ["Whatsapp","Telegram","Calling","Texting"]
     
+    @IBOutlet weak var submitBt: UIButton!
     
     var selectedSkills = sectionsModel()
     
@@ -57,7 +59,10 @@ class addworkerVC: baseViewController,UITextFieldDelegate, dalSelectionDataSourc
         contactTextfield.delegate = self
         nameTextfield.delegate = self
         descTextfield.delegate = self
+          KeyboardAvoiding.padding = -100
         
+        KeyboardAvoiding.avoidingView =  view
+
         alertt = UIAlertController(title: "Error", message: "This is  one Alert", preferredStyle: UIAlertControllerStyle.alert)
         alertt.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (_) in
             applicationDelegate.dalDismiss(animated: true, completion: nil)
@@ -190,7 +195,8 @@ class addworkerVC: baseViewController,UITextFieldDelegate, dalSelectionDataSourc
             }
             
           
-     
+            sender.loadingIndicator(false)
+
 
             
 

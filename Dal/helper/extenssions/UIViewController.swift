@@ -43,7 +43,14 @@ extension UIViewController {
                                           toItem: holderView, attribute: .right, multiplier: 1.0, constant: 0)
         
         holderView.addConstraints([pinTop, pinBottom, pinLeft, pinRight])
-    }}
+    }
+    func reloadViewFromNib() {
+        let parent = view.superview
+        view.removeFromSuperview()
+        view = nil
+        parent?.addSubview(view) // This line causes the view to be reloaded
+    }
+}
 open class SectionVC: UIViewController {
     
     

@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Dal/controllers/addWorkerVC/addworkerVC.swift"
-            timestampString = "546487611.552412"
+            timestampString = "546492386.730128"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "153"
-            endingLineNumber = "153"
+            startingLineNumber = "180"
+            endingLineNumber = "180"
             landmarkName = "submitBt(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -26,59 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Dal/controllers/addWorkerVC/addworkerVC.swift"
-            timestampString = "546487611.5527821"
+            timestampString = "546492386.730242"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "157"
-            endingLineNumber = "157"
-            landmarkName = "submitBt(_:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Dal.addworkerVC.submitBt(__ObjC.UIButton) -&gt; ()"
-                  moduleName = "Dal"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/khalidalmalki/Documents/GitHub/GitHub1/Dal-iOS/Dal/controllers/addWorkerVC/addworkerVC.swift"
-                  timestampString = "546484575.397669"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "154"
-                  endingLineNumber = "154"
-                  offsetFromSymbolStart = "726">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Dal.workerModel) -&gt; () in Dal.addworkerVC.submitBt(__ObjC.UIButton) -&gt; ()"
-                  moduleName = "Dal"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/khalidalmalki/Documents/GitHub/GitHub1/Dal-iOS/Dal/controllers/addWorkerVC/addworkerVC.swift"
-                  timestampString = "546484575.399222"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "142"
-                  endingLineNumber = "142"
-                  offsetFromSymbolStart = "25">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Dal/controllers/addWorkerVC/addworkerVC.swift"
-            timestampString = "546487611.553045"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "159"
-            endingLineNumber = "159"
+            startingLineNumber = "182"
+            endingLineNumber = "182"
             landmarkName = "submitBt(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -90,59 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Dal/controllers/addWorkerVC/addworkerVC.swift"
-            timestampString = "546487611.553299"
+            timestampString = "546492386.7303081"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "162"
-            endingLineNumber = "162"
-            landmarkName = "submitBt(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Dal/controllers/addWorkerVC/addworkerVC.swift"
-            timestampString = "546487611.553584"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "175"
-            endingLineNumber = "175"
-            landmarkName = "submitBt(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Dal/controllers/addWorkerVC/addworkerVC.swift"
-            timestampString = "546487611.553817"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "177"
-            endingLineNumber = "177"
-            landmarkName = "submitBt(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Dal/controllers/addWorkerVC/addworkerVC.swift"
-            timestampString = "546487611.5540839"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "179"
-            endingLineNumber = "179"
+            startingLineNumber = "184"
+            endingLineNumber = "184"
             landmarkName = "submitBt(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -154,7 +58,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Dal/controllers/workerDetailsVC.swift"
-            timestampString = "546487611.554314"
+            timestampString = "546492386.730373"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "147"
@@ -170,7 +74,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Dal/controllers/workerDetailsVC.swift"
-            timestampString = "546487611.554626"
+            timestampString = "546492386.730859"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "148"
@@ -186,7 +90,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Dal/controllers/workerDetailsVC.swift"
-            timestampString = "546487611.554876"
+            timestampString = "546492386.731176"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "150"
@@ -202,7 +106,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Dal/controllers/workerDetailsVC.swift"
-            timestampString = "546487611.5551651"
+            timestampString = "546492386.731493"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "152"
@@ -218,7 +122,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Dal/controllers/workerDetailsVC.swift"
-            timestampString = "546487611.555411"
+            timestampString = "546492386.731784"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "124"

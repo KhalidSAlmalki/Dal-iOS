@@ -48,8 +48,11 @@ class workersModel:NSObject {
         
     }
     func getWorkerList() -> [workerModel] {
-        
-        return list
+      
+        let temp =   list.sorted(by: {$0.distance < $1.distance })
+
+        return  temp
+
     }
     
  
