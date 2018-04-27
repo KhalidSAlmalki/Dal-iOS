@@ -67,6 +67,7 @@ class addworkerVC: baseViewController,UITextFieldDelegate, dalSelectionDataSourc
         alertt.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (_) in
             applicationDelegate.dalDismiss(animated: true, completion: nil)
 
+            self.dalbbaseView?.dismiss()
         }))
         setUpPicker()
         
@@ -147,7 +148,7 @@ class addworkerVC: baseViewController,UITextFieldDelegate, dalSelectionDataSourc
     
     @IBAction func submitBt(_ sender: UIButton) {
         if validateUserInput() {
-            sender.loadingIndicator(true)
+
             var par = getUserInputs()
             
 
@@ -204,6 +205,8 @@ class addworkerVC: baseViewController,UITextFieldDelegate, dalSelectionDataSourc
     }
     func CreateUpdateWOrker(user ID:String)  {
         
+        applicationDelegate.loading()
+
         var par = getUserInputs()
 
         let data = UIImagePNGRepresentation(imageView.image!)
@@ -223,10 +226,11 @@ class addworkerVC: baseViewController,UITextFieldDelegate, dalSelectionDataSourc
                     restAPI.shared.ref.child("workers/worker").child(par["id"] as! String).updateChildValues(par)
                     self.alertt.message = "user has been updated"
                     self.alertt.title = "Success"
+                    
 
                 }
-                
-              
+                applicationDelegate.Dismissloading()
+
                 applicationDelegate.dalPresent(vc: self.alertt, animated: true, completion: nil)
 
             }

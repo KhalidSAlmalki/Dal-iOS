@@ -64,22 +64,7 @@ class HomeVC: SectionVC {
         
     }
 
-   class func loading()  {
-        let alert = UIAlertController(title: nil, message: "Please wait...", preferredStyle: .alert)
-        
-        let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
-        loadingIndicator.hidesWhenStopped = true
-        loadingIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
-        loadingIndicator.startAnimating();
-        
-        alert.view.addSubview(loadingIndicator)
-      applicationDelegate.window?.rootViewController?.present(alert, animated: true, completion: nil)
-    }
-    class func Dismissloading() {
-        print("sds")
-        applicationDelegate.window?.rootViewController?.dismiss(animated: false, completion: nil)
-
-    }
+  
     func reloadHomeBarData()  {
 
         guard userSessionManagement.isLoginedIn() != nil else {
@@ -231,7 +216,7 @@ class HomeVC: SectionVC {
   
     }
     private func getSectionBased(location:CLLocation) {
-        HomeVC.loading()
+            applicationDelegate.loading()
 
         restAPI.shared.get(sectionWithLocation: location) { (sections) in
             self.sectionItems = sections
@@ -241,7 +226,7 @@ class HomeVC: SectionVC {
             
             guard  self.sectionItems.count != 0  else{
                
-                HomeVC.Dismissloading()
+                applicationDelegate.Dismissloading()
                 
                 self.view.addSubview(self.emptyMessage)
                 self.emptyMessage.isHidden = true
@@ -251,7 +236,7 @@ class HomeVC: SectionVC {
             self.setUPPagingVC()
             
             self.pageMenu?.sendDelgateMessage()
-                HomeVC.Dismissloading()
+                applicationDelegate.Dismissloading()
         }
     }
 private func setUpNvaBar(){
