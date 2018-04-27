@@ -28,7 +28,7 @@ class settingsVC: UITableViewController {
     @IBOutlet weak var RoleCell: UITableViewCell!
     
     @IBOutlet weak var currentLocationDe: UITableViewCell!
-    
+     var user = workerModel()
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -37,6 +37,10 @@ class settingsVC: UITableViewController {
         becomeWorker.tag = BECOMEWORKERTAG
         updateData.tag = updateDataTAG
         
+        guard !userSessionManagement.IsLogined.isEmpty else {
+            self.dismiss(animated: true, completion: nil)
+            return
+        }
         self.title = "Setting"
         let textAttributes = [NSAttributedStringKey.foregroundColor:UIColor.white]
         navigationController?.navigationBar.titleTextAttributes = textAttributes
@@ -58,7 +62,10 @@ class settingsVC: UITableViewController {
         navigationController?.navigationBar.isTranslucent = false
         
         
+        
         userSessionManagement.getLoginedUserData { (w) in
+            
+            self.user = w!
             self.userName.detailTextLabel?.text = w?.name
             self.contactNumberCell.detailTextLabel?.text = w?.contactNumber
             
@@ -80,7 +87,7 @@ class settingsVC: UITableViewController {
         
 
     }
-    
+
     @IBAction func doneBT(_ sender: Any) {
         
         self.dismiss(animated: true, completion: nil)
@@ -111,7 +118,23 @@ class settingsVC: UITableViewController {
             
             break
         case SUSPENDTAG:
-            break
+            let alert = UIAlertController(title: "Confirmation", message: "Are you sure you want to delete you account!!", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default, handler: nil))
+            alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (ok) in
+                
+                guard !self.user.id.isEmpty else{
+                    return
+                }
+                restAPI.shared.removeUser(by: self.user.id) { (_) in
+                    
+                    _ = userSessionManagement.logout()
+                    self.dismiss(animated: true, completion: nil)
+                    
+                }
+            }))
+            self.present(alert, animated: true, completion: nil)
+
+      
         case LONGOUTTAG:
             if userSessionManagement.logout(){
                 self.dismiss(animated: true, completion: nil)

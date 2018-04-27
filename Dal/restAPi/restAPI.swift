@@ -32,27 +32,18 @@ class restAPI: NSObject {
         sectionsBasedOnUserLocations = sectionsModel()
         sections = sectionsModel()
     }
-    // GET section  based on worker who coverage the rnage
+   
     
-    // get get workers based on sections
-    
-   //
-    
-    
-    func convertToAarry(_ string:String) -> [String] {
-        var strings:[String] = []
-        let splitString = string.split(separator: ";")
-        for aSubstring in splitString {
-            
-            strings.append(convertString(aSubstring as AnyObject))
+    func removeUser(by ID:String,completion:@escaping (Any)->Void){
+        self.ref.child("workers").child("worker").child(ID).removeValue { (e, d) in
+            completion(d)
         }
-        return strings
     }
     
     
     func rate( with userID:String, whoRate:String, rating:Double,completion:@escaping (Any)->Void)  {
         
-        restAPI.shared.ref.child("rates").child(userID).child(whoRate).setValue(["score":rating]) { (err, d) in
+        ref.child("rates").child(userID).child(whoRate).setValue(["score":rating]) { (err, d) in
             completion(d)
 
          }
@@ -104,6 +95,7 @@ class restAPI: NSObject {
     }
     func getWorkerDetail(usingUserID:String,completion:@escaping (workerModel)->Void )  {
         getWorkerDetail(byChild: "id", value: usingUserID) { (w) in
+        
             completion(w)
         }
     }
@@ -120,11 +112,11 @@ class restAPI: NSObject {
                                      avatar:convertString(_result["avatar"]),
                                      location: locationModel(),
                                      status: convertWorkerStatus(_result["status"]))
-            if let location = _result["location"] as? [String:Any]{
+            if let location = _result["location"] as? [String:AnyObject]{
                 
                 let location_ = locationModel(location: CLLocationCoordinate2D(latitude: location["latitude"] as! CLLocationDegrees, longitude: location["longitude"] as! CLLocationDegrees),
-                                              Range: location["range"] as! Float,
-                                              zoom: location["zoom"] as! Float)
+                                              Range: convertFloat(location["range"]),
+                                              zoom: convertFloat(location["zoom"]) )
                 worker.location = location_
                 
                 return worker
@@ -154,7 +146,7 @@ class restAPI: NSObject {
             }
         }
     }
-    func extarctSkills(basedOnSectionID:String,completion:(([skillModel]?)->Void)?){
+   private func extarctSkills(basedOnSectionID:String,completion:(([skillModel]?)->Void)?){
         self.ref.child("sections").child("\(basedOnSectionID)").observeSingleEvent(of: DataEventType.value, with: { (skill) in
             if let section = skill.value as? [String:AnyObject]{
                 
@@ -182,7 +174,7 @@ class restAPI: NSObject {
         
         
     }
-    func extractSection(bySkillID:String,completion:((sectionModel?)->Void)?){
+    private func extractSection(bySkillID:String,completion:((sectionModel?)->Void)?){
         self.ref.child("sections").queryOrdered(byChild: "skills").observeSingleEvent(of: .value, with: { (lookingForSection) in
             
             if let value = lookingForSection.value as? [[String : AnyObject]]{
@@ -318,6 +310,15 @@ class restAPI: NSObject {
         
         
         
+    }
+    func convertToAarry(_ string:String) -> [String] {
+        var strings:[String] = []
+        let splitString = string.split(separator: ";")
+        for aSubstring in splitString {
+            
+            strings.append(convertString(aSubstring as AnyObject))
+        }
+        return strings
     }
     func getRandomIDUsingFirBase() -> String{
         

@@ -36,6 +36,9 @@ class addworkerVC: baseViewController,UITextFieldDelegate, dalSelectionDataSourc
     @IBOutlet var pickerViewContacts: UIPickerView!
     
     var vcRequestedBased:addworkerRequestType = .addWorker
+    
+    var alertt = UIAlertController()
+ 
 
     @objc func dismissKeyboard(){
         
@@ -55,7 +58,11 @@ class addworkerVC: baseViewController,UITextFieldDelegate, dalSelectionDataSourc
         nameTextfield.delegate = self
         descTextfield.delegate = self
         
-        
+        alertt = UIAlertController(title: "Error", message: "This is  one Alert", preferredStyle: UIAlertControllerStyle.alert)
+        alertt.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (_) in
+            applicationDelegate.dalDismiss(animated: true, completion: nil)
+
+        }))
         setUpPicker()
         
         setUpImagePicker()
@@ -134,48 +141,92 @@ class addworkerVC: baseViewController,UITextFieldDelegate, dalSelectionDataSourc
     }
     
     @IBAction func submitBt(_ sender: UIButton) {
-        
         if validateUserInput() {
             sender.loadingIndicator(true)
             var par = getUserInputs()
-            // Data in memory
             
-            let data = UIImagePNGRepresentation(imageView.image!)
 
             
           
             if vcRequestedBased == .becomeWorker ||  vcRequestedBased == .UpdateWorkerData{
                 par["id"] = self.userID
 
+                  CreateUpdateWOrker(user: self.userID)
             }else{
-                par["id"] = restAPI.shared.getRandomIDUsingFirBase()
+                
+                restAPI.shared.getWorkerDetail(usingPhoneNUmber:par["contactNumber"] as! String) { (_worker) in
+                    
+                    if _worker.id.isEmpty{
+                        
+                        
+                    let id =  restAPI.shared.getRandomIDUsingFirBase()
+                        
+                        print("id id",id)
+                        if  !id.isEmpty{
+                            par["id"]  = id
+                            self.CreateUpdateWOrker(user: id)
+                            sender.loadingIndicator(true)
+                        }else{
+                            
+                            self.perform(#selector(self.submitBt(_:)))
+                        }
+                    
+
+                    }else{
+                        
+                        self.alertt.message = "the phone Number has been taken, try another one !!"
+                        self.alertt.title = "Error"
+                        applicationDelegate.dalPresent(vc: self.alertt, animated: true, completion: nil)
+                        sender.loadingIndicator(true)
+
+                        return 
+                    }
+                    
+                }
+                
+            
                 
 
             }
             
           
-            uploadImage(userID, data) {(url) in
-                
-                if !url.isEmpty{
-                    par["avatar"] = url
-                    if self.vcRequestedBased == .addWorker{
-                      
-                          restAPI.shared.ref.child("workers/worker").child(par["id"] as! String).setValue(par)
-                    }else{
-                        
-                 restAPI.shared.ref.child("workers/worker").child(par["id"] as! String).updateChildValues(par)
-                    }
-                  
-                    sender.loadingIndicator(false)
+     
 
-                }
-               
-                
-            }
-        
             
 
          }
+    }
+    func CreateUpdateWOrker(user ID:String)  {
+        
+        var par = getUserInputs()
+
+        let data = UIImagePNGRepresentation(imageView.image!)
+        uploadImage(ID, data) {(url) in
+            
+            if !url.isEmpty{
+                par["avatar"] = url
+                   par["id"]  = ID
+                if self.vcRequestedBased == .addWorker{
+                    
+                    restAPI.shared.ref.child("workers/worker").child(ID).setValue(par)
+                    self.alertt.message = "user has been added"
+                    self.alertt.title = "Success"
+
+                }else{
+                    
+                    restAPI.shared.ref.child("workers/worker").child(par["id"] as! String).updateChildValues(par)
+                    self.alertt.message = "user has been updated"
+                    self.alertt.title = "Success"
+
+                }
+                
+              
+                applicationDelegate.dalPresent(vc: self.alertt, animated: true, completion: nil)
+
+            }
+            
+            
+        }
     }
     
     @objc func presentImageViewPicker()  {
@@ -230,19 +281,40 @@ class addworkerVC: baseViewController,UITextFieldDelegate, dalSelectionDataSourc
     }
   
     func validateUserInput() -> Bool  {
+        let phoneRege = "^(\\([0-9]{3}\\) |[0-9]{3}-)[0-9]{3}-[0-9]{4}$"
+
+    
+        let predicate = NSPredicate(format: "SELF MATCHES %@", phoneRege)
+        
+
+        
         
         if (LocationTextfield.text?.isEmpty)! || (contactTextfield.text?.isEmpty)!
         || (nameTextfield.text?.isEmpty)! || (SkillsTextfield.text?.isEmpty)!
         || (descTextfield.text?.isEmpty)! {
-            let alert = UIAlertController(title: "Error", message: "plaese check your inputs and fill the missing value", preferredStyle: .alert)
             
             
-            alert.addAction(UIAlertAction(title: "done", style: .cancel, handler: { (r) in
+            let alert = UIAlertController(title: "Error", message: "Plaese check your inputs and fill the missing values", preferredStyle: .alert)
+            
+            alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: { (r) in
                 applicationDelegate.dalDismiss(animated: true, completion: nil)
 
             }))
         
             applicationDelegate.dalPresent(vc: alert, animated: true, completion: nil)
+            return false
+        }
+        guard  predicate.evaluate(with: contactTextfield.text) else {
+            let alert = UIAlertController(title: "Error",
+                                          message: "The phone number shoild be like (123) 123-1234",
+                                          preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: { (r) in
+                applicationDelegate.dalDismiss(animated: true, completion: nil)
+                
+            }))
+            
+            applicationDelegate.dalPresent(vc: alert, animated: true, completion: nil)
+            
             return false
         }
         return true

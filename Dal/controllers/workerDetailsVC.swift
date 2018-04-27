@@ -110,6 +110,8 @@ class workerDetailsVC: baseViewController,UIPickerViewDelegate,UIPickerViewDataS
             imageView.dalSetImage(url: img)
         
     }
+  
+
     @IBAction func callChangeStatusBt(_ sender: UIButton) {
         
         if sender.tag == PROFILETAG {
@@ -118,8 +120,39 @@ class workerDetailsVC: baseViewController,UIPickerViewDelegate,UIPickerViewDataS
             pickerContainer.isHidden = false
             
         }else{
+     
+           let m =  worker.contactMethod
             
-            print("workerdetail")
+            print(m)
+            var url = ""
+            
+            if m == "Whatsapp"{
+                url = "whatsapp://send?phone=1"
+                
+            }
+            else if m == "Telegram"{
+                url = "tg://msg?to=1"
+            }
+            else if m == "Calling"{
+                url = "tel://"
+            }
+            else if m == "Texting"{
+                url = "sms:"
+            }
+            url += cleanPhoneNumber(worker.contactNumber)
+
+            print(url)
+
+            if let urlFromStr = URL(string: url) {
+                
+                if UIApplication.shared.canOpenURL(urlFromStr) {
+                    if #available(iOS 10.0, *) {
+                        UIApplication.shared.open(urlFromStr, options: [:], completionHandler: nil)
+                    } else {
+                        UIApplication.shared.openURL(urlFromStr)
+                    }
+                }
+            }
 
         }
     }
@@ -214,7 +247,12 @@ class workerDetailsVC: baseViewController,UIPickerViewDelegate,UIPickerViewDataS
     }
     
     
-    
+    func cleanPhoneNumber(_ str: String) -> String {
+        struct Constants {
+            static let validChars = Set("1234567890".characters)
+        }
+        return String(str.characters.filter { Constants.validChars.contains($0) })
+    }
 
     
  

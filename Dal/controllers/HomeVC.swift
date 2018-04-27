@@ -25,7 +25,10 @@ class HomeVC: SectionVC {
     static var currentLocation = CLLocationCoordinate2D()
     lazy var searchBar:UISearchBar = UISearchBar(frame:CGRect(x: 0, y: 0, width: 200, height: 20))
 
-
+    @IBAction func refreshBt(_ sender: UIBarButtonItem) {
+        setUP()
+    }
+    
     @IBAction func profileBt(_ sender: Any) {
         
         let add = dalBaseView(storyBoard: "workerDetailsVC")
@@ -51,12 +54,34 @@ class HomeVC: SectionVC {
                         HomeVC.currentLocation = (Locator.shared.location?.coordinate)!
                         
                         self.getSectionBased(location: CLLocation(latitude: HomeVC.currentLocation.latitude, longitude: HomeVC.currentLocation.longitude))
+                        
+                        
+                        if !userSessionManagement.IsLogined.isEmpty{
+                            
+                            restAPI.shared.getWorkerDetail(usingUserID: userSessionManagement.isLoginedIn()!) { (currentUser) in
+                                
+                                if currentUser.getRole() == .user{
+                                    self.navigationItem.rightBarButtonItems?.remove(at: 0)
+                                }else{
+                                    self.navigationItem.rightBarButtonItems?.append(self.profileBt)
+                                }
+                            }
+                        }
 
+                    }else{
+                      
+                     
+
+                        
                     }
                 })
             }else{
-//                let alert = UIAlertController()
-//                alert.addAction(UIAlertAction(title: "got it", style: .alert, handler: nil))
+                
+                let alert = UIAlertController(title: "Error", message: "Please enable the current location to show the data", preferredStyle: UIAlertControllerStyle.alert)
+                alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default, handler: nil))
+                
+                self.present(alert, animated: true, completion: nil)
+
             }
         }
     }
@@ -84,7 +109,7 @@ class HomeVC: SectionVC {
         if userSessionManagement.isLoginedIn() == nil {
             let phoneRege = "^(\\([0-9]{3}\\) |[0-9]{3}-)[0-9]{3}-[0-9]{4}$"
             
-            let alert:dalalert = dalalert(self,iconImage:UIImage(named: "logo"),textfied:DalTextfieldOption(name: "Phone Number", keyboradType:UIKeyboardType.decimalPad, MustHasData: true, MustCkeckRegex: phoneRege))
+            let alert:dalalert = dalalert(self,iconImage:UIImage(named: "logo"),textfied:DalTextfieldOption(name: "Phone Number", keyboradType:UIKeyboardType.numbersAndPunctuation, MustHasData: true, MustCkeckRegex: phoneRege))
             
             alert.addAction { (phoneNumber) in
                 
@@ -113,18 +138,7 @@ class HomeVC: SectionVC {
 
         
 
-        
-        if !userSessionManagement.IsLogined.isEmpty{
-            
-            restAPI.shared.getWorkerDetail(usingUserID: userSessionManagement.isLoginedIn()!) { (currentUser) in
-                
-                if currentUser.getRole() == .user{
-                    self.navigationItem.rightBarButtonItems?.remove(at: 0)
-                }else{
-                    self.navigationItem.rightBarButtonItems?.append(self.profileBt)
-                }
-            }
-        }
+  
       
         
      }

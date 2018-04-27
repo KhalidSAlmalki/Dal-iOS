@@ -64,11 +64,11 @@ class workerModel:NSObject{
         let skillsID =  restAPI.shared.convertToAarry(skillsIDstring)
      
         var location_ = locationModel()
-        if let location = data["location"] as? [String:Any]{
+        if let location = data["location"] as? [String:AnyObject]{
             location_ = locationModel(location: CLLocationCoordinate2D(latitude: location["latitude"] as! CLLocationDegrees,
                                                                        longitude: location["longitude"] as! CLLocationDegrees),
-                                      Range: location["range"] as! Float,
-                                      zoom: location["zoom"] as! Float)
+                                      Range: convertFloat(location["range"]),
+                                      zoom:  convertFloat(location["zoom"]))
         }
                         
         
