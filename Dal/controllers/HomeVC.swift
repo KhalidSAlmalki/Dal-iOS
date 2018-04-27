@@ -21,6 +21,7 @@ class HomeVC: SectionVC {
     var pageMenu : CAPSPageMenu?
     var delegate:DidloadChange?
     
+    @IBOutlet var emptyMessage: UILabel!
     
     static var currentLocation = CLLocationCoordinate2D()
     lazy var searchBar:UISearchBar = UISearchBar(frame:CGRect(x: 0, y: 0, width: 200, height: 20))
@@ -75,6 +76,7 @@ class HomeVC: SectionVC {
       applicationDelegate.window?.rootViewController?.present(alert, animated: true, completion: nil)
     }
     class func Dismissloading() {
+        print("sds")
         applicationDelegate.window?.rootViewController?.dismiss(animated: false, completion: nil)
 
     }
@@ -107,16 +109,21 @@ class HomeVC: SectionVC {
     }
     
     func reloadSections()  {
+        
+        
         guard Locator.shared.location?.coordinate != nil else {
             
-            let alert = UIAlertController(title: "Error", message: "Please enable the current location to show the data", preferredStyle: UIAlertControllerStyle.alert)
+            let alert = UIAlertController(title: "Error", message: "Something went wrong with locations", preferredStyle: UIAlertControllerStyle.alert)
             alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default, handler: nil))
-            
+           
+//            Locator.shared.locate { (s) in
+//                print(<#T##items: Any...##Any#>)
+//            }
             self.present(alert, animated: true, completion: nil)
 
             return
         }
-        if HomeVC.currentLocation.latitude <= 0 {
+        if HomeVC.currentLocation.latitude != 0 {
             HomeVC.currentLocation = (Locator.shared.location?.coordinate)!
         }
         self.getSectionBased(location: CLLocation(latitude: HomeVC.currentLocation.latitude, longitude: HomeVC.currentLocation.longitude))
@@ -229,16 +236,16 @@ class HomeVC: SectionVC {
         restAPI.shared.get(sectionWithLocation: location) { (sections) in
             self.sectionItems = sections
             
+            print(sections)
             self.sectionItems = self.sectionItems.sorted(by: { $0.sort < $1.sort })
             
             guard  self.sectionItems.count != 0  else{
                
                 HomeVC.Dismissloading()
-                let alert = UIAlertController(title: "opps", message: "Current location does not have workers! ", preferredStyle: UIAlertControllerStyle.alert)
-                alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
                 
-                self.present(alert, animated: true, completion: nil)
-
+                self.view.addSubview(self.emptyMessage)
+                self.emptyMessage.isHidden = true
+                self.emptyMessage.center = self.view.center
                 return
             }
             self.setUPPagingVC()
