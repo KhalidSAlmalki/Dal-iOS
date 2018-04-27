@@ -1,5 +1,4 @@
 PODS:
-  - Alamofire (4.7.2)
   - Cosmos (15.0.0)
   - Firebase/Core (4.13.0):
     - FirebaseAnalytics (= 4.2.0)
@@ -36,7 +35,6 @@ PODS:
   - GoogleToolboxForMac/NSData+zlib (2.1.4):
     - GoogleToolboxForMac/Defines (= 2.1.4)
   - GTMSessionFetcher/Core (1.1.15)
-  - IHKeyboardAvoiding (4.2)
   - Kingfisher (4.7.0)
   - leveldb-library (1.20)
   - nanopb (0.3.8):
@@ -46,16 +44,13 @@ PODS:
   - nanopb/encode (0.3.8)
 
 DEPENDENCIES:
-  - Alamofire
   - Cosmos
   - Firebase/Database
   - Firebase/Storage
   - GoogleMaps
-  - IHKeyboardAvoiding
   - Kingfisher
 
 SPEC CHECKSUMS:
-  Alamofire: e4fa87002c137ba2d8d634d2c51fabcda0d5c223
   Cosmos: a6dbd3d0baa0cc8f51f8598f7508d5a09d0a9ade
   Firebase: 5ec5e863d269d82d66b4bf56856726f8fb8f0fb3
   FirebaseAnalytics: 7ef69e76a5142f643aeb47c780e1cdce4e23632e
@@ -66,11 +61,10 @@ SPEC CHECKSUMS:
   GoogleMaps: f79af95cb24d869457b1f961c93d3ce8b2f3b848
   GoogleToolboxForMac: 91c824d21e85b31c2aae9bb011c5027c9b4e738f
   GTMSessionFetcher: 5fa5b80fd20e439ef5f545fb2cb3ca6c6714caa2
-  IHKeyboardAvoiding: 9fbf816b7c3c84911964802ff110d12caf40ebef
   Kingfisher: da6b005aa96d37698e3e4f1ccfe96a5b9bbf27d6
   leveldb-library: 08cba283675b7ed2d99629a4bc5fd052cd2bb6a5
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
 
-PODFILE CHECKSUM: 532615ba42257daf1e27f81293b9f4c852c96d6a
+PODFILE CHECKSUM: 98e43a1a5d9d0da881ae184ce721fff8103c0694
 
 COCOAPODS: 1.4.0
