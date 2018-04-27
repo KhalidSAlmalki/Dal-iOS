@@ -72,7 +72,7 @@ class HomeVC: SectionVC {
         loadingIndicator.startAnimating();
         
         alert.view.addSubview(loadingIndicator)
-    applicationDelegate.window?.rootViewController?.present(alert, animated: true, completion: nil)
+      applicationDelegate.window?.rootViewController?.present(alert, animated: true, completion: nil)
     }
     class func Dismissloading() {
         applicationDelegate.window?.rootViewController?.dismiss(animated: false, completion: nil)
@@ -123,7 +123,6 @@ class HomeVC: SectionVC {
     }
     private func setUP() {
 
-            HomeVC.loading()
         reloadSections()
 
         Locator.shared.authorize { (status) in
@@ -225,13 +224,21 @@ class HomeVC: SectionVC {
   
     }
     private func getSectionBased(location:CLLocation) {
-        
+        HomeVC.loading()
+
         restAPI.shared.get(sectionWithLocation: location) { (sections) in
             self.sectionItems = sections
             
             self.sectionItems = self.sectionItems.sorted(by: { $0.sort < $1.sort })
             
             guard  self.sectionItems.count != 0  else{
+               
+                HomeVC.Dismissloading()
+                let alert = UIAlertController(title: "opps", message: "Current location does not have workers! ", preferredStyle: UIAlertControllerStyle.alert)
+                alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+                
+                self.present(alert, animated: true, completion: nil)
+
                 return
             }
             self.setUPPagingVC()
