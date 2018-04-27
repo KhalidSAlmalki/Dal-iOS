@@ -34,7 +34,6 @@ class settingsVC: UITableViewController {
 
     }
     override func viewWillAppear(_ animated: Bool) {
-        print("viewDidLayoutSubviews",Locator.shared.location?.coordinate)
         Locator.shared.locate { (reslut) in
             
             let loc = locationModel(location: (Locator.shared.location?.coordinate)!, Range: 0, zoom: 0)

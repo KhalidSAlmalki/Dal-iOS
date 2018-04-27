@@ -216,7 +216,7 @@ class dalalert: UIViewController , UITextFieldDelegate{
         // Container for the entire alert modal contents
       //  let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.dark)
         containerView = UIView()
-        containerView.backgroundColor = UIColor.black.withAlphaComponent(0.70)
+        containerView.backgroundColor = UIColor.black
         view.addSubview(containerView!)
         
         containerView.frame.size = sz

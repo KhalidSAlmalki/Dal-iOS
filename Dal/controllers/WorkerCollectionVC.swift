@@ -7,8 +7,8 @@
 //
 
 import UIKit
-import Firebase
 import CoreLocation
+import Firebase
 private let reuseIdentifier = "Cell"
 
 class WorkerCollectionVC: UICollectionViewController,UICollectionViewDelegateFlowLayout,DidloadChange {

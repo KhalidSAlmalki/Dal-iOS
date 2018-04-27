@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import IHKeyboardAvoiding
+
 enum addworkerRequestType {
     case becomeWorker
     case addWorker
@@ -209,7 +209,9 @@ class addworkerVC: baseViewController,UITextFieldDelegate, dalSelectionDataSourc
 
         var par = getUserInputs()
 
-        let data = UIImagePNGRepresentation(imageView.image!)
+        let data = UIImageJPEGRepresentation(imageView.image!,0)
+        print("data",data?.count)
+        
         uploadImage(ID, data) {(url) in
             
             if !url.isEmpty{

@@ -165,9 +165,8 @@ class HomeVC: SectionVC {
         self.view.backgroundColor = UIColor.dalHeaderColor()
         setUpNvaBar()
         
-       
+       applicationDelegate.empty.configure(appendIn: self.view, data: emptyStatusData(name: "No skilled worker in current Location !!", image: "location"))
     
-        
         if userSessionManagement.isLoginedIn() == nil {
             let phoneRege = "^(\\([0-9]{3}\\) |[0-9]{3}-)[0-9]{3}-[0-9]{4}$"
             
@@ -233,6 +232,7 @@ class HomeVC: SectionVC {
                 self.emptyMessage.center = self.view.center
                 return
             }
+            applicationDelegate.empty.SSremove()
             self.setUPPagingVC()
             
             self.pageMenu?.sendDelgateMessage()
