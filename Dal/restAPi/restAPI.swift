@@ -303,7 +303,7 @@ class restAPI: NSObject {
                 
                 for skill in skills{
                     
-                    let askill = skillModel(id:convertString(skill["id"]) , name:convertString(skill["name"]), sort: 0)
+                    let askill = skillModel(id:skill["id"] as! String ,name:skill["name"] as! String , sort: 0)
                     asection.addSkill(aSkill: askill)
                 }
                 
