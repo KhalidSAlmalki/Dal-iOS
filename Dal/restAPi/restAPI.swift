@@ -198,12 +198,17 @@ class restAPI: NSObject {
                         }
                         
                         
+                    }else{
+                        completion!(nil)
+
                     }
                 }
                 
             }else{
-                
+                completion!(nil)
+
             }
+            
             
         })
         
@@ -212,19 +217,18 @@ class restAPI: NSObject {
     
     func getDistanceBetween(location1:CLLocation,location2:CLLocation) -> Float{
         
-        return Float(location1.distance(from: location2) * 0.00062137)
+        return Float(location1.distance(from: location2)/1000)*0.00062137
     }
     func get(sectionWithLocation:CLLocation,completion:@escaping ([sectionModel])->Void ) {
         ref.child("workers/worker").observeSingleEvent(of: .value, with: { (snapshot) in
             let sEctions = sectionsModel()
-            
             for aworker in snapshot.children {
                 let snap = aworker as! DataSnapshot
                 let value = snap.value  as! [String:AnyObject]
                 let skillsID = self.convertToAarry(convertString(value["skills"]))
-                
+
                 let aWorker =  self.parseWorkerFirbaseValue(value)
-                
+
                 // get wectin where skillsID belong and add them into array   athat belogn to
                 for  lookingSkill in skillsID{
                     
@@ -235,7 +239,8 @@ class restAPI: NSObject {
                             // if class with the workers range
                             
                             let distance = self.getDistanceBetween(location1: sectionWithLocation, location2: aWorker.getLocation())
-                            
+                            print(distance)
+
                             if distance <= aWorker.location.Range{
                                 
                                 guard distance > 0 else{
@@ -249,6 +254,7 @@ class restAPI: NSObject {
                                 self.extarctSkills(basedOnSectionID: asection.id, completion: { (skills_) in
                                     
                                     guard skills_ != nil else{
+
                                         return
                                     }
                                     sEctions.add(skills: skills_!, at: asection)
@@ -263,7 +269,8 @@ class restAPI: NSObject {
                             
                             
                         }else{
-                            
+                            completion(sEctions.getSections())
+
                         }
                     })
                     
@@ -275,7 +282,6 @@ class restAPI: NSObject {
                 
                 
             }
-            
             
             
         })

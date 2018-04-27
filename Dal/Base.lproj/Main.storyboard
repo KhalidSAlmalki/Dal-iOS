@@ -70,11 +70,22 @@
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="PagingView" destination="sB7-KB-Qgn" id="i21-aj-Bri"/>
+                        <outlet property="emptyMessage" destination="bMk-D8-xEj" id="Scn-ra-PVQ"/>
                         <outlet property="profileBt" destination="EXp-O2-MvA" id="cRe-qJ-WEI"/>
                         <outlet property="settingsBt" destination="HVK-hV-5ZP" id="ZuQ-Se-chX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Current location does not have workers!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bMk-D8-xEj">
+                    <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="200" id="iRt-ya-d36"/>
+                        <constraint firstAttribute="width" constant="200" id="pRk-zm-9OD"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="32"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </objects>
             <point key="canvasLocation" x="-305" y="-328"/>
         </scene>
@@ -921,7 +932,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Logout" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="QIk-V9-NwI">
-                                                    <rect key="frame" x="16" y="0.0" width="343" height="43.5"/>
+                                                    <rect key="frame" x="15" y="0.0" width="345" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                     <nil key="textColor"/>
