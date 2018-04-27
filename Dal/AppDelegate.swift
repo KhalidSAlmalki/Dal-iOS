@@ -53,7 +53,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         dalPresent(vc: alert, animated: true, completion: nil)
     }
      func Dismissloading() {
-        print("sds")
         dalDismiss(animated: true, completion: nil)
         
     }

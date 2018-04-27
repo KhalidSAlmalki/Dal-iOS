@@ -62,7 +62,7 @@ class sectionsModel:NSObject {
                     if let _skill = secs[index].getSkillModel(by: Skill){
                         
                         sectionList[sectionListIndex].addSkill(aSkill: _skill)
-                                                
+                        
                     }
                 }else{
                     
