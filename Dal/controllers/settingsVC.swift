@@ -125,7 +125,7 @@ class settingsVC: UITableViewController {
         
         switch cell?.tag {
             
-        case BECOMEWORKERTAG:
+        case BECOMEWORKERTAG?:
             
             let becomeWorker = dalBaseView(storyBoard: "addworkerVC")
             let vc = becomeWorker.getViewController() as! addworkerVC
@@ -134,7 +134,7 @@ class settingsVC: UITableViewController {
                 becomeWorker.showOnWindos()
             
              break
-        case updateDataTAG:
+        case updateDataTAG?:
             
             let becomeWorker = dalBaseView(storyBoard: "addworkerVC")
             let vc = becomeWorker.getViewController() as! addworkerVC
@@ -143,7 +143,7 @@ class settingsVC: UITableViewController {
                 becomeWorker.showOnWindos()
             
             break
-        case SUSPENDTAG:
+        case SUSPENDTAG?:
             let alert = UIAlertController(title: "Confirmation", message: "Are you sure you want to delete you account!!", preferredStyle: UIAlertControllerStyle.alert)
             alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default, handler: nil))
             alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (ok) in
@@ -162,7 +162,7 @@ class settingsVC: UITableViewController {
             self.present(alert, animated: true, completion: nil)
 
       
-        case LONGOUTTAG:
+        case LONGOUTTAG?:
             if userSessionManagement.logout(){
                 self.dismiss(animated: true, completion: nil)
                 pushToMain()

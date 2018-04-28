@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Cosmos
 
 enum modeType {
     case profile
