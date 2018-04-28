@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Firebase
+import FirebaseCore
 import GoogleMaps
 let applicationDelegate:AppDelegate = UIApplication.shared.delegate as! AppDelegate
 

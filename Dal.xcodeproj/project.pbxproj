@@ -22,6 +22,42 @@
 		144E80CB207561690049FEB3 /* workerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144E80CA207561690049FEB3 /* workerModel.swift */; };
 		144E80CD20757AED0049FEB3 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144E80CC20757AEC0049FEB3 /* String.swift */; };
 		144E80CF207580FE0049FEB3 /* dataFeederProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 144E80CE207580FE0049FEB3 /* dataFeederProtocol.swift */; };
+		1459766F2094479F00B0FB6A /* FirebaseInstanceID.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 145976682094479800B0FB6A /* FirebaseInstanceID.framework */; };
+		145976702094479F00B0FB6A /* nanopb.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 145976692094479900B0FB6A /* nanopb.framework */; };
+		145976712094479F00B0FB6A /* FirebaseAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1459766A2094479B00B0FB6A /* FirebaseAnalytics.framework */; };
+		145976722094479F00B0FB6A /* FirebaseNanoPB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1459766B2094479C00B0FB6A /* FirebaseNanoPB.framework */; };
+		145976732094479F00B0FB6A /* GoogleToolboxForMac.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1459766C2094479D00B0FB6A /* GoogleToolboxForMac.framework */; };
+		145976742094479F00B0FB6A /* FirebaseCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1459766D2094479E00B0FB6A /* FirebaseCore.framework */; };
+		145976752094479F00B0FB6A /* FirebaseCoreDiagnostics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1459766E2094479F00B0FB6A /* FirebaseCoreDiagnostics.framework */; };
+		14597678209447A900B0FB6A /* leveldb-library.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14597676209447A700B0FB6A /* leveldb-library.framework */; };
+		14597679209447A900B0FB6A /* FirebaseDatabase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14597677209447A900B0FB6A /* FirebaseDatabase.framework */; };
+		1459767E2094494700B0FB6A /* GoogleMapsBase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1459767B2094494200B0FB6A /* GoogleMapsBase.framework */; };
+		1459767F2094494700B0FB6A /* GoogleMapsCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1459767C2094494500B0FB6A /* GoogleMapsCore.framework */; };
+		145976802094494700B0FB6A /* GoogleMaps.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1459767D2094494700B0FB6A /* GoogleMaps.framework */; };
+		145976822094495C00B0FB6A /* GoogleMaps.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 145976812094495C00B0FB6A /* GoogleMaps.bundle */; };
+		1459768520944AF800B0FB6A /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1459768420944AF800B0FB6A /* Accelerate.framework */; };
+		1459768720944B0100B0FB6A /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1459768620944B0100B0FB6A /* CoreData.framework */; };
+		1459768920944B1100B0FB6A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1459768820944B1100B0FB6A /* CoreGraphics.framework */; };
+		1459768B20944B1B00B0FB6A /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1459768A20944B1B00B0FB6A /* CoreImage.framework */; };
+		1459768D20944B2300B0FB6A /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1459768C20944B2300B0FB6A /* CoreLocation.framework */; };
+		1459768F20944B2D00B0FB6A /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1459768E20944B2D00B0FB6A /* CoreTelephony.framework */; };
+		1459769120944B3700B0FB6A /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1459769020944B3700B0FB6A /* CoreText.framework */; };
+		1459769320944B4000B0FB6A /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1459769220944B4000B0FB6A /* GLKit.framework */; };
+		1459769520944B4900B0FB6A /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1459769420944B4900B0FB6A /* ImageIO.framework */; };
+		1459769720944B5200B0FB6A /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1459769620944B5100B0FB6A /* libc++.tbd */; };
+		1459769920944B5B00B0FB6A /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1459769820944B5B00B0FB6A /* libz.tbd */; };
+		1459769B20944B6400B0FB6A /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1459769A20944B6400B0FB6A /* OpenGLES.framework */; };
+		1459769D20944B6E00B0FB6A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1459769C20944B6D00B0FB6A /* QuartzCore.framework */; };
+		1459769F20944B7700B0FB6A /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1459769E20944B7700B0FB6A /* SystemConfiguration.framework */; };
+		145976A120944B8100B0FB6A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 145976A020944B8000B0FB6A /* UIKit.framework */; };
+		145976A420944B9E00B0FB6A /* Cosmos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 145976A220944B9E00B0FB6A /* Cosmos.framework */; };
+		145976A520944B9E00B0FB6A /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 145976A320944B9E00B0FB6A /* Kingfisher.framework */; };
+		145976A820944BE500B0FB6A /* FirebaseStorage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 145976A620944BE300B0FB6A /* FirebaseStorage.framework */; };
+		145976A920944BE500B0FB6A /* GTMSessionFetcher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 145976A720944BE500B0FB6A /* GTMSessionFetcher.framework */; };
+		145976AA20944C9400B0FB6A /* Cosmos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 145976A220944B9E00B0FB6A /* Cosmos.framework */; };
+		145976AB20944C9400B0FB6A /* Cosmos.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 145976A220944B9E00B0FB6A /* Cosmos.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		145976AD20944CAC00B0FB6A /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 145976A320944B9E00B0FB6A /* Kingfisher.framework */; };
+		145976AE20944CAC00B0FB6A /* Kingfisher.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 145976A320944B9E00B0FB6A /* Kingfisher.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		1461F21C207852D40061DE1C /* image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1461F21B207852D40061DE1C /* image.swift */; };
 		1461F21E207861450061DE1C /* view.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1461F21D207861450061DE1C /* view.swift */; };
 		1461F22A2078929F0061DE1C /* CAPSPageMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1461F2232078929D0061DE1C /* CAPSPageMenu.swift */; };
@@ -38,7 +74,6 @@
 		1461F23B207B06420061DE1C /* dalAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1461F23A207B06420061DE1C /* dalAlert.swift */; };
 		1461F23D207B08660061DE1C /* dalAlert-extentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1461F23C207B08660061DE1C /* dalAlert-extentions.swift */; };
 		1461F25D207BC7EB0061DE1C /* skillModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1461F25C207BC7EB0061DE1C /* skillModel.swift */; };
-		1466A91F208791BC00C3B355 /* Pods_Dal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1466A91E208791BC00C3B355 /* Pods_Dal.framework */; };
 		1466A92120883F4900C3B355 /* settingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1466A92020883F4900C3B355 /* settingsVC.swift */; };
 		1466A92320885FFF00C3B355 /* button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1466A92220885FFF00C3B355 /* button.swift */; };
 		14671900208EC33400D573CE /* userSessionManagement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146718FF208EC33400D573CE /* userSessionManagement.swift */; };
@@ -59,6 +94,21 @@
 		14EB61112093A8AF00D66196 /* dalEmptyStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EB61102093A8AF00D66196 /* dalEmptyStatus.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		145976AC20944C9400B0FB6A /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				145976AE20944CAC00B0FB6A /* Kingfisher.framework in Embed Frameworks */,
+				145976AB20944C9400B0FB6A /* Cosmos.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		143564212077026300AEE097 /* workerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = workerCell.swift; sourceTree = "<group>"; };
 		143564222077026300AEE097 /* workerCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = workerCell.xib; sourceTree = "<group>"; };
@@ -77,6 +127,40 @@
 		144E80CA207561690049FEB3 /* workerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = workerModel.swift; sourceTree = "<group>"; };
 		144E80CC20757AEC0049FEB3 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		144E80CE207580FE0049FEB3 /* dataFeederProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dataFeederProtocol.swift; sourceTree = "<group>"; };
+		145976642094473A00B0FB6A /* Dal-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Dal-Bridging-Header.h"; sourceTree = "<group>"; };
+		145976682094479800B0FB6A /* FirebaseInstanceID.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FirebaseInstanceID.framework; sourceTree = "<group>"; };
+		145976692094479900B0FB6A /* nanopb.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = nanopb.framework; sourceTree = "<group>"; };
+		1459766A2094479B00B0FB6A /* FirebaseAnalytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FirebaseAnalytics.framework; sourceTree = "<group>"; };
+		1459766B2094479C00B0FB6A /* FirebaseNanoPB.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FirebaseNanoPB.framework; sourceTree = "<group>"; };
+		1459766C2094479D00B0FB6A /* GoogleToolboxForMac.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleToolboxForMac.framework; sourceTree = "<group>"; };
+		1459766D2094479E00B0FB6A /* FirebaseCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FirebaseCore.framework; sourceTree = "<group>"; };
+		1459766E2094479F00B0FB6A /* FirebaseCoreDiagnostics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FirebaseCoreDiagnostics.framework; sourceTree = "<group>"; };
+		14597676209447A700B0FB6A /* leveldb-library.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = "leveldb-library.framework"; sourceTree = "<group>"; };
+		14597677209447A900B0FB6A /* FirebaseDatabase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FirebaseDatabase.framework; sourceTree = "<group>"; };
+		1459767A209447B900B0FB6A /* Firebase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Firebase.h; sourceTree = "<group>"; };
+		1459767B2094494200B0FB6A /* GoogleMapsBase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMapsBase.framework; sourceTree = "<group>"; };
+		1459767C2094494500B0FB6A /* GoogleMapsCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMapsCore.framework; sourceTree = "<group>"; };
+		1459767D2094494700B0FB6A /* GoogleMaps.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMaps.framework; sourceTree = "<group>"; };
+		145976812094495C00B0FB6A /* GoogleMaps.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = GoogleMaps.bundle; path = GoogleMaps.framework/Resources/GoogleMaps.bundle; sourceTree = "<group>"; };
+		1459768420944AF800B0FB6A /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		1459768620944B0100B0FB6A /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		1459768820944B1100B0FB6A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		1459768A20944B1B00B0FB6A /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
+		1459768C20944B2300B0FB6A /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		1459768E20944B2D00B0FB6A /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		1459769020944B3700B0FB6A /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		1459769220944B4000B0FB6A /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
+		1459769420944B4900B0FB6A /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
+		1459769620944B5100B0FB6A /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		1459769820944B5B00B0FB6A /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		1459769A20944B6400B0FB6A /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		1459769C20944B6D00B0FB6A /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		1459769E20944B7700B0FB6A /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		145976A020944B8000B0FB6A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		145976A220944B9E00B0FB6A /* Cosmos.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cosmos.framework; path = Carthage/Build/iOS/Cosmos.framework; sourceTree = "<group>"; };
+		145976A320944B9E00B0FB6A /* Kingfisher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Kingfisher.framework; path = Carthage/Build/iOS/Kingfisher.framework; sourceTree = "<group>"; };
+		145976A620944BE300B0FB6A /* FirebaseStorage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FirebaseStorage.framework; sourceTree = "<group>"; };
+		145976A720944BE500B0FB6A /* GTMSessionFetcher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GTMSessionFetcher.framework; sourceTree = "<group>"; };
 		1461F21B207852D40061DE1C /* image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = image.swift; sourceTree = "<group>"; };
 		1461F21D207861450061DE1C /* view.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = view.swift; sourceTree = "<group>"; };
 		1461F2232078929D0061DE1C /* CAPSPageMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CAPSPageMenu.swift; sourceTree = "<group>"; };
@@ -93,7 +177,6 @@
 		1461F23A207B06420061DE1C /* dalAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dalAlert.swift; sourceTree = "<group>"; };
 		1461F23C207B08660061DE1C /* dalAlert-extentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "dalAlert-extentions.swift"; sourceTree = "<group>"; };
 		1461F25C207BC7EB0061DE1C /* skillModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = skillModel.swift; sourceTree = "<group>"; };
-		1466A91E208791BC00C3B355 /* Pods_Dal.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_Dal.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1466A92020883F4900C3B355 /* settingsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = settingsVC.swift; sourceTree = "<group>"; };
 		1466A92220885FFF00C3B355 /* button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = button.swift; sourceTree = "<group>"; };
 		146718FF208EC33400D573CE /* userSessionManagement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = userSessionManagement.swift; sourceTree = "<group>"; };
@@ -112,8 +195,6 @@
 		14EB610C2093A7BD00D66196 /* KeyboardDismissingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardDismissingView.swift; sourceTree = "<group>"; };
 		14EB610D2093A7BD00D66196 /* KeyboardAvoiding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardAvoiding.swift; sourceTree = "<group>"; };
 		14EB61102093A8AF00D66196 /* dalEmptyStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = dalEmptyStatus.swift; path = ../../../../../../Desktop/dalEmptyStatus.swift; sourceTree = "<group>"; };
-		5D341FB4FC8102FC196A6308 /* Pods-Dal.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dal.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Dal/Pods-Dal.debug.xcconfig"; sourceTree = "<group>"; };
-		9071B0A2410047146531199D /* Pods-Dal.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dal.release.xcconfig"; path = "Pods/Target Support Files/Pods-Dal/Pods-Dal.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,7 +202,39 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1466A91F208791BC00C3B355 /* Pods_Dal.framework in Frameworks */,
+				145976AA20944C9400B0FB6A /* Cosmos.framework in Frameworks */,
+				145976A420944B9E00B0FB6A /* Cosmos.framework in Frameworks */,
+				145976A920944BE500B0FB6A /* GTMSessionFetcher.framework in Frameworks */,
+				145976A520944B9E00B0FB6A /* Kingfisher.framework in Frameworks */,
+				145976A120944B8100B0FB6A /* UIKit.framework in Frameworks */,
+				1459769F20944B7700B0FB6A /* SystemConfiguration.framework in Frameworks */,
+				1459769D20944B6E00B0FB6A /* QuartzCore.framework in Frameworks */,
+				1459769B20944B6400B0FB6A /* OpenGLES.framework in Frameworks */,
+				1459769920944B5B00B0FB6A /* libz.tbd in Frameworks */,
+				1459769720944B5200B0FB6A /* libc++.tbd in Frameworks */,
+				1459769520944B4900B0FB6A /* ImageIO.framework in Frameworks */,
+				1459769320944B4000B0FB6A /* GLKit.framework in Frameworks */,
+				1459769120944B3700B0FB6A /* CoreText.framework in Frameworks */,
+				1459768F20944B2D00B0FB6A /* CoreTelephony.framework in Frameworks */,
+				1459768D20944B2300B0FB6A /* CoreLocation.framework in Frameworks */,
+				1459768B20944B1B00B0FB6A /* CoreImage.framework in Frameworks */,
+				1459768920944B1100B0FB6A /* CoreGraphics.framework in Frameworks */,
+				1459768720944B0100B0FB6A /* CoreData.framework in Frameworks */,
+				1459768520944AF800B0FB6A /* Accelerate.framework in Frameworks */,
+				14597679209447A900B0FB6A /* FirebaseDatabase.framework in Frameworks */,
+				145976702094479F00B0FB6A /* nanopb.framework in Frameworks */,
+				1459766F2094479F00B0FB6A /* FirebaseInstanceID.framework in Frameworks */,
+				1459767F2094494700B0FB6A /* GoogleMapsCore.framework in Frameworks */,
+				145976742094479F00B0FB6A /* FirebaseCore.framework in Frameworks */,
+				145976712094479F00B0FB6A /* FirebaseAnalytics.framework in Frameworks */,
+				145976A820944BE500B0FB6A /* FirebaseStorage.framework in Frameworks */,
+				145976802094494700B0FB6A /* GoogleMaps.framework in Frameworks */,
+				1459767E2094494700B0FB6A /* GoogleMapsBase.framework in Frameworks */,
+				145976752094479F00B0FB6A /* FirebaseCoreDiagnostics.framework in Frameworks */,
+				14597678209447A900B0FB6A /* leveldb-library.framework in Frameworks */,
+				145976722094479F00B0FB6A /* FirebaseNanoPB.framework in Frameworks */,
+				145976AD20944CAC00B0FB6A /* Kingfisher.framework in Frameworks */,
+				145976732094479F00B0FB6A /* GoogleToolboxForMac.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -133,8 +246,7 @@
 			children = (
 				144A94DD2073D6330024B912 /* Dal */,
 				144A94DC2073D6330024B912 /* Products */,
-				D836EA6FDC096046738B2860 /* Pods */,
-				65D08E134555116ABD21822E /* Frameworks */,
+				1459768320944AF700B0FB6A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -159,6 +271,8 @@
 				144A94E52073D6340024B912 /* Assets.xcassets */,
 				144A94E72073D6340024B912 /* LaunchScreen.storyboard */,
 				144A94EA2073D6340024B912 /* Info.plist */,
+				145976642094473A00B0FB6A /* Dal-Bridging-Header.h */,
+				145976672094475600B0FB6A /* Frameworks */,
 			);
 			path = Dal;
 			sourceTree = "<group>";
@@ -166,6 +280,7 @@
 		144A94F02073D8810024B912 /* helper */ = {
 			isa = PBXGroup;
 			children = (
+				1459767A209447B900B0FB6A /* Firebase.h */,
 				14EB61102093A8AF00D66196 /* dalEmptyStatus.swift */,
 				14EB610B2093A7AF00D66196 /* IHKeyboardAvoiding */,
 				14AF884D207EC8CF0055411E /* dalSelectin */,
@@ -252,6 +367,52 @@
 			path = protocals;
 			sourceTree = "<group>";
 		};
+		145976672094475600B0FB6A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				145976A620944BE300B0FB6A /* FirebaseStorage.framework */,
+				145976A720944BE500B0FB6A /* GTMSessionFetcher.framework */,
+				145976812094495C00B0FB6A /* GoogleMaps.bundle */,
+				1459767D2094494700B0FB6A /* GoogleMaps.framework */,
+				1459767B2094494200B0FB6A /* GoogleMapsBase.framework */,
+				1459767C2094494500B0FB6A /* GoogleMapsCore.framework */,
+				14597677209447A900B0FB6A /* FirebaseDatabase.framework */,
+				14597676209447A700B0FB6A /* leveldb-library.framework */,
+				1459766A2094479B00B0FB6A /* FirebaseAnalytics.framework */,
+				1459766D2094479E00B0FB6A /* FirebaseCore.framework */,
+				1459766E2094479F00B0FB6A /* FirebaseCoreDiagnostics.framework */,
+				145976682094479800B0FB6A /* FirebaseInstanceID.framework */,
+				1459766B2094479C00B0FB6A /* FirebaseNanoPB.framework */,
+				1459766C2094479D00B0FB6A /* GoogleToolboxForMac.framework */,
+				145976692094479900B0FB6A /* nanopb.framework */,
+			);
+			path = Frameworks;
+			sourceTree = "<group>";
+		};
+		1459768320944AF700B0FB6A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				145976A220944B9E00B0FB6A /* Cosmos.framework */,
+				145976A320944B9E00B0FB6A /* Kingfisher.framework */,
+				145976A020944B8000B0FB6A /* UIKit.framework */,
+				1459769E20944B7700B0FB6A /* SystemConfiguration.framework */,
+				1459769C20944B6D00B0FB6A /* QuartzCore.framework */,
+				1459769A20944B6400B0FB6A /* OpenGLES.framework */,
+				1459769820944B5B00B0FB6A /* libz.tbd */,
+				1459769620944B5100B0FB6A /* libc++.tbd */,
+				1459769420944B4900B0FB6A /* ImageIO.framework */,
+				1459769220944B4000B0FB6A /* GLKit.framework */,
+				1459769020944B3700B0FB6A /* CoreText.framework */,
+				1459768E20944B2D00B0FB6A /* CoreTelephony.framework */,
+				1459768C20944B2300B0FB6A /* CoreLocation.framework */,
+				1459768A20944B1B00B0FB6A /* CoreImage.framework */,
+				1459768820944B1100B0FB6A /* CoreGraphics.framework */,
+				1459768620944B0100B0FB6A /* CoreData.framework */,
+				1459768420944AF800B0FB6A /* Accelerate.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		1461F239207B06260061DE1C /* dalAlert */ = {
 			isa = PBXGroup;
 			children = (
@@ -315,23 +476,6 @@
 			path = IHKeyboardAvoiding;
 			sourceTree = "<group>";
 		};
-		65D08E134555116ABD21822E /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				1466A91E208791BC00C3B355 /* Pods_Dal.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		D836EA6FDC096046738B2860 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				5D341FB4FC8102FC196A6308 /* Pods-Dal.debug.xcconfig */,
-				9071B0A2410047146531199D /* Pods-Dal.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -339,12 +483,10 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 144A94ED2073D6340024B912 /* Build configuration list for PBXNativeTarget "Dal" */;
 			buildPhases = (
-				BC84ABD041B5187292B249C9 /* [CP] Check Pods Manifest.lock */,
 				144A94D72073D6330024B912 /* Sources */,
 				144A94D82073D6330024B912 /* Frameworks */,
 				144A94D92073D6330024B912 /* Resources */,
-				28EADE3F7858C480EBB30678 /* [CP] Embed Pods Frameworks */,
-				D5422D17C9F8112F1D770691 /* [CP] Copy Pods Resources */,
+				145976AC20944C9400B0FB6A /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -367,6 +509,7 @@
 				TargetAttributes = {
 					144A94DA2073D6330024B912 = {
 						CreatedOnToolsVersion = 9.3;
+						LastSwiftMigration = 0930;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -400,77 +543,11 @@
 				143564242077026300AEE097 /* workerCell.xib in Resources */,
 				144A94E62073D6340024B912 /* Assets.xcassets in Resources */,
 				144A94E42073D6330024B912 /* Main.storyboard in Resources */,
+				145976822094495C00B0FB6A /* GoogleMaps.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		28EADE3F7858C480EBB30678 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Dal/Pods-Dal-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Cosmos/Cosmos.framework",
-				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
-				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
-				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
-				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
-				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Cosmos.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Dal/Pods-Dal-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		BC84ABD041B5187292B249C9 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Dal-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		D5422D17C9F8112F1D770691 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Dal/Pods-Dal-resources.sh",
-				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleMaps.bundle",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Dal/Pods-Dal-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		144A94D72073D6330024B912 /* Sources */ = {
@@ -660,16 +737,23 @@
 		};
 		144A94EE2073D6340024B912 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5D341FB4FC8102FC196A6308 /* Pods-Dal.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = FT5TU5KEM8;
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Dal/Frameworks",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = Dal/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) $(SRCROOT)";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) $(SRCROOT) @executable_path/Frameworks";
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.khaild.Dal;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Dal/Dal-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -677,16 +761,22 @@
 		};
 		144A94EF2073D6340024B912 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9071B0A2410047146531199D /* Pods-Dal.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = FT5TU5KEM8;
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Dal/Frameworks",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = Dal/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) $(SRCROOT)";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) $(SRCROOT) @executable_path/Frameworks";
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.khaild.Dal;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Dal/Dal-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

@@ -8,8 +8,8 @@
 
 import UIKit
 import CoreLocation
-import Firebase
-
+import FirebaseCore
+import FirebaseStorage
 class restAPI: NSObject {
     static let shared = restAPI()
     
