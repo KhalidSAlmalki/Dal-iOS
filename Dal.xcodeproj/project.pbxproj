@@ -91,7 +91,7 @@
 		14AF8855207EED440055411E /* dalSelectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14AF8854207EED440055411E /* dalSelectionCell.swift */; };
 		14EB610E2093A7BD00D66196 /* KeyboardDismissingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EB610C2093A7BD00D66196 /* KeyboardDismissingView.swift */; };
 		14EB610F2093A7BD00D66196 /* KeyboardAvoiding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EB610D2093A7BD00D66196 /* KeyboardAvoiding.swift */; };
-		14EB61112093A8AF00D66196 /* dalEmptyStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EB61102093A8AF00D66196 /* dalEmptyStatus.swift */; };
+		97A610F020950921009AD7B4 /* dalEmptyStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97A610EF20950921009AD7B4 /* dalEmptyStatus.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -194,7 +194,7 @@
 		14AF8854207EED440055411E /* dalSelectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dalSelectionCell.swift; sourceTree = "<group>"; };
 		14EB610C2093A7BD00D66196 /* KeyboardDismissingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardDismissingView.swift; sourceTree = "<group>"; };
 		14EB610D2093A7BD00D66196 /* KeyboardAvoiding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardAvoiding.swift; sourceTree = "<group>"; };
-		14EB61102093A8AF00D66196 /* dalEmptyStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = dalEmptyStatus.swift; path = ../../../../../../Desktop/dalEmptyStatus.swift; sourceTree = "<group>"; };
+		97A610EF20950921009AD7B4 /* dalEmptyStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dalEmptyStatus.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -280,8 +280,8 @@
 		144A94F02073D8810024B912 /* helper */ = {
 			isa = PBXGroup;
 			children = (
+				97A610EF20950921009AD7B4 /* dalEmptyStatus.swift */,
 				1459767A209447B900B0FB6A /* Firebase.h */,
-				14EB61102093A8AF00D66196 /* dalEmptyStatus.swift */,
 				14EB610B2093A7AF00D66196 /* IHKeyboardAvoiding */,
 				14AF884D207EC8CF0055411E /* dalSelectin */,
 				1461F239207B06260061DE1C /* dalAlert */,
@@ -554,6 +554,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				97A610F020950921009AD7B4 /* dalEmptyStatus.swift in Sources */,
 				144A94FE2073DFA00024B912 /* UIViewController.swift in Sources */,
 				14671900208EC33400D573CE /* userSessionManagement.swift in Sources */,
 				1461F21E207861450061DE1C /* view.swift in Sources */,
@@ -587,7 +588,6 @@
 				1461F2302078929F0061DE1C /* CAPSPageMenu+UIScrollViewDelegate.swift in Sources */,
 				1461F2342079872A0061DE1C /* dalBaseView.swift in Sources */,
 				144A95032074167A0024B912 /* WorkerCollectionVC.swift in Sources */,
-				14EB61112093A8AF00D66196 /* dalEmptyStatus.swift in Sources */,
 				14EB610E2093A7BD00D66196 /* KeyboardDismissingView.swift in Sources */,
 				144E80C92075612D0049FEB3 /* sectionModel.swift in Sources */,
 				14AF8851207EC9B20055411E /* dalSelection.swift in Sources */,
