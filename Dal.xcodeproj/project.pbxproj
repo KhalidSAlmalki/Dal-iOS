@@ -87,6 +87,7 @@
 		14EB610F2093A7BD00D66196 /* KeyboardAvoiding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EB610D2093A7BD00D66196 /* KeyboardAvoiding.swift */; };
 		97A610F020950921009AD7B4 /* dalEmptyStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97A610EF20950921009AD7B4 /* dalEmptyStatus.swift */; };
 		B256397520956A9700B65BA3 /* Kingfisher.framework in Copy framworkers */ = {isa = PBXBuildFile; fileRef = B2563968209569F700B65BA3 /* Kingfisher.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B256397820956DBB00B65BA3 /* CosmosDistrib.swift in Sources */ = {isa = PBXBuildFile; fileRef = B256397720956DBB00B65BA3 /* CosmosDistrib.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -250,6 +251,7 @@
 		14EB610D2093A7BD00D66196 /* KeyboardAvoiding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardAvoiding.swift; sourceTree = "<group>"; };
 		97A610EF20950921009AD7B4 /* dalEmptyStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dalEmptyStatus.swift; sourceTree = "<group>"; };
 		B256395D209569F600B65BA3 /* Kingfisher.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Kingfisher.xcodeproj; path = Kingfisher/Kingfisher.xcodeproj; sourceTree = SOURCE_ROOT; };
+		B256397720956DBB00B65BA3 /* CosmosDistrib.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CosmosDistrib.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -332,6 +334,7 @@
 		144A94F02073D8810024B912 /* helper */ = {
 			isa = PBXGroup;
 			children = (
+				B256397620956C0B00B65BA3 /* Cosmos */,
 				97A610EF20950921009AD7B4 /* dalEmptyStatus.swift */,
 				1459767A209447B900B0FB6A /* Firebase.h */,
 				14EB610B2093A7AF00D66196 /* IHKeyboardAvoiding */,
@@ -540,6 +543,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		B256397620956C0B00B65BA3 /* Cosmos */ = {
+			isa = PBXGroup;
+			children = (
+				B256397720956DBB00B65BA3 /* CosmosDistrib.swift */,
+			);
+			path = Cosmos;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -720,6 +731,7 @@
 				14AF8847207E63030055411E /* addworkerVC.swift in Sources */,
 				1466A92320885FFF00C3B355 /* button.swift in Sources */,
 				144A94DF2073D6330024B912 /* AppDelegate.swift in Sources */,
+				B256397820956DBB00B65BA3 /* CosmosDistrib.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
