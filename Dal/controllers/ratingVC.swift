@@ -7,7 +7,6 @@
 //
 
 import UIKit
-
 enum modeType {
     case profile
     case workerDrtails
