@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import CoreLocation
 enum addworkerRequestType {
     case becomeWorker
     case addWorker
@@ -423,6 +423,11 @@ class addworkerVC: baseViewController,UITextFieldDelegate, dalSelectionDataSourc
 
         
         if userLocation.location.latitude == 0.0 {
+            
+            guard Locator.shared.location?.coordinate != nil else {
+               
+                return locationModel(location: CLLocation(latitude: 37.785834, longitude: -122.406417).coordinate , Range: 8.04672, zoom: 18)
+            }
             return locationModel(location: (Locator.shared.location?.coordinate)!, Range: 8.04672, zoom: 18)
 
         }else{

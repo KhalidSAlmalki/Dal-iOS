@@ -98,7 +98,7 @@ class HomeVC: SectionVC {
         
         guard Locator.shared.location?.coordinate != nil else {
             
-            let alert = UIAlertController(title: "Error", message: "Something went wrong with locations", preferredStyle: UIAlertControllerStyle.alert)
+            let alert = UIAlertController(title: "Ops!!", message: "Something went wrong with locations", preferredStyle: UIAlertControllerStyle.alert)
             alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.default, handler: nil))
            
 //            Locator.shared.locate { (s) in
